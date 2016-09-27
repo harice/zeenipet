@@ -1,0 +1,71 @@
+<?php 
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_SFG
+ * @copyright  Copyright (c) 2012 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+<?php
+
+$template_name = 'sfgnew';
+$tmpl = '
+	<div id="sfg_menu"></div>
+<div id="sfg_top"></div>
+<div id="sfg_central">
+	<table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
+		<tr>
+			<td width="20" align="left" valign="top">
+				<div id="sfg_elements_bar"></div>
+			</td>
+			<td align="left" valign="top">
+				<div id="sfg_container">
+					<div id="sfg_inner_container">
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+	';
+?>
+	<link rel="stylesheet" href="<?php echo SFG_URL_SKIN; ?>jsf/sfg.css" type="text/css" />
+	<div id="container" style="width:100%; height:500px; position:relative;"><?php echo $tmpl; ?></div>
+	<script language="Javascript" type="text/javascript" src="<?php echo SFG_URL_SKIN ?>jsf/sfg.js"></script>
+	<script language="Javascript" type="text/javascript">
+		var sfg_template = '<?php echo $template_name; ?>';
+		document.sfgArea = document.getElementById('container');
+		document.lang = '<?php echo $GLOBALS['sfg_gl']['translations']['lang'];?>';
+		document.adminURL = '<?php echo SFG_URL_SKIN ?>jsf';
+		document.sfgFiles = '<?php echo SFG_URL_FILES; ?>';
+		document.sfgSkin = '<?php echo SFG_URL_SKIN; ?>';
+		document.siteURL = '<?php echo SFG_URL_SITE ?>';
+		document.form_id = <?php echo $this->fid; ?>;
+		document.formManagerURL = '<?php echo $this->getUrl('*/*/') ?>';
+		document.loadFormURL = '<?php echo $this->getUrl('*/*/loadForm',array('fid'=>$this->fid, 'rand'=>  rand(20000, 4000))); ?>';
+		document.saveFormURL = '<?php echo $this->getUrl('*/*/saveForm'); ?>';
+		document.saveFormKEY = '<?php echo  Mage::getSingleton('core/session')->getFormKey();?>';
+		document.getTablesListURL = '<?php echo $this->getUrl('*/*/getTablesList'); ?>';
+		document.execQuery = '<?php echo $this->getUrl('*/*/execQuery'); ?>';
+		document.dbPostKEY = '<?php echo  Mage::getSingleton('core/session')->getFormKey();?>';
+		document.getDBTaskURL = '<?php echo $this->getUrl('*/*/getDBTask');?>'
+		sfgInitialize();
+	</script>
+

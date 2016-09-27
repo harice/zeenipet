@@ -1,0 +1,52 @@
+<!--@subject {{var frontend_label}} Installment Reminder @-->
+<!--@vars
+{"var frontend_label":"Frontend Label",
+"var customer_name":"Customer Name",
+"var order_id":"Order Id",
+"var amount":"Installment Amt",
+"var date":"Installment Due Date",
+"var paid_amount":"Paid Amount"
+"var remainning_amount":"Remainning Amount",
+"var total_amount":"Total Amount",
+"var paid_installment":"Paid Installment",
+"var remainning_installment":"Remainning Installment",
+"var total_installment":"Total Installment",
+"var msg":"Autoinstallment Message",
+}
+@-->
+
+<style type="text/css">
+	.partialpayment_order_confirmation { font-family:Arial, Helvetica, sans-serif; font-size:12px; }
+	.align_center { text-align:center; }
+	.align_right { text-align:right; }
+</style>
+
+<div class="partialpayment_order_confirmation">
+	<table border="0" cellpadding="3" cellspacing="3">
+    	<tr>
+        	<td>Dear {{var customer_name}},<br /></td>
+        </tr>
+        <tr>
+        	<td>This email is to remind you that due date of your  installment of  {{var amount}} for partially paid order  # {{var order_id}} is {{var date}}.{{var msg}}.<br /></td>
+        </tr>
+        <tr>
+        	<td>Your Partially Paid order details for order # {{var order_id}} are as follows:<br /></td>
+        </tr>
+        <tr>
+        	<td>
+            	Paid Amount: {{var paid_amount}} <br />
+                Remaining Amount: {{var remainning_amount}}<br />
+                Total Amount: {{var total_amount}}<br />
+                Paid Installment: {{var paid_installment}}<br />
+                Remaining Installment: {{var remainning_installment}}<br />
+                Total No. of Installment: {{var total_installment}}<br />
+            </td>
+            
+        </tr>
+        <tr>
+        	<td>Thanks for being with us. Visit our store for more products  and exciting offers.</td>
+        </tr>
+     
+       
+    </table>
+</div>

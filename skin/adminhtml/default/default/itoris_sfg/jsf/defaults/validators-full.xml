@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<validators>
+  <validator name="Name">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. The name is too long. Please specify a valid value';
+msg = msg.replace('%s', sfgName);
+if (obj.value.length&gt;150) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Address">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. The address is too long. Please specify a valid value';
+msg = msg.replace('%s', sfgName);
+if (obj.value.length&gt;150) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Email">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid email. Please specify a valid value';
+msg = msg.replace('%s', sfgName);
+var RegExp=/^((([a-z]|[0-9]|!|#|$|%|&amp;|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+(\.([a-z]|[0-9]|!|#|$|%|&amp;|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+)*)@((((([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.))*([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.)[\w]{2,4}|(((([0-9]){1,3}\.){3}([0-9]){1,3}))|(\[((([0-9]){1,3}\.){3}([0-9]){1,3})\])))$/;
+if (obj.value!='' &amp;&amp; !RegExp.test(obj.value)) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Integer">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct integer value';
+msg = msg.replace('%s', sfgName);
+if (Math.floor(obj.value)!=obj.value-0) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="IntegerPositive">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct integer positive value';
+msg = msg.replace('%s', sfgName);
+if (Math.floor(obj.value)!=obj.value-0 || obj.value-0&lt;0) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="String">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct string';
+msg = msg.replace('%s', sfgName);
+var letters='qwertyuiopasdfghjklzxcvbnm ';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="City">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct city name';
+msg = msg.replace('%s', sfgName);
+var letters='qwertyuiopasdfghjklzxcvbnm -';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Zip">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct zip/postal';
+msg = msg.replace('%s', sfgName);
+var letters='qwertyuiopasdfghjklzxcvbnm -1234567890';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || obj.value.length&gt;10) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="ZipUS">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid US Zip. Please specify a valid value';
+msg = msg.replace('%s', sfgName);
+var zipPattern1=/^(\d{5})$/;
+var zipPattern2=/^(\d{5})\-(\d{4})$/;
+if ((obj.value.match(zipPattern1)==null)&amp;&amp;(obj.value.match(zipPattern2)==null)&amp;&amp;obj.value.length&gt;0) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Phone">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct phone number';
+msg = msg.replace('%s', sfgName);
+var letters='1234567890 -.()+';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || obj.value.length&gt;10) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="PhoneUS">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Please, provide a phone number in format XXX-XXX-XXXX, where X is a digit.';
+msg = msg.replace('%s', sfgName);
+var phonePattern=/^(\d{3})\-(\d{3})\-(\d{4})$/;
+if ((obj.value.match(phonePattern)==null)&amp;&amp;obj.value.length&gt;0) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Password">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. The password should contain 6 to 12 symbols';
+msg = msg.replace('%s', sfgName);
+if ((obj.value.length&lt;6 || obj.value.length&gt;12) &amp;&amp; obj.value.length!=0) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="CreditCardNumber">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct credit card number';
+msg = msg.replace('%s', sfgName);
+var letters='1234567890';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || (obj.value.length&lt;16 &amp;&amp; obj.value.length!=0) || obj.value.length&gt;18) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="CreditCardCVV">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct credit card CVV';
+msg = msg.replace('%s', sfgName);
+var letters='1234567890';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || (obj.value.length&lt;3 &amp;&amp; obj.value.length!=0) || obj.value.length&gt;4) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Flat">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct flat';
+msg = msg.replace('%s', sfgName);
+var letters='qwertyuiopasdfghjklzxcvbnm+-.() /1234567890';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i  ) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || obj.value.length&gt;5) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Building">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct building';
+msg = msg.replace('%s', sfgName);
+var letters='qwertyuiopasdfghjklzxcvbnm+-.() /1234567890';
+var ps=false; for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || obj.value.length&gt;3) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Money">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify currency correctly';
+msg = msg.replace('%s', sfgName);
+var letters='1234567890.';
+var ps=false; for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || obj.value.length&gt;10 || Math.floor(obj.value*100)/100!=obj.value-0) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Float">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct float number';
+msg = msg.replace('%s', sfgName);
+if (obj.value-0&lt;0 || obj.value-0&gt;0 || obj.value=='0') return null; else return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="URL">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a valid URL';
+msg = msg.replace('%s', sfgName);
+var RegExp=/^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&amp;?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/;
+if (obj.value!='' &amp;&amp; !RegExp.test(obj.value)) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="IP">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct IP';
+msg = msg.replace('%s', sfgName);
+var RegExp=/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+var a=obj.value.split('.');
+if (obj.value!='' &amp;&amp; !RegExp.test(obj.value) || a[0]&gt;255 || a[1]&gt;255 || a[2]&gt;255 || a[3]&gt;255) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="SSN">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Please, provide a SSN in format XXX-XX-XXXX or XX-XXXXXXX, where X is a digit.';
+msg = msg.replace('%s', sfgName);
+var ssnPattern1 = /^(\d{3})\-(\d{2})\-(\d{4})$/;
+var ssnPattern2 = /^(\d{2})\-(\d{7})$/;
+if ((obj.value.match(ssnPattern1)==null)&amp;&amp;(obj.value.match(ssnPattern2)==null)&amp;&amp;obj.value.length&gt;0) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="House">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please provide a correct house number';
+msg = msg.replace('%s', sfgName);
+var housePattern = /^(\d{1,4})(\S{0,1})$/;
+if (obj.value.match(housePattern)==null&amp;&amp;obj.value.length&gt;0) return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Date">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Field value should be in MM/DD/YYYY format.';
+msg = msg.replace('%s', sfgName);
+var a=obj.value.split('/');
+if (a[0]-0&gt;0 &amp;&amp; a[0]-0&lt;=12 &amp;&amp; a[1]-0&gt;0 &amp;&amp; a[1]-0&lt;=31 &amp;&amp; a[2]-0&gt;1000 &amp;&amp; a[2]-0&lt;=9999 &amp;&amp; a[3]==null ||obj.value.length==0) return null; else return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="DateShort">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Field value should be in MM/DD/YY format';
+msg = msg.replace('%s', sfgName);
+var a=obj.value.split('/');
+if (a[0]-0&gt;0 &amp;&amp; a[0]-0&lt;=12 &amp;&amp; a[1]-0&gt;0 &amp;&amp; a[1]-0&lt;=31 &amp;&amp; a[2]-0&gt;=0 &amp;&amp; a[2]-0&lt;=99 &amp;&amp; a[3]==null ||obj.value.length==0) return null; else return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+  <validator name="Time">
+    <js>
+      // incomming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Field value should be in HH:MM format.';
+msg = msg.replace('%s', sfgName);
+var a=obj.value.split(':');
+if (a[0]-0&gt;=0 &amp;&amp; a[0]-0&lt;24 &amp;&amp; a[1]-0&gt;=0 &amp;&amp; a[1]-0&lt;60 &amp;&amp; a[2]==null ||obj.value.length==0) return null; else return msg;
+    </js>
+    <php>
+      
+    </php>
+  </validator>
+</validators>

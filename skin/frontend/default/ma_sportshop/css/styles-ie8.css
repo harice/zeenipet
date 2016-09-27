@@ -1,0 +1,12 @@
+.ma-featuredproductslider-container .flexslider .slides > li{ width:225px !important; }
+
+.ma-brand-slider-contain{ padding:20px 10px 10px !important; }
+
+.products-grid .item-inner {  }
+
+.ma-footer-static-inner .social ul li{ float:left; }
+.ma-footer-static-inner .social ul li.facebook{ width:135px; }
+.ma-footer-static-inner .social ul li.twitter{ width:210px; }
+.ma-footer-static-inner .social ul li.vimeo{ width:132px; }
+.ma-footer-static-inner .social ul li.youtube{ width:140px; }
+.ma-footer-static-inner .social ul li.rss{ width:170px; }

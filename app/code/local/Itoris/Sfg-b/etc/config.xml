@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Itoris_Sfg>
+			<version>1.2.7</version>
+		</Itoris_Sfg>
+	</modules>
+	<frontend>
+		<routers>
+			<sfg>
+				<use>standard</use>
+				<args>
+					<module>Itoris_Sfg</module>
+					<frontName>sfg</frontName>
+				</args>
+			</sfg>
+		</routers>
+		<layout>
+			<updates>
+				<sfg>
+					<file>sfg.xml</file>
+				</sfg>
+			</updates>
+		</layout>
+	</frontend>
+	<global>
+		<blocks>
+			<Itoris_Sfg>
+				<class>Itoris_Sfg_Block</class>
+			</Itoris_Sfg>
+		</blocks>
+		<helpers>
+			<sfg>
+				<class>Itoris_Sfg_Helper</class>
+			</sfg>
+		</helpers>
+		
+		<models>
+			<itoris_sfg>
+				<class>Itoris_Sfg_Model</class>
+			</itoris_sfg>
+		</models>
+
+		<resources>
+			<itoris_sfg_setup>
+				<setup>
+					<module>Itoris_Sfg</module>
+					<class>Itoris_Sfg_Model_Mysql4_Setup</class>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</itoris_sfg_setup>
+		</resources>
+	</global>
+	<admin>
+		<routers>
+			<sfg_admin>
+				<use>admin</use>
+				<args>
+					<module>Itoris_Sfg</module>
+					<frontName>itoris_sfg</frontName>
+				</args>
+			</sfg_admin>
+		</routers>
+	</admin>
+	<adminhtml>
+		 <menu>
+            <system>
+                <children>
+                    <itoris_extensions translate="title">
+						<children>
+							<sfg_admin_main module="sfg">
+								<title>SmartFormer Gold</title>
+								<action>itoris_sfg/admin_index</action>
+								<sort_order>1</sort_order>
+								<children>
+									<sfg_admin_formmanager>
+										<title>Form Manager</title>
+										<action>itoris_sfg/admin_form</action>
+									</sfg_admin_formmanager>
+									<sfg_admin_pluginmanager>
+										<title>Plugin Manager</title>
+										<action>itoris_sfg/admin_pluginmanager</action>
+									</sfg_admin_pluginmanager>
+								</children>
+							</sfg_admin_main>
+						</children>
+                    </itoris_extensions>
+                </children>
+            </system>
+        </menu>
+        
+        <acl>
+        	<resources>
+	            <admin>
+	                <children>
+	                    <system>
+	                        <children>
+	                            <itoris_extensions>
+	                            	<title>IToris Extensions</title>
+	                            	<children>
+	                                    <sfg_admin_main>
+	                                        <title>SmartFormer Gold</title>
+	                                        <children>
+											<sfg_admin_formmanager>
+												<title>Form Manager</title>
+											</sfg_admin_formmanager>
+											<sfg_admin_pluginmanager>
+												<title>Plugin Manager</title>
+											</sfg_admin_pluginmanager>
+										</children>
+	                                    </sfg_admin_main>
+	                                </children>
+	                            </itoris_extensions>
+	                        </children>
+	                    </system>
+	                </children>
+	            </admin>
+	        </resources>
+        </acl>
+
+		<layout>
+			<updates>
+				<itoris_sfg>
+					<file>itoris_sfg.xml</file>
+				</itoris_sfg>
+			</updates>
+		</layout>
+	</adminhtml>
+
+</config>

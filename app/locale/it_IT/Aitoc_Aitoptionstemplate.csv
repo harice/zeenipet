@@ -1,0 +1,62 @@
+﻿"Check Synchronization","Controlla la sincronizzazione"
+"Backup data to file","Fare copia di riserva dei dati nel file"
+"Restore data from reserve tables","Ripristinare i dati dalle tabelle di riserva"
+Export,Esportazione
+"Restore from backup file","Ripristina dal file di copia di riserva"
+"Add New Option","Aggiungere una Nuova Opzione"
+"Save All Options As New Template","Salvare tutte le Opzioni come un Nuovo Modello"
+"Add Template Options","Aggiungere Opzioni del Modello"
+"Assign Whole Template","Assegnare Intero Modello"
+"Delete Template","Eliminare Modello"
+"Please enter search conditions to view products.","Si prega di inserire le condizioni di ricerca per visualizzare i prodotti."
+"General Information","Informazione generale"
+Title,Titolo
+Description,Descrizione
+Status,Status
+Active,Attivo
+Inactive,Passivo
+ID,ID
+Name,Nome
+Type,Tipo
+"Attrib. Set Name","Attrib. Stabilire Nome"
+Visibility,Visibilita`
+SKU,SKU
+Price,Prezzo
+"Default Qty","Qualita` default"
+Position,Posizione
+"Template Information","Informazioni sul modello"
+Template,Modello
+General,Generale
+Options,Opzioni
+"Assigned Products","Prodotti Assegnati"
+Duplicate,Duplicare
+"Save and Continue Edit","Salva e continua a modificare"
+"Save Template","Salvare Modello"
+"New Template","Nuova sagoma"
+"Edit Template '%s'","Modificare Modello '%s'"
+"Add New Template","Aggiungere Nuovo Modello"
+"Template Title","Modello di Titolo"
+"Template Description","Descrizione del Modello"
+Yes,Si`
+No,No
+"Options Template","Opzioni di Modello"
+"Custom Options Templates","Modello di Opzioni del Cliente"
+"Options Backup and Restore","Opzioni di Copi di riserva e Ripristino"
+"Templates was succesfully backuped","Modelli sono stati conservati"
+"Backup restoring failed","Ripristino di copia di riserva e` fallito"
+"Backup was succesfully restored","Copia di Riserva e` stata ripristinata"
+"This template no longer exists","Questo Modello non esiste piu`."
+"Edit Template","Modificare sagoma"
+"The page you are trying to save no longer exists","Questa Pagina che stai cercando di salvare non esiste piu`."
+"Template was successfully saved","Modello e` stato salvato"
+"Template was successfully deleted","Modello e` stato eliminato"
+"Unable to find a page to delete","Non e` possibile trovare pagina da eliminare"
+"Template duplicated","Modello duplicato"
+"Sort Order","Assortire Ordine"
+"Template Options","Modello di Opzioni"
+"You have already added this template.","Hai gia` aggiunto questo modello."
+"Active Templates","Modelli Attivi"
+"Custom Options","Opzioni di Cliente"
+"Manage Options Template","Dirigere Modello di Opzioni"
+"Manage Options Templates","Dirigere Modello di Opzioni"
+"Some of your data may be corrupted,please restore data in Custom Options Template/Backup and Restore","Alcuni dei tuoi dati possono essere danneggiati, si prega di ripristinare i dati in Modello di Opzioni del Cliente / fare la copia di riserva e ripristinare."

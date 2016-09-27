@@ -1,0 +1,55 @@
+<!--@subject {{var frontend_label}} Installment Confirmation @-->
+<!--@vars
+{"var frontend_label":"Frontend Label",
+"var customer_name":"Customer Name",
+"var order_id":"Order Id",
+"var installment_amount":"Installment Amount",
+"var partialpayment_id":"partial payment id",
+"var paid_amount":"paid amount"
+"var remainning_installment":"Remainning Amount",
+"var total_amount":"Total Amount",
+"var paid_installment":"Paid Installment"
+"var remainning_installment":"Remainning Installment",
+"var total_installment":"Total Installment",
+"var login_url":"login url",
+}
+@-->
+
+<style type="text/css">
+	.partialpayment_order_confirmation { font-family:Arial, Helvetica, sans-serif; font-size:12px; }
+	.align_center { text-align:center; }
+	.align_right { text-align:right; }
+</style>
+
+<div class="partialpayment_order_confirmation">
+	<table border="0" cellpadding="3" cellspacing="3">
+    	<tr>
+        	<td>Dear {{var customer_name}},<br /></td>
+        </tr>
+        <tr>
+        	<td>We have received your installment of {{var installment_amount}} for the order # {{var order_id}}. Check the status of your payment by <a href="{{var login_url}}" target="_blank">logging into your account</a> .<br /></td>
+        </tr>
+        <tr>
+        	<td>Your Partially Paid order details for order # {{var order_id}} are as follows:<br /></td>
+        </tr>
+        <tr>
+        	<td>
+            	Paid Amount: {{var paid_amount}} <br />
+                Remaining Amount: {{var remainnnig_amount}}<br />
+                Total Amount: {{var total_amount}}<br />
+                Paid Installment: {{var paid_installment}}<br />
+                Remaining Installment: {{var remainning_installment}}<br />
+                Total No. of Installment: {{var total_installment}}<br />
+            </td>
+        </tr>
+        <tr>
+        	<td>Thank you for using our services. Visit our store for more products and exciting offers.<br /></td>
+        </tr>
+        <tr>
+        	<td><strong>Note:  </strong>Installment is subject to payment method / gateway.<br /></td>
+        </tr>
+        <tr>
+        	<td>Thank you.</td>
+        </tr>
+    </table>
+</div>

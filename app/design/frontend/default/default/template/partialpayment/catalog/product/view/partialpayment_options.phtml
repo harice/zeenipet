@@ -1,0 +1,332 @@
+<div class="clearer"></div>
+
+<?php
+	$partialpaymentAuthentication = Mage::helper('partialpayment/data');
+	$partialpaymentHelper = Mage::helper('partialpayment/partialpayment');
+	
+	 $url_value = $this->getRequest()->getParams();
+	 $item_id_pass =$url_value['id'];
+	
+	$validCustomer = $partialpaymentHelper->isValidCustomer();
+	$controller = Mage::app()->getRequest()->getControllerName();
+	$allow_partial_payment = '';
+	if ($partialpaymentHelper->isEnabled() && !$partialpaymentAuthentication->canRun()) {
+		echo $partialpaymentAuthentication->getMessage();
+	}
+	elseif ($partialpaymentHelper->isEnabled()) {
+		if ( ($partialpaymentHelper->isApplyToAllProducts()) || ($partialpaymentHelper->isApplyToSpecificProductsOnly() && $partialpaymentHelper->allowPartialPayment($this->getProduct())) || ($partialpaymentHelper->isApplyToOutOfStockProducts() && $partialpaymentHelper->isOutOfStockProduct($this->getProduct()->getEntityId())) ) {
+			
+			 if($controller=='cart')  // Edit page 
+		  	 {
+				  $url_value = $this->getRequest()->getParams();
+				  $item_id_pass =$url_value['id'];
+				  $item = Mage::getSingleton('sales/quote_item')->load($item_id_pass); 
+			  	  $product_price = $item->getPrice(); 
+				  
+				  $quote = Mage::getSingleton('checkout/session')->getQuote();
+				  $cartItems =  $quote->getAllVisibleItems();
+				  foreach ($cartItems as $new) 
+				  {			
+				  	 if ($new->getItemId() == $item_id_pass)
+					 {
+						$allow_partial_payment =$partialpaymentHelper->getAllowPartialPayment($new) ;					
+					 }
+				  }	 
+			 }
+			 else
+			 {
+				if (Mage::helper('tax')->displayPriceIncludingTax()) {
+					$product_price = Mage::helper('tax')->getPrice($this->getProduct(), $this->getProduct()->getFinalPrice());
+				}
+				else {
+					$product_price = $this->getProduct()->getPrice();
+				}
+			 }
+			if ($validCustomer) {
+				if ($partialpaymentHelper->isProductPriceValid($product_price)) {
+					if ($partialpaymentHelper->isPartialPaymentOptionFlexyPayments()) {
+						
+						echo '<div class="allow_partial_payment">';
+						echo '<h2>';
+						echo '<em>* </em>';
+						echo $this->__('This product is available on ') .$partialpaymentHelper->getFrontendLabel();
+						echo '</h2>';
+						echo '<div id="update-partial-payment-options">';
+						echo '<select id="allow_partial_payment" name="allow_partial_payment" class="required-entry" style="margin-right:15px;">';
+						
+						echo '<option selected="selected" value="">' . $this->__('Please Select') . '</option>';
+	
+						echo '<option value="0" '.($allow_partial_payment == '0' ?'selected="selected"':'').'>' . $this->__('Full Payment of ') . Mage::helper('core')->currency($product_price, true, false) . '</option>';
+	
+						for ($i=2;$i<=$partialpaymentHelper->getTotalNoOfInstallment();$i++) {
+							$installment_price = $product_price;
+							$surcharge_value = 0;
+	
+							if ($partialpaymentHelper->isSurchargeOptionsSingleSurcharge()) {
+								$surcharge_value = $partialpaymentHelper->getSingleSurchargeValue();								
+							}
+							elseif ($partialpaymentHelper->isSurchargeOptionsMultipleSurcharge()) {
+								$surcharge_value = explode(',', $partialpaymentHelper->getMultipleSurchargeValues());
+								$surcharge_value = $surcharge_value[$i-1];
+							}
+	
+							if ($partialpaymentHelper->isSurchargeOptionsSingleSurcharge() || $partialpaymentHelper->isSurchargeOptionsMultipleSurcharge()) {
+								if ($partialpaymentHelper->isInstallmentCalculationTypeFixed()) {
+									$installment_price += $surcharge_value;
+								}
+								else {
+									$installment_price += (($installment_price * $surcharge_value) / 100);
+								}
+							}
+	
+							echo '<option value="' . $i . '" '.($allow_partial_payment == $i ?'selected="selected"':'').'>' . $i . $this->__(' Installments of ') . Mage::helper('core')->currency($installment_price / $i, true, false) . '</option>';
+						}
+						
+						
+						echo '</select>';
+						echo '</div>';
+						if (!$partialpaymentHelper->isGroupedProduct($this->getProduct())) {
+							echo '<a href="#" onclick="return false;" onmouseover="showPartialPaymentHelp();" onmouseout="hidePartialPaymentHelp();">';
+							echo 'Explain<img alt="Help" class="partialpayment-help" height="15px;" src="' . $this->getSkinUrl('partialpayment/images/help.jpg') . '" title="Help" width="16px;" />';
+							echo '</a>';
+						}
+						echo '</div>';
+					}
+					elseif ($partialpaymentHelper->isPartialPaymentOptional()) {
+	?>
+						<div class="allow_partial_payment">
+                        	<?php if (!$partialpaymentHelper->isGroupedProduct($this->getProduct())) { ?>
+								<a href="#" onclick="return false;" onmouseover="showPartialPaymentHelp();" onmouseout="hidePartialPaymentHelp();">
+                            <?php } ?>
+								<h2>
+									<em>* </em>
+									<?php echo $this->__('This product is available on ') . $partialpaymentHelper->getFrontendLabel(); ?>
+                                    <?php if (!$partialpaymentHelper->isGroupedProduct($this->getProduct())) { ?>
+										<img alt="Help" class="partialpayment-help" height="15px;" src="<?php echo $this->getSkinUrl('partialpayment/images/help.jpg'); ?>" title="Help" width="16px;" />
+                                    <?php } ?>
+								</h2>
+                            <?php if (!$partialpaymentHelper->isGroupedProduct($this->getProduct())) { ?>
+								</a>
+                            <?php } ?>
+							<select id="allow_partial_payment" name="allow_partial_payment" class="required-entry">
+								<option selected="selected" value=""><?php echo $this->__('Please Select'); ?></option>
+								<option value="0" <?php echo $allow_partial_payment == '0' ?'selected="selected"':''?> ><?php echo $this->__('Full Payment'); ?></option>
+								<option value="1" <?php echo $allow_partial_payment == 1 ?'selected="selected"':'' ?>><?php echo $this->__('Installment'); ?></option>
+							</select>
+						</div>
+	<?php
+					}
+					else {
+	?>
+						<div class="partial_payment_is_not_optional">
+							<input type="hidden" id="allow_partial_payment" name="allow_partial_payment" value="1"/>
+                            <?php if (!$partialpaymentHelper->isGroupedProduct($this->getProduct())) { ?>
+								<a href="#" onclick="return false;" onmouseover="showPartialPaymentHelp();" onmouseout="hidePartialPaymentHelp();">
+                            <?php } ?>
+							<?php echo $this->__('This product is available on ') . $partialpaymentHelper->getFrontendLabel() . '.'; ?>
+                            <?php if (!$partialpaymentHelper->isGroupedProduct($this->getProduct())) { ?>
+                                <img alt="Help" class="partialpayment-help" height="15px;" src="<?php echo $this->getSkinUrl('partialpayment/images/help.jpg'); ?>" title="Help" width="16px;" />
+                                </a>
+                            <?php } ?>
+						</div>
+	<?php
+					}
+
+					if (!$partialpaymentHelper->isGroupedProduct($this->getProduct())) {
+	?>
+                        <div id="partialpayment-help">
+                            <?php
+                                $surcharge_value = 0;
+                                $remaining_installments = 1;
+                                $remaining_balance = 0;
+        
+                                if ($partialpaymentHelper->isPartialPaymentOption2Installments() || $partialpaymentHelper->isPartialPaymentOptionFixedInstallments()) {
+                                    if ($partialpaymentHelper->isPartialPaymentOptionFixedInstallments()) {
+                                        $remaining_installments = $partialpaymentHelper->getTotalNoOfInstallment() - 1;
+                                    }
+        
+                                    if ($partialpaymentHelper->isSurchargeOptionsSingleSurcharge()) {
+                                        $surcharge_value = $partialpaymentHelper->getSingleSurchargeValue();								
+                                    }
+                                    elseif ($partialpaymentHelper->isSurchargeOptionsMultipleSurcharge()) {
+                                        $surcharge_value = explode(',', $partialpaymentHelper->getMultipleSurchargeValues());
+                                        $surcharge_value = $surcharge_value[$remaining_installments];
+                                    }
+        
+                                    if ($partialpaymentHelper->isSurchargeOptionsSingleSurcharge() || $partialpaymentHelper->isSurchargeOptionsMultipleSurcharge()) {
+                                        if ($partialpaymentHelper->isInstallmentCalculationTypeFixed()) {
+                                            $product_price += $surcharge_value;
+                                        }
+                                        else {
+                                            $product_price += (($product_price * $surcharge_value) / 100);
+                                        }
+                                    }
+        
+                                    $initial_deposit = 0;
+        
+                                    if ($partialpaymentHelper->isInstallmentCalculationTypeFixed()) {
+                                        $initial_deposit = $partialpaymentHelper->getFirstInstallmentAmount();
+                                    }
+                                    else {
+                                        $initial_deposit = ($product_price * $partialpaymentHelper->getFirstInstallmentAmount()) / 100;
+                                    }
+        
+                                    echo 'Initial deposit of ' . Mage::helper('core')->currency($initial_deposit, true, false) . '.';
+        
+                                    $remaining_balance = $product_price - $initial_deposit;
+                                }
+        
+                                $payment_plan = '';
+                                if ($partialpaymentHelper->isPaymentPlanDays()) {
+                                    $payment_plan = $partialpaymentHelper->getPaymentPlanTotalNoOfDays() . ' days';
+                                }
+                                elseif ($partialpaymentHelper->isPaymentPlanWeekly()) {
+                                    $payment_plan = 'week';
+                                }
+                                else {
+                                    $payment_plan = 'month';
+                                }
+        
+                                if ($partialpaymentHelper->isPartialPaymentOption2Installments() || $partialpaymentHelper->isPartialPaymentOptionFixedInstallments()) {
+                                    if ($remaining_installments == 1) {
+                                        echo '<br />Remaining balance in ' . $remaining_installments . ' installment of ' . Mage::helper('core')->currency($remaining_balance / $remaining_installments, true, false) . ' to be paid in ' . $payment_plan . '.';
+                                    }
+                                    else {
+                                        echo '<br />Remaining balance in ' . $remaining_installments . ' installments of ' . Mage::helper('core')->currency($remaining_balance / $remaining_installments, true, false) . ' to be paid every ' . $payment_plan . '.';
+                                    }
+                                }
+                                else {
+                                    echo 'Installments to be paid every ' . $payment_plan . '.';
+                                }
+        
+                                if ($partialpaymentHelper->isCaptureInstallmentsAutomatically()) {
+                                    echo '<br />Your CC will be charged automatic.';
+                                    echo "<br />We don't save your CC details. You are secure.";
+                                }
+        
+                                if ($partialpaymentHelper->isPartialPaymentOption2Installments() || $partialpaymentHelper->isPartialPaymentOptionFixedInstallments()) {
+                                    echo '<div class="total-to-be-paid">Total to be paid = ' . Mage::helper('core')->currency($product_price, true, false) . '</div>';
+                                }
+                                else {
+                                    echo '<br /><br />';
+                                }
+        
+                                echo '* Final amount varies depending on shipping, tax & other charges.';
+        
+                                if ($surcharge_value) {
+                                    echo '<br />* ';
+                                    if ($partialpaymentHelper->isInstallmentCalculationTypeFixed()) {
+                                        echo '<span id="surcharge_value">' . Mage::helper('core')->currency($surcharge_value, true, false) . '</span>';
+                                    }
+                                    else {
+                                        echo '<span id="surcharge_value">' . $surcharge_value . '</span>%';
+                                    }
+                                    echo ' surcharge applies to all amount.';
+                                }
+                            ?>
+                        </div>
+<?php
+					}
+				}
+			}
+			elseif($partialpaymentHelper->displayPartialPaymentMessage())
+			{ 
+?>
+				<div class="customer_group_message">
+					<?php echo $this->__('Please login to know your parital payment facility.'); ?>
+                </div>
+<?php
+	       }
+		}
+	}
+
+	if (!$partialpaymentHelper->isGroupedProduct($this->getProduct())) {
+?>
+		<script type="text/javascript" language="javascript">
+            function showPartialPaymentHelp () {
+				<?php if ($partialpaymentHelper->isPartialPaymentOption2Installments() || $partialpaymentHelper->isPartialPaymentOptionFixedInstallments()) { 
+					if(Mage::getStoreConfig('tax/display/type', Mage::app()->getStore()) == '3')
+					{
+						if(Mage::getStoreConfig('tax/calculation/price_includes_tax', Mage::app()->getStore()) == '1')
+						{
+				?>
+							var price_element_id = 'price-including-tax-<?php echo $this->getProduct()->getEntityId(); ?>';
+				<?php
+						}
+						else
+						{
+				?>
+							var price_element_id = 'price-excluding-tax-<?php echo $this->getProduct()->getEntityId(); ?>';
+				<?php
+						}
+					}
+					else
+					{
+				?>					
+						var price_element_id = 'product-price-<?php echo $this->getProduct()->getEntityId(); ?>';
+				<?php
+					}
+				?>
+					var currency_symbol = '<?php echo Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); ?>';
+					var currency_code = '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>';
+					var price = jQuery('#' + price_element_id).text();
+					price = price.replace(currency_symbol, '');
+					price = price.replace(currency_code, '');
+					price = price.replace(',', '');
+					var data = 'product_price=' + jQuery.trim(price);
+					jQuery.ajax({
+						url: "<?php echo $this->getUrl('partialpayment/index/gethelptooltip'); ?>",
+						type: "POST",        
+						data: data,     
+						cache: false,
+						success: function (html) {
+							jQuery('#partialpayment-help').html(html);
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							/*alert(textStatus);
+							alert(errorThrown);*/
+						}
+					});
+				<?php } ?>
+                document.getElementById('partialpayment-help').style.display = 'block';
+            }
+
+            function hidePartialPaymentHelp () {
+                document.getElementById('partialpayment-help').style.display = 'none';
+            }
+				
+			function updatePartialpaymentAmount ()
+			{
+				var price_element_id = 'product-price-<?php echo $this->getProduct()->getEntityId(); ?>';
+				var item_id = <?php echo $item_id_pass ?> ;
+				var currency_symbol = '<?php echo Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); ?>';
+				var currency_code = '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>';
+				var price =jQuery('#' + price_element_id).text();
+				var controller = '<?php echo $controller; ?>';
+				price = price.replace(currency_symbol, '');
+				price = price.replace(currency_code, '');
+				price = price.replace(',', '');
+
+				var selValue = document.getElementById("allow_partial_payment");
+   			    var getValue = selValue.options[selValue.selectedIndex].value
+
+				var data = 'product_price=' + jQuery.trim(price) + '&select_combo=' + getValue + '&item_id_pass=' + item_id + '&controller=' + controller ;
+				jQuery.ajax({
+					url: "<?php echo $this->getUrl('partialpayment/index/updatePartialpaymentAmount'); ?>",
+					type: "POST",        
+					data: data,     
+					cache: false,
+					success: function (html) {
+						jQuery('#update-partial-payment-options').html(html);
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+					//	alert(textStatus);
+					//	alert(errorThrown);
+					}
+				});
+			}	
+				
+        </script>
+<?php
+	}
+?>

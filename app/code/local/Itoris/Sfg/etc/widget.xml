@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+	<itoris_sfg type="Itoris_Sfg/WidgetForm">
+		<name>IToris SmartFormer Gold Form</name>
+		<description>Adds Form instance.</description>
+		<parameters>
+			<formid>
+				<label>Form</label>
+				<type>select</type>
+				<visible>1</visible>
+				<source_model>itoris_sfg/forms</source_model>
+			</formid>
+		</parameters>
+	</itoris_sfg>
+</widgets>

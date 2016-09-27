@@ -1,0 +1,40 @@
+
+/**
+ * Product:     Custom Product Preview
+ * Package:     Aitoc_Aitcg_3.0.1_1.0.0_520274
+ * Purchase ID: n/a
+ * Generated:   2013-03-05 20:52:02
+ * File path:   skin/frontend/base/default/aitoc/aitcg/css/colorset.css
+ * Copyright:   (c) 2013 AITOC, Inc.
+ */
+.aitcg_colorset_container
+{
+    padding-bottom: 10px;
+}
+
+.aitcg_colorset
+{
+    width: 159px;
+    max-height: 180px;
+    position:relative;
+    padding-top: 5px;
+/*    background-color: #D4D0C8;*/
+    top:5px;
+/*    border: solid;
+    border-width: 1px;
+    border-color: ThreeDHighlight ThreeDShadow ThreeDShadow ThreeDHighlight;*/
+    overflow:auto;
+}
+
+.aitcg_colorset_color
+{
+    float: left;
+    width: 15px;
+    height: 15px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#2F2F2F;
+    margin-bottom:5px;
+    margin-left:5px;
+    position:relative;
+}

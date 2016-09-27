@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<validators>
+  <validator name="Required">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Field is required';
+msg = msg.replace('%s', sfgName); 
+if (obj.type &amp;&amp; (obj.type.toLowerCase()=='checkbox' || obj.type.toLowerCase()=='radio') &amp;&amp; !obj.checked) return msg; 
+if (obj.tagName.toLowerCase()=='select' &amp;&amp; (obj.selectedIndex==-1 || obj.selectedIndex==0)) return msg; 
+if (obj.value=='') return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Field is required';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+if (!isset($form-&gt;data[$htmlName]) || !is_array($form-&gt;data[$htmlName]) &amp;&amp; trim($form-&gt;data[$htmlName])=='') return $msg;
+if (is_array($form-&gt;data[$htmlName]) &amp;&amp; trim(implode('',$form-&gt;data[$htmlName]))=='') return $msg;
+    </php>
+  </validator>
+  <validator name="Group Required">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Group: %s. Please select a value';
+msg = msg.replace('%s', sfgName); 
+var objs = document.getElementsByName(obj.name); 
+var checked = false; 
+for (i=0; i&lt;objs.length; i++) if (objs[i].checked) { checked = true; break; } 
+if (!checked) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Group: '.$obj['sfgalias'].'. Please select a value';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+if (!isset($form-&gt;data[$htmlName]) || !is_array($form-&gt;data[$htmlName]) &amp;&amp; trim($form-&gt;data[$htmlName])=='') return $msg;
+if (is_array($form-&gt;data[$htmlName]) &amp;&amp; trim(implode('',$form-&gt;data[$htmlName]))=='') return $msg;
+    </php>
+  </validator>
+  <validator name="Check identical">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object, obj2 - another HTML element for comparing
+var msg = 'Field: %s. Entities are not identival';
+msg = msg.replace('%s', sfgName);
+var el2 = document.getElementsByName(obj2)[0];
+if (el2 &amp;&amp; obj.value != el2.value) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation, $obj - another element
+$msg = 'Field: '.$obj['sfgalias'].'. Entities are not identival';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$htmlName2 = str_replace(array('[', ']', ' '), array('','',''), $obj2);
+$htmlName2 = strtolower($htmlName2);
+if ($form-&gt;data[$htmlName]!=$form-&gt;data[$htmlName2]) return $msg;
+    </php>
+  </validator>
+  <validator name="Email">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid email. Please specify a valid value';
+msg = msg.replace('%s', sfgName);
+var RegExp=/^((([a-z]|[0-9]|!|#|$|%|&amp;|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+(\.([a-z]|[0-9]|!|#|$|%|&amp;|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+)*)@((((([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.))*([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.)[\w]{2,4}|(((([0-9]){1,3}\.){3}([0-9]){1,3}))|(\[((([0-9]){1,3}\.){3}([0-9]){1,3})\])))$/;
+if (obj.value!='' &amp;&amp; !RegExp.test(obj.value.toLowerCase())) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Invalid email. Please specify a valid value';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$RegExp="/^((([a-z]|[0-9]|!|#|$|%|&amp;|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+(\.([a-z]|[0-9]|!|#|$|%|&amp;|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+)*)@((((([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.))*([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.)[\w]{2,4}|(((([0-9]){1,3}\.){3}([0-9]){1,3}))|(\[((([0-9]){1,3}\.){3}([0-9]){1,3})\])))$/";
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; !preg_match($RegExp, strtolower($form-&gt;data[$htmlName]))) return $msg;
+    </php>
+  </validator>
+  <validator name="Zip">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct zip/postal';
+msg = msg.replace('%s', sfgName);
+var letters='qwertyuiopasdfghjklzxcvbnm -1234567890';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || obj.value.length&gt;10) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Please specify a correct zip/postal';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$letters = 'qwertyuiopasdfghjklzxcvbnm -1234567890';
+if (isset($form-&gt;data[$htmlName])) $value = strtolower($form-&gt;data[$htmlName]); else $value='';
+for($i=0; $i&lt;strlen($value); $i++) if (strpos($letters, substr($value, $i, 1))===false) return $msg;
+    </php>
+  </validator>
+  <validator name="ZipUS">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid US Zip. Please specify a valid value';
+msg = msg.replace('%s', sfgName);
+var zipPattern1=/^(\d{5})$/;
+var zipPattern2=/^(\d{5})\-(\d{4})$/;
+if ((obj.value.match(zipPattern1)==null)&amp;&amp;(obj.value.match(zipPattern2)==null)&amp;&amp;obj.value.length&gt;0) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Invalid US Zip. Please specify a valid value';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$zipPattern1="/^(\d{5})$/";
+$zipPattern2="/^(\d{5})\-(\d{4})$/";
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; !preg_match($zipPattern1, $form-&gt;data[$htmlName]) &amp;&amp; !preg_match($zipPattern2, $form-&gt;data[$htmlName])) return $msg;
+    </php>
+  </validator>
+  <validator name="Phone">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct phone number';
+msg = msg.replace('%s', sfgName);
+var letters='1234567890 -.()+';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || obj.value.length&gt;10) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Please specify a correct phone number';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$letters = '1234567890 -.()+';
+if (isset($form-&gt;data[$htmlName])) $value = strtolower($form-&gt;data[$htmlName]); else $value='';
+for($i=0; $i&lt;strlen($value); $i++) if (strpos($letters, substr($value, $i, 1))===false) return $msg;
+    </php>
+  </validator>
+  <validator name="PhoneUS">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Please, provide a phone number in format XXX-XXX-XXXX, where X is a digit.';
+msg = msg.replace('%s', sfgName);
+var phonePattern=/^(\d{3})\-(\d{3})\-(\d{4})$/;
+if ((obj.value.match(phonePattern)==null)&amp;&amp;obj.value.length&gt;0) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Invalid value! Please, provide a phone number in format XXX-XXX-XXXX, where X is a digit.';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$phonePattern="/^(\d{3})\-(\d{3})\-(\d{4})$/";
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; !preg_match($phonePattern, strtolower($form-&gt;data[$htmlName]))) return $msg;
+    </php>
+  </validator>
+  <validator name="Password">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. The password should contain 6 to 12 symbols';
+msg = msg.replace('%s', sfgName);
+if ((obj.value.length&lt;6 || obj.value.length&gt;12) &amp;&amp; obj.value.length!=0) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. The password should contain 6 to 12 symbols';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; (strlen($form-&gt;data[$htmlName])&lt;6 || strlen($form-&gt;data[$htmlName])&gt;12)) return $msg;
+    </php>
+  </validator>
+  <validator name="CreditCardNumber">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct credit card number';
+msg = msg.replace('%s', sfgName);
+var ccPattern=/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+if ((obj.value.match(ccPattern)==null)&amp;&amp;obj.value.length&gt;0) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Please specify a correct credit card number';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$ccPattern="/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/";
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; !preg_match($ccPattern, strtolower($form-&gt;data[$htmlName]))) return $msg;
+    </php>
+  </validator>
+  <validator name="CreditCardCVV">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct credit card CVV';
+msg = msg.replace('%s', sfgName);
+var letters='1234567890';
+var ps=false;
+for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || (obj.value.length&lt;3 &amp;&amp; obj.value.length!=0) || obj.value.length&gt;4) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Please specify a correct credit card CVV';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; (strlen($form-&gt;data[$htmlName])&lt;3 || strlen($form-&gt;data[$htmlName])&gt;4 || !is_numeric($form-&gt;data[$htmlName]))) return $msg;
+    </php>
+  </validator>
+  <validator name="Money">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify currency correctly';
+msg = msg.replace('%s', sfgName);
+var letters='1234567890.';
+var ps=false; for(i=0;i&lt;obj.value.length;i++) if (letters.indexOf(obj.value.toLowerCase().substr(i,1))&lt;0) ps=true;
+if (ps || obj.value.length&gt;10 || Math.floor(obj.value*100)/100!=obj.value-0) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Please specify currency correctly';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; (floor(floatval($form-&gt;data[$htmlName])*100)/100!=floatval($form-&gt;data[$htmlName]) || !is_numeric($form-&gt;data[$htmlName]))) return $msg;
+    </php>
+  </validator>
+  <validator name="URL">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a valid URL';
+msg = msg.replace('%s', sfgName);
+var RegExp=/^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&amp;?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/;
+if (obj.value!='' &amp;&amp; !RegExp.test(obj.value)) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Please specify a valid URL';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$RegExp="/^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&amp;?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/";
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; !preg_match($RegExp, strtolower($form-&gt;data[$htmlName]))) return $msg;
+    </php>
+  </validator>
+  <validator name="IP">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Please specify a correct IP';
+msg = msg.replace('%s', sfgName);
+var RegExp=/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+var a=obj.value.split('.');
+if (obj.value!='' &amp;&amp; !RegExp.test(obj.value) || a[0]&gt;255 || a[1]&gt;255 || a[2]&gt;255 || a[3]&gt;255) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Please specify a correct IP';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$RegExp="/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/";
+if (isset($form-&gt;data[$htmlName])) $parts = explode('.', $form-&gt;data[$htmlName]); else $parts = array(999,999,999,999);
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; (!preg_match($RegExp, $form-&gt;data[$htmlName]) || intval($parts[0])&gt;255 || intval($parts[1])&gt;255 || intval($parts[2])&gt;255 || intval($parts[3])&gt;255)) return $msg;
+    </php>
+  </validator>
+  <validator name="SSN">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Please, provide a SSN in format XXX-XX-XXXX or XX-XXXXXXX, where X is a digit.';
+msg = msg.replace('%s', sfgName);
+var ssnPattern1 = /^(\d{3})\-(\d{2})\-(\d{4})$/;
+var ssnPattern2 = /^(\d{2})\-(\d{7})$/;
+if ((obj.value.match(ssnPattern1)==null)&amp;&amp;(obj.value.match(ssnPattern2)==null)&amp;&amp;obj.value.length&gt;0) return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Invalid value! Please, provide a SSN in format XXX-XX-XXXX or XX-XXXXXXX, where X is a digit.';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+$ssnPattern1="/^(\d{3})\-(\d{2})\-(\d{4})$/";
+$ssnPattern2="/^(\d{2})\-(\d{7})$/";
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; !preg_match($ssnPattern1, $form-&gt;data[$htmlName]) &amp;&amp; !preg_match($ssnPattern2, $form-&gt;data[$htmlName])) return $msg;
+    </php>
+  </validator>
+  <validator name="Date">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Field value should be in MM/DD/YYYY format.';
+msg = msg.replace('%s', sfgName);
+var a=obj.value.split('/');
+if (a[0]-0&gt;0 &amp;&amp; a[0]-0&lt;=12 &amp;&amp; a[1]-0&gt;0 &amp;&amp; a[1]-0&lt;=31 &amp;&amp; a[2]-0&gt;1000 &amp;&amp; a[2]-0&lt;=9999 &amp;&amp; a[3]==null ||obj.value.length==0) return null; else return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Invalid value! Field value should be in MM/DD/YYYY format.';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+if (isset($form-&gt;data[$htmlName])) $parts=explode('/', $form-&gt;data[$htmlName]); else $parts=array(0,0,0);
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; (count($parts)!=3 || !checkdate(intval($parts[0]), intval($parts[1]), intval($parts[2])))) return $msg;
+    </php>
+  </validator>
+  <validator name="DateShort">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Field value should be in MM/DD/YY format';
+msg = msg.replace('%s', sfgName);
+var a=obj.value.split('/');
+if (a[0]-0&gt;0 &amp;&amp; a[0]-0&lt;=12 &amp;&amp; a[1]-0&gt;0 &amp;&amp; a[1]-0&lt;=31 &amp;&amp; a[2]-0&gt;=0 &amp;&amp; a[2]-0&lt;=99 &amp;&amp; a[3]==null ||obj.value.length==0) return null; else return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Invalid value! Field value should be in MM/DD/YY format.';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+if (isset($form-&gt;data[$htmlName])) $parts=explode('/', $form-&gt;data[$htmlName]); else $parts=array(0,0,0);
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; (count($parts)!=3 || !is_numeric($parts[2]) || !checkdate(intval($parts[0]), intval($parts[1]), intval($parts[2])+2000))) return $msg;
+    </php>
+  </validator>
+  <validator name="Time">
+    <js>
+      // incoming variables: obj - HTML element firing the event, sfgName - system name of the object 
+var msg = 'Field: %s. Invalid value! Field value should be in HH:MM format.';
+msg = msg.replace('%s', sfgName);
+var a=obj.value.split(':');
+if (a[0]-0&gt;=0 &amp;&amp; a[0]-0&lt;24 &amp;&amp; a[1]-0&gt;=0 &amp;&amp; a[1]-0&lt;60 &amp;&amp; a[2]==null ||obj.value.length==0) return null; else return msg;
+    </js>
+    <php>
+      // incoming variables: $form - the form object, $obj - structured object of element firing the validation
+$msg = 'Field: '.$obj['sfgalias'].'. Invalid value! Field value should be in HH:MM format.';
+$htmlName = str_replace(array('[', ']', ' '), array('','',''), $form-&gt;getProp($obj['attributes'], 'name'));
+$htmlName = strtolower($htmlName);
+if (isset($form-&gt;data[$htmlName])) $parts=explode(':', $form-&gt;data[$htmlName]); else $parts=array(99,99);
+if (isset($form-&gt;data[$htmlName]) &amp;&amp; $form-&gt;data[$htmlName]!='' &amp;&amp; !is_array($form-&gt;data[$htmlName]) &amp;&amp; (count($parts)!=2 || !is_numeric($parts[0]) || !is_numeric($parts[1]) || intval($parts[0])&lt;0 || intval($parts[0])&gt;23 || intval($parts[1])&lt;0 || intval($parts[1])&gt;59)) return $msg;
+    </php>
+  </validator>
+</validators>

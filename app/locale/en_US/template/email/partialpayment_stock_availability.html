@@ -1,0 +1,49 @@
+<!--@subject {{var frontend_label}} Stoock Availability Information @-->
+<!--@vars
+{
+"var frontend_label":"Frontend Label",
+"var customer_name":"Customer Name",
+"var order_id":"Order Id",
+"var product_name":"Product Name",
+"var due_date":"Product Name",
+"var paid_amount":"Orded Date",
+"var remaining_amount":"Orded Date",
+"var total_amount":"Orded Date",
+"var paid_installment":"Orded Date",
+"var remaining_installment":"Orded Date",
+"var total_installment":"Orded Date",
+"var login_url":"Orded Date",
+}
+@-->
+<style type="text/css">
+	.partialpayment_stock_availability { font-family:Arial, Helvetica, sans-serif; font-size:12px; }
+	.align_center { text-align:center; }
+	.align_right { text-align:right; }
+</style>
+
+<div class="partialpayment_stock_availability">
+	<table border="0" cellpadding="3" cellspacing="3">
+    	<tr>
+        	<td>Dear {{var customer_name}},<br /></td>
+        </tr>
+         <tr>
+        	<td>This email is to notify that the product {{var product_name}} you have ordered is now available in stock.You may <a href="{{var login_url}}" target="_blank"> pay the next installment</a> before {{var due_date}} <br/></td>
+        </tr>
+        <tr>
+        	<td>Your Partially Paid order details for order {{var order_id}} are as follows:</td>
+        </tr>
+           <tr>
+        	<td>
+            	Paid Amount: {{var paid_amount}} <br />
+                Remaining Amount: {{var remaining_amount}}<br />
+                Total Amount: {{var total_amount}}<br />
+                Paid Installment: {{var paid_installment}}<br />
+                Remaining Installment: {{var remaining_installment}}<br />
+                Total No. of Installment: {{var total_installment}}<br />
+            </td>         
+        </tr>
+          <tr>
+        	<td>Thanks for being with us. Visit our store for more products and exciting offers.</td>
+        </tr>
+     </table>
+</div>

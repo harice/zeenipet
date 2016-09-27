@@ -1,0 +1,90 @@
+<?php 
+$order = $this->getData('order');
+$payment = $order->getPayment();
+$order_id = $order->getIncrementId();
+$order = Mage::getModel('sales/order')->loadByIncrementId($order_id);
+$_items = $order->getAllItems();
+
+?>
+
+<div class="grid np" id="c_<?php echo $order_id; ?>" style="display:none;position:absolute;margin:45px 0 0 -190px;border:1px solid green;width:70.5%;">
+   
+   <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'adminhtml/default/default/images/rule_component_remove.gif'?>" onclick="hideDetail('c_<?php echo $order_id; ?>')" style="position:absolute;left:884px;top:-7px;">
+   	
+	
+		<div class="box-left" style="width:49.7%;">
+			<!--Billing Address-->
+			<div class="entry-edit">
+				<div class="entry-edit-head">
+					<h4 class="icon-head head-billing-address"><?php echo Mage::helper('sales')->__('Billing Address') ?></h4>
+				</div>
+				<fieldset style="margin-bottom:5px;">
+					<address><?php echo $order->getBillingAddress()->getFormated(true) ?></address>
+				</fieldset>
+			</div>
+		</div>
+				
+		<?php if (!$order->getIsVirtual()): ?>
+			<div class="box-right" style="width:49.7%;">
+				<!--Shipping Address-->
+				<div class="entry-edit">
+					<div class="entry-edit-head">
+						<h4 class="icon-head head-shipping-address"><?php echo Mage::helper('sales')->__('Shipping Address') ?></h4>
+					</div>
+					<fieldset style="margin-bottom:5px;">
+						<address><?php echo $order->getShippingAddress()->getFormated(true) ?></address>
+					</fieldset>
+				</div>
+			</div>
+			<div class="clear"></div>
+		<?php endif; ?>
+		
+		<div class="box-left" style="width:49.7%;">
+			<!--Billing Address-->
+			<div class="entry-edit">
+				<div class="entry-edit-head">
+					<h4 class="icon-head head-payment-method"><?php echo $this->helper('sales')->__('Payment Information') ?></h4>
+				</div>
+				<fieldset style="margin-bottom:5px;">
+					<div>
+ 						<strong>	<?php echo $order->getPayment()->getMethodInstance()->getTitle();  ?>  </strong>
+					</div>
+					<div><?php echo Mage::helper('sales')->__('Order was placed using %s', $order->getOrderCurrencyCode()) ?></div>
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="box-right" style="width:49.7%;">
+  		  <!--Shipping Address-->
+			<div class="entry-edit">
+				<div class="entry-edit-head">
+					<h4 class="icon-head head-shipping-method"><?php echo $this->helper('sales')->__('Shipping and Tracking Information') ?></h4>
+				</div>
+ 				  <fieldset style="margin-bottom:5px;">
+					<div>
+					 
+						<strong><?php echo $order->getShippingDescription() ?></strong>
+						<br />
+						<?php echo $this->helper('sales')->__('Total Shipping Charges'); ?>:
+						<?php echo sprintf("%.2f", $order->getShippingAmount()); ?>
+		 
+					</div>
+			 
+					<div><?php //echo $this->getChildHtml('shipment_tracking') ?></div>
+				</fieldset>
+			</div>
+		</div>
+
+</div>
+
+
+<script>
+	function showCusDetail(order_id)
+	{	
+		document.getElementById(order_id).style.display = 'block'
+	}
+	function hideCusDetail(order_id)
+	{	
+		document.getElementById(order_id).style.display = 'none'
+	}
+</script>

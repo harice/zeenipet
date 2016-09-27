@@ -1,0 +1,180 @@
+<?php
+	$partial_payment_id = Mage::app()->getRequest()->getParam('id');
+
+	if (empty($partial_payment_id)) {
+		$partial_payment_id = 0;
+	}
+
+	$partial_payment_collection = Mage::getModel('partialpayment/partialpayment')->getCollection()
+									->addFieldToFilter('partial_payment_id', $partial_payment_id);
+	$partial_payment_collection = $partial_payment_collection->getData();
+
+	if (sizeof($partial_payment_collection)) {
+		$partial_payment_installments = Mage::getModel('partialpayment/installment')->getCollection()
+											->addFieldToFilter('partial_payment_id', array('eq' => $partial_payment_id));
+		$partial_payment_installments = $partial_payment_installments->getData();
+?>
+
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+            	<h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('partialpaymentadmin')->__("Partially Paid Order's Information"); ?></h4>
+            <div class="form-buttons"></div>
+        </div>
+    	<div id="partialpayment_form" class="fieldset ">
+    		<div class="hor-scroll">
+            	<table cellspacing="0" class="form-list">
+            		<tbody>
+                		<tr>
+        					<td class="label"><label for="partial_payment_id"><?php echo Mage::helper('partialpaymentadmin')->__('Partial Payment Id'); ?></label></td>
+    						<td class="value"><input name="partial_payment_id" type="hidden" value="<?php echo $partial_payment_collection[0]['partial_payment_id']; ?>" /><?php echo $partial_payment_collection[0]['partial_payment_id']; ?></td>
+    					</tr>
+						<tr>
+        					<td class="label"><label for="order_id">Order Id</label></td>
+    						<td class="value"><?php echo $partial_payment_collection[0]['order_id']; ?></td>
+    					</tr>
+						<tr>
+        					<td class="label"><label for="customer_id">Customer Id</label></td>
+    						<td class="value"><?php echo $partial_payment_collection[0]['customer_id']; ?></td>
+    					</tr>
+						<tr>
+        					<td class="label"><label for="customer_firstname">First Name</label></td>
+    						<td class="value"><?php echo $partial_payment_collection[0]['customer_first_name']; ?></td>
+    					</tr>
+						<tr>
+        					<td class="label"><label for="customer_lastname">Last Name</label></td>
+    						<td class="value"><?php echo $partial_payment_collection[0]['customer_last_name']; ?></td>
+    					</tr>
+						<tr>
+        					<td class="label"><label for="email">Email</label></td>
+    						<td class="value"><?php echo $partial_payment_collection[0]['customer_email']; ?></td>
+    					</tr>
+                        <tr>
+                        	<td class="label"><label for="total_amount">Total Amount</label></td>
+                            <td class="value"><?php echo $partial_payment_collection[0]['total_amount']; ?></td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label for="paid_amount">Paid Amount</label></td>
+                            <td class="value"><?php echo $partial_payment_collection[0]['paid_amount']; ?></td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label for="remaining_amount">Due Amount</label></td>
+                            <td class="value"><?php echo $partial_payment_collection[0]['remaining_amount']; ?></td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label for="total_installment">Total Installment</label></td>
+                            <td class="value"><?php echo $partial_payment_collection[0]['total_installment']; ?></td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label for="paid_installment">Paid Installment</label></td>
+                            <td class="value"><?php echo $partial_payment_collection[0]['paid_installment']; ?></td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label for="remaining_installment">Remaining Installment</label></td>
+                            <td class="value"><?php echo $partial_payment_collection[0]['remaining_installment']; ?></td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label for="created_date">Created Date</label></td>
+                            <td class="value"><?php echo $partial_payment_collection[0]['created_date']; ?></td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label for="updated_date">Updated Date</label></td>
+                            <td class="value"><?php echo $partial_payment_collection[0]['updated_date']; ?></td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label for="partial_payment_status"><?php echo Mage::helper('partialpaymentadmin')->__('Partial Payment Status'); ?></label></td>
+                            <td class="value">
+                            	<select class="select" name="partial_payment_status" id="partial_payment_status">
+                                	<?php
+                                    	$partial_payment_status = Mage::getModel('partialpayment/partialpaymentstatus')->toOptionArray();
+
+										for ($i=0;$i<sizeof($partial_payment_status);$i++) {
+											echo '<option' . ($partial_payment_status[$i]['value'] == $partial_payment_collection[0]['partial_payment_status'] ? ' selected="selected"' : '') . ' value="' . $partial_payment_status[$i]['value'] . '">' . $partial_payment_status[$i]['label'] . '</option>';
+										}
+									?>
+                        		</select>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label for="partial_payment_status">Installments</label></td>
+                            <td class="value">
+                            	<div class="grid">
+                                    <table>
+                                        <tr>
+                                            <th class="a-center">Pay / Edit</th>
+                                            <th class="a-center">Installment Amount</th>
+                                            <th class="a-center">Due Date</th>
+                                            <th class="a-center">Paid Date</th>
+                                            <th class="a-center">Installment Status</th>
+                                            <th class="a-center">Payment Method </th>
+                                        </tr>
+                                        <?php
+											for ($i=0;$i<sizeof($partial_payment_installments);$i++) {
+												if ($i != 0 && $i % 2 == 1) {
+													echo '<tr class="even">';
+												}
+												else {
+													echo '<tr>';
+												}
+
+												echo '<td class="a-center">';
+												echo '<input type="radio" value="' . $partial_payment_installments[$i]['installment_id'] . '" name="installment_id" />';
+												echo '</td>';
+
+												echo '<td class="a-right">';
+												echo $partial_payment_installments[$i]['installment_amount'];
+												echo '</td>';
+
+												echo '<td class="a-center nowrap">';
+												echo '<input class="input-text no-changes validate-date required-entry" type="text" id="installment[' . $partial_payment_installments[$i]['installment_id'] . '][installment_due_date]" name="installment[' . $partial_payment_installments[$i]['installment_id'] . '][installment_due_date]" value="' . $partial_payment_installments[$i]['installment_due_date'] . '" style="width:6em" />';
+												echo '<img src="' . $this->getSkinUrl('images/grid-cal.gif') . '" title="' . Mage::helper('partialpaymentadmin')->__('Select Date') . '" id="installment[' . $partial_payment_installments[$i]['installment_id'] . '][installment_due_date][trig]" alt="' . Mage::helper('partialpaymentadmin')->__('Select Date') . '" class="v-middle" style="margin-left:5px;" />';
+												echo '<script type="text/javascript">';
+												echo 'Calendar.setup({';
+												echo 'inputField : "installment[' . $partial_payment_installments[$i]['installment_id'] . '][installment_due_date]",';
+												echo 'ifFormat : "%Y-%m-%d",';
+												echo 'showsTime : false,';
+												echo 'button : "installment[' . $partial_payment_installments[$i]['installment_id'] . '][installment_due_date][trig]",';
+												echo 'align : "Bl",';
+												echo 'singleClick : true';
+												echo '});';
+												echo '</script>';
+												echo '</td>';
+
+												echo '<td class="a-center">';
+												echo $partial_payment_installments[$i]['installment_paid_date'];
+												echo '</td>';
+
+												echo '<td class="a-center">';
+												echo '<select class="a-center" name="installment[' . $partial_payment_installments[$i]['installment_id'] . '][installment_status]" style="width:100%;">';
+												$installment_status = Mage::getModel('partialpayment/installmentstatus')->toOptionArray();
+												for ($j=0;$j<sizeof($installment_status);$j++) {
+													echo '<option' . ($installment_status[$j]['value'] == $partial_payment_installments[$i]['installment_status'] ? ' selected="selected"' : '') . ' value="' . $installment_status[$j]['value'] . '">' . $installment_status[$j]['label'] . '</option>';
+												}
+												echo '</select>';
+												echo '</td>';
+
+												echo '<td class="a-center">';
+												echo $partial_payment_installments[$i]['payment_method'];
+												echo '</td>';
+
+												echo '</tr>';
+											}
+										?>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td class="label"><label style="" for="mycustom_element">Payment Method</label></td>
+                            <td class="value">
+								<?php
+									$payment_methods = new Indies_Partialpaymentadmin_Lib_Varien_Data_Form_Element_ExtendedLabel();
+                                	echo $payment_methods->getElementHtml();
+								?>
+                            </td>
+                        </tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+<?php } ?>

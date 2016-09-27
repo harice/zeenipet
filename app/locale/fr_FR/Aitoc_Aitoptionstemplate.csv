@@ -1,0 +1,62 @@
+﻿"Check Synchronization","Vérifiez la synchronisation"
+"Backup data to file","Données de sauvegarde de fichier"
+"Restore data from reserve tables","Restaurer les données de réserver des tables"
+Export,Exporter
+"Restore from backup file","Restaurer à partir de fichier de sauvegarde"
+"Add New Option","Ajouter une nouvelle option"
+"Save All Options As New Template","Enregistrer toutes les options en tant que Nouveaux modèles"
+"Add Template Options","Ajouter des Options de modèle"
+"Assign Whole Template","Attribuer le modèle entier"
+"Delete Template","Supprimer le modèle"
+"Please enter search conditions to view products.","S'il vous plaît entrer les conditions de recherche pour voir les produits."
+"General Information","Informations générales"
+Title,Titre
+Description,Description
+Status,Statut
+Active,Actif
+Inactive,Inactif
+ID,ID
+Name,Nom
+Type,Type
+"Attrib. Set Name","Attribuer le mot identificateur"
+Visibility,Visibilité
+SKU,"URS (Unité retenue de stock)"
+Price,Prix
+"Default Qty","Quantité par défaut"
+Position,Position
+"Template Information",Echantillon
+Template,Modèle
+General,Général
+Options,Options
+"Assigned Products","Produits affectées"
+Duplicate,Doubler
+"Save and Continue Edit","Enregistrer et continuer à modifier"
+"Save Template","Enregistrer le modèle"
+"New Template","Nouveau modèle"
+"Edit Template '%s'","Modifier le modèle '%s' "
+"Add New Template","Ajouter nouveau modèl"
+"Template Title","Titre du modèle"
+"Template Description","Description du modèle"
+Yes,Oui
+No,Non
+"Options Template","Options de modèle"
+"Custom Options Templates","Options des modèles personnalisés"
+"Options Backup and Restore","Options de sauvegarde et de restauration"
+"Templates was succesfully backuped","Modèles a été sauvegardé avec succès"
+"Backup restoring failed","Sauvegarde de restauration a échoué"
+"Backup was succesfully restored","Sauvegarde a été restaurée avec succès"
+"This template no longer exists","Ce modèle n'existe plus"
+"Edit Template","Modifier le modèle"
+"The page you are trying to save no longer exists","La page que vous essayez d'enregistrer n'existe plus"
+"Template was successfully saved","Modèle a été correctement enregistré"
+"Template was successfully deleted","Modèle a été supprimé avec succès"
+"Unable to find a page to delete","Impossible de trouver une page à supprimer"
+"Template duplicated","Modèle en double"
+"Sort Order","Tri en ordre"
+"Template Options","Options de modèle"
+"You have already added this template.","Vous avez déjà ajouté ce modèle"
+"Active Templates","Modèle activé"
+"Custom Options","Options d'utilisateur"
+"Manage Options Template","Gérer les Options de modèle"
+"Manage Options Templates","Gérer les options de modèles"
+"Some of your data may be corrupted,please restore data in Custom Options Template/Backup and Restore","Certaines de vos données peuventt être endommagés, s'il vous plaît, restaurez des données dans les Options d'un modèle personnalisé/Sauvegarde et Restauration"

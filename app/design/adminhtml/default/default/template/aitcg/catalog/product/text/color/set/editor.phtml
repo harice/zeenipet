@@ -1,0 +1,23 @@
+<?php
+/**
+ * Product:     Custom Product Preview
+ * Package:     Aitoc_Aitcg_3.0.1_1.0.0_520274
+ * Purchase ID: 9XHJkpl9USQGlgqMmhzeUoZOIR22A95V3tio9yYTqY
+ * Generated:   2013-03-05 20:52:02
+ * File path:   app/design/adminhtml/default/default/template/aitcg/catalog/product/text/color/set/editor.phtml
+ * Copyright:   (c) 2013 AITOC, Inc.
+ */
+?>
+<div id="aitcg_color_set_editor"></div>
+
+<script type="text/javascript">
+    
+    var colorsetEditor = new aitcgColorSetEditor({
+        source: $('edit_form')['value'],
+        container: $('aitcg_color_set_editor'),
+        initVarName: 'colorsetEditor',
+        colorAddText: '<?php echo Mage::helper('aitcg')->__('Add Color') ?>'
+    });
+    
+    colorsetEditor.renderSet();
+</script>

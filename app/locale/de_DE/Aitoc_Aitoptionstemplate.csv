@@ -1,0 +1,62 @@
+﻿"Check Synchronization","Synchronisation pruefen"
+"Backup data to file","Backup Dateien zu File"
+"Restore data from reserve tables","Daten von Reserven bekommen"
+Export,Exportieren
+"Restore from backup file","Von Bachup-File Daten bekommen"
+"Add New Option","Neue Option hinzufuegen"
+"Save All Options As New Template","Alle Optionen als neues Muster speichern"
+"Add Template Options","Musteroptionen hinzufuegen"
+"Assign Whole Template","Ganzes Muster bestaetigen"
+"Delete Template","Muster loeschen"
+"Please enter search conditions to view products.","Bitte geben Sie Suchkriterien, um Produkte zu sehen."
+"General Information","Generelle Information"
+Title,Titel
+Description,Beschreibung
+Status,Status
+Active,Aktiv
+Inactive,"Nicht aktiv"
+ID,ID
+Name,Name
+Type,Art
+"Attrib. Set Name",Attributname
+Visibility,Sicht
+SKU,SKU
+Price,Preis
+"Default Qty",Standard-Qty
+Position,Position
+"Template Information",Musterinformation
+Template,Muster
+General,Generell
+Options,"Optionen "
+"Assigned Products","Bestaetigte Produkte"
+Duplicate,verdoppeln
+"Save and Continue Edit","Speichern und weiterfuehren Bearbeitung"
+"Save Template","Muster speichern"
+"New Template","Neues Muster"
+"Edit Template '%s'","Muster '%s' bearbeiten"
+"Add New Template","Neues Muster hinzufuegen"
+"Template Title",Mustertitel
+"Template Description",Musterbeschreibung
+Yes,Ja
+No,Nein
+"Options Template",Optionenmuster
+"Custom Options Templates",Kundenoptionenmuster
+"Options Backup and Restore","Optionen von Backup und Restore"
+"Templates was succesfully backuped","Muster waren erfolgreich erneuert"
+"Backup restoring failed","Backup Erneuerung war missgelungen"
+"Backup was succesfully restored","Backup war erfolgreich erneuert"
+"This template no longer exists","Dieses Muster existiert schon nicht"
+"Edit Template","Muster bearbeiten"
+"The page you are trying to save no longer exists","Die Seite, die Sie speichern moechten, existiert schon nicht"
+"Template was successfully saved","Muster war erfolgreich gespeichert"
+"Template was successfully deleted","Muster war erfolgreich geloescht"
+"Unable to find a page to delete","Kann nicht Seite finden, um sie zu loeschen"
+"Template duplicated","Muster ist verdoppelt"
+"Sort Order",Sortierungart
+"Template Options",Musteroptionen
+"You have already added this template.","Sie haben dieses Muster schon hinzugefuegt"
+"Active Templates","Aktive Muster"
+"Custom Options",Kundenoptionen
+"Manage Options Template",Manageoptionenmuster
+"Manage Options Templates",Manageoptionenmuster
+"Some of your data may be corrupted,please restore data in Custom Options Template/Backup and Restore","Einige von Ihren Daten koennen beschaedigt sein, bitte erneuern Sie Daten in Kundenoptionenmuster / Backup und Restore"

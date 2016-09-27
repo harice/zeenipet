@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+ 
+<config>
+    <modules>
+        <Magedev_Ordermanager>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Magedev_Ordermanager>
+    </modules>
+</config> 

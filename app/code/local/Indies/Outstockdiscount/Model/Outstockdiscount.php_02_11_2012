@@ -1,0 +1,60 @@
+<?php
+
+class Indies_Outstockdiscount_Model_Outstockdiscount extends Varien_Object{
+	
+	public static function getOutstockDiscountFee()
+	{
+		$partialpaymentHelper = Mage::helper('partialpayment/partialpayment');
+
+		// Check Indies_Ppadmin Module whether is Active or not.
+		$modules = Mage::getConfig()->getNode('modules')->children();
+		$modulesArray = (array)$modules;
+		
+		if(isset($modulesArray['Indies_Ppadmin'])) {
+			$session = Mage::getSingleton('admin/session');
+			if ($session->isLoggedIn()) {
+				$quote = Mage::getSingleton('adminhtml/session_quote')->getQuote();
+			}else{
+				$quote = Mage::getSingleton('checkout/cart')->getQuote();
+			}
+		}else{
+			$quote = Mage::getSingleton('checkout/cart')->getQuote();
+		}
+
+		$items = $quote->getAllVisibleItems();
+
+		$outstock_discount_amount = 0;
+		foreach($items as $item)
+			$outstock_discount_amount += self::getOutstockDiscountByItem($item);
+				
+		return $outstock_discount_amount;
+	}
+	
+	public static function getOutstockDiscountByItem($item){
+		$partialpaymentHelper = Mage::helper('partialpayment/partialpayment');
+
+		$allow_partial_payment = $partialpaymentHelper->getAllowPartialPayment($item);
+
+		if ( $allow_partial_payment && ( ($partialpaymentHelper->isApplyToAllProducts()) || ($partialpaymentHelper->isApplyToSpecificProductsOnly()) || ($partialpaymentHelper->isApplyToOutOfStockProducts() && $partialpaymentHelper->isOutOfStockProduct($item->getProductId())) ) ) {
+			if($partialpaymentHelper->isOutOfStockProduct($item->getProductId()))
+			{
+				if ($partialpaymentHelper->isInstallmentCalculationTypeFixed()){
+					$outstock_discount_amount = $partialpaymentHelper->getOutofstockDiscountAmount() * $item->getQty();
+					return ($outstock_discount_amount > 0?$outstock_discount_amount:0);
+				}
+				else{
+					if(Mage::getStoreConfig(Indies_Deposit_Model_Deposit::XML_PATH_DISPLAY_CART_PRICE) == Indies_Deposit_Model_Deposit::DISPLAY_TYPE_EXCLUDING_TAX)
+					//change
+						$outstock_discount_amount =(($item->getPrice() * Mage::helper('outstockdiscount')->getOutofstockDiscountAmount()) / 100) * $item->getQty();
+					//
+					elseif(Mage::getStoreConfig(Indies_Deposit_Model_Deposit::XML_PATH_DISPLAY_CART_PRICE) == Indies_Deposit_Model_Deposit::DISPLAY_TYPE_INCLUDING_TAX)
+						$outstock_discount_amount =(($item->getPriceInclTax() * $partialpaymentHelper->getOutofstockDiscountAmount()) / 100) * $item->getQty();
+					else
+						$outstock_discount_amount =(($item->getPriceInclTax() * $partialpaymentHelper->getOutofstockDiscountAmount()) / 100) * $item->getQty();				
+					return ($outstock_discount_amount > 0?$outstock_discount_amount:0);
+				}
+			}
+		}
+		return 0;	
+	}
+}

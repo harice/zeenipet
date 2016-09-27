@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Aitoc_Aitcg>
+            <active>true</active>
+            <codePool>local</codePool>
+            <self_name>Custom Product Preview</self_name>            
+            <priority>4200</priority> 
+        </Aitoc_Aitcg>
+    </modules>
+</config>
+<!--
+/**
+ * Product:     Custom Product Preview
+ * Package:     Aitoc_Aitcg_3.0.1_1.0.0_520274
+ * Purchase ID: 9XHJkpl9USQGlgqMmhzeUoZOIR22A95V3tio9yYTqY
+ * Generated:   2013-03-05 20:52:02
+ * File path:   app/etc/modules/Aitoc_Aitcg.xml
+ * Copyright:   (c) 2013 AITOC, Inc.
+ */
+-->

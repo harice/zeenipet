@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout>    
+    <adminhtml_sales_order_view>
+       
+        <reference name="order_history">            
+            <action method="setTemplate"><template>ordermanager/history.phtml</template></action>
+        </reference>
+     </adminhtml_sales_order_view>
+     <adminhtml_sales_order_addcomment>
+        <block type="adminhtml/sales_order_view_history" name="order_history" template="ordermanager/history.phtml" output="toHtml"/>
+    </adminhtml_sales_order_addcomment>
+	
+    <ordermanager_adminhtml_ordereditor_deletesinglehistory>
+        <block type="adminhtml/sales_order_view_history" name="order_history" template="ordermanager/history.phtml" output="toHtml"/>
+    </ordermanager_adminhtml_ordereditor_deletesinglehistory>
+
+    <ordermanager_adminhtml_ordereditor_deleteallhistory>
+        <block type="adminhtml/sales_order_view_history" name="order_history" template="ordermanager/history.phtml" output="toHtml"/>
+    </ordermanager_adminhtml_ordereditor_deleteallhistory>
+	
+	<ordermanager_adminhtml_ordereditor_savewithdel>
+        <block type="adminhtml/sales_order_view_history" name="order_history" template="ordermanager/history.phtml" output="toHtml"/>
+    </ordermanager_adminhtml_ordereditor_savewithdel>
+	
+    <ordermanager_adminhtml_ordereditor_addcomment>
+		<reference name="order_history">            
+              <block type="adminhtml/sales_order_view_history" name="order_history" template="ordermanager/history.phtml" output="toHtml"/>
+        </reference>
+    </ordermanager_adminhtml_ordereditor_addcomment>
+ </layout>

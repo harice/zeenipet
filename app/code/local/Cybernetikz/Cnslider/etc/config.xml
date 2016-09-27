@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<config>    
+    <modules>
+        <Cybernetikz_Cnslider>
+            <version>0.3.0</version>
+        </Cybernetikz_Cnslider>
+    </modules>
+	<global>
+		<models>
+            <cybernetikz_cnslider>
+                <class>Cybernetikz_Cnslider_Model</class>
+                <resourceModel>cnslider_resource</resourceModel>
+            </cybernetikz_cnslider>
+            <cnslider_resource>
+                <class>Cybernetikz_Cnslider_Model_Resource</class>
+                <entities>
+                    <slider>
+                        <table>cn_slider</table>
+                    </slider>
+					<cat>
+                        <table>cn_slider_cat</table>
+                    </cat>
+                </entities>
+            </cnslider_resource>
+        </models>
+		<helpers>
+            <cybernetikz_cnslider>
+                <class>Cybernetikz_Cnslider_Helper</class>
+            </cybernetikz_cnslider>
+        </helpers>
+		<blocks>
+			<cybernetikz_cnslider>
+                <class>Cybernetikz_Cnslider_Block</class>
+            </cybernetikz_cnslider>
+		</blocks>
+		<resources>
+			<cnslider_setup>
+				<setup>
+					<module>Cybernetikz_Cnslider</module>
+					<class>Cybernetikz_Cnslider_Model_Resource_Mysql4_Setup</class>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</cnslider_setup>
+		</resources>
+		
+	</global>
+	<frontend>
+        <routers>
+            <cybernetikz_cnslider>
+                <use>standard</use>
+                <args>
+                    <module>Cybernetikz_Cnslider</module>
+                    <frontName>slider</frontName>
+                </args>
+            </cybernetikz_cnslider>
+        </routers>
+        <layout>
+            <updates>
+                <cybernetikz_cnslider>
+                    <file>cybernetikz_cnslider.xml</file>
+                </cybernetikz_cnslider>
+            </updates>
+        </layout>
+    </frontend>
+	<admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Cybernetikz_Cnslider before="Mage_Adminhtml">Cybernetikz_Cnslider_Adminhtml</Cybernetikz_Cnslider>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+	<adminhtml>
+        <layout>
+            <updates>
+                <cybernetikz_cnslider>
+                    <file>cybernetikz_cnslider.xml</file>
+                </cybernetikz_cnslider>
+            </updates>
+        </layout>
+		
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<cnsliderconf translate="label" module="cybernetikz_cnslider">
+											<label>CyberNetikz - All</label>
+											<sort_order>10</sort_order>
+										</cnsliderconf>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	
+    </adminhtml>
+	
+	<default>
+	  <cnsliderconf>
+		<slidersettiing>
+		  <effect>fade</effect>
+		  <delay>3</delay>
+		  <length>1</length>
+		  <image_width>900</image_width>
+		  <image_height>300</image_height>
+		  <playpause>1</playpause>
+		  <pagination>1</pagination>
+		  <nextprev>0</nextprev>
+		</slidersettiing>
+		
+		<contentsetting>
+			<slider_view>1</slider_view>
+			<slider_title>1</slider_title>
+			<slider_content>1</slider_content>
+			<slider_link>1</slider_link>
+		</contentsetting>
+		
+		<sliderjsfile>
+			<jquerylibrary>1</jquerylibrary>
+		</sliderjsfile>
+	  </cnsliderconf>
+	</default>
+
+</config>

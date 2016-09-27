@@ -1,0 +1,457 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <upslabel translate="label comment" module="upslabel">
+            <tab>sales</tab>
+            <label>UPS Shipping Labels</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>330</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <profile translate="label comment" module="upslabel">
+                    <label>Configuration options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <accesslicensenumber translate="label">
+                            <label>Access License Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </accesslicensenumber>
+                        <userid translate="label">
+                            <label>User Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </userid>
+                        <password translate="label">
+                            <label>Password</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </password>
+                        <shippernumber translate="label">
+                            <label>Shipper Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shippernumber>
+                        <packagingtypecode translate="label">
+                            <label>Packaging Type Code</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>upslabel/config_upspackagecode</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </packagingtypecode>
+                        <packagingdescription translate="label">
+                            <label>Packaging Description</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </packagingdescription>
+                        <packagingreferencenumbercode translate="label">
+                            <label>Packaging Reference Number Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </packagingreferencenumbercode>
+                        <packagingreferencenumbervalue translate="label">
+                            <label>Packaging Reference Number Value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </packagingreferencenumbervalue>
+                        <defaultshipmentmethod translate="label">
+                            <label>Default shipping method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>upslabel/config_upsmethod</source_model>
+                            <sort_order>81</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </defaultshipmentmethod>
+                        <negotiatedratesindicator translate="label">
+                            <label>Negotiated Rates</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>85</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </negotiatedratesindicator>
+                        <testing translate="label">
+                            <label>Test mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </testing>
+                        <frontend_customer_return translate="label">
+                            <label>Printing "Return label" by customer?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>95</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </frontend_customer_return>
+                        <weightunits translate="label">
+                            <label>Weight units</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>upslabel/config_weight</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </weightunits>
+                        <packweight translate="label">
+                            <label>Pack weight</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>101</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </packweight>
+                        <additionalhandling translate="label">
+                            <label>Additional Handling</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>105</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </additionalhandling>
+                        <includedimensions translate="label">
+                            <label>Include dimensions</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </includedimensions>
+                        <unitofmeasurement translate="label">
+                            <label>Default unit of measurement</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>upslabel/config_unitofmeasurement</source_model>
+                            <sort_order>111</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </unitofmeasurement>
+                        <insured_automaticaly translate="label">
+                            <label>Adding Insured Value automatically</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>112</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </insured_automaticaly>
+                        <addtrack translate="label">
+                            <label>Add tracking number automatically ?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </addtrack>
+                        <currencycode translate="label">
+                            <label>Default Currency code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </currencycode>
+                        <refundaccess translate="label">
+                            <label>Refund</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </refundaccess>
+                        <cod translate="label">
+                            <label>COD (default)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cod>
+                        <cod_shipping_cost translate="label">
+                            <label>Add shipping cost to COD</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>152</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cod_shipping_cost>
+                        <cod_discount translate="label">
+                            <label>Apply discount for COD</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>153</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cod_discount>
+                        <invoicelinetotal translate="label">
+                            <label>Send InvoiceLineTotal (for shipments from US to Canada and PR only)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>155</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoicelinetotal>
+                        <carbon_neutral translate="label">
+                            <label>Carbon neutral</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>152</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </carbon_neutral>
+                        <default_return translate="label">
+                            <label>Create return label by default</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>153</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_return>
+                        <default_return_amount translate="label">
+                            <label>Order amount for default return label, from</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>154</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_return_amount>
+                        <verticalprint translate="label">
+                            <label>Vertical PDF print label?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </verticalprint>
+                        <dimensionx translate="label">
+                            <label>Label width for PDF printing (px)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dimensionx>
+                        <dimensiony translate="label">
+                            <label>Label height for PDF printing (px)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dimensiony>
+                        <holstx translate="label">
+                            <label>Paper width for PDF printing (standart A4 - 595)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </holstx>
+                        <holsty translate="label">
+                            <label>Paper height for PDF printing (standart A4 - 842)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </holsty>
+                    </fields>
+                </profile>
+                <shipper translate="label comment" module="upslabel">
+                    <label>Shipper</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <name translate="label">
+                            <label>Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </name>
+                        <attentionname translate="label">
+                            <label>Attention Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </attentionname>
+                        <phonenumber translate="label">
+                            <label>Phone Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </phonenumber>
+                        <addressline1 translate="label">
+                            <label>Address Line 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </addressline1>
+                        <city translate="label">
+                            <label>City</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </city>
+                        <stateprovincecode translate="label">
+                            <label>State Province Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </stateprovincecode>
+                        <postalcode translate="label">
+                            <label>Postal Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </postalcode>
+                        <countrycode translate="label">
+                            <label>Country Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </countrycode>
+                    </fields>
+                </shipper>
+                <shipfrom translate="label comment" module="upslabel">
+                    <label>Ship From</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <companyname translate="label">
+                            <label>Company Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </companyname>
+                        <attentionname translate="label">
+                            <label>Attention Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </attentionname>
+                        <phonenumber translate="label">
+                            <label>Phone Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </phonenumber>
+                        <addressline1 translate="label">
+                            <label>Address Line 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </addressline1>
+                        <city translate="label">
+                            <label>City</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </city>
+                        <stateprovincecode translate="label">
+                            <label>State Province Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </stateprovincecode>
+                        <postalcode translate="label">
+                            <label>Postal Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </postalcode>
+                        <countrycode translate="label">
+                            <label>Country Code</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </countrycode>
+                    </fields>
+                </shipfrom>
+            </groups>
+        </upslabel>
+    </sections>
+</config>

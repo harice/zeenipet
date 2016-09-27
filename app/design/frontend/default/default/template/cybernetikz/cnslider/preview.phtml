@@ -1,0 +1,175 @@
+<?php
+/**
+*	Author		: 	Cybernetikz
+*	Author Email:   info@cybernetikz.com
+*	Blog		: 	http://blog.cybernetikz.com
+*	Website		: 	http://www.cybernetikz.com
+*/
+?>
+<?php
+	$slider_skinurl=Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN)."frontend/default/default/images/cybernetikz_cnslider/";
+	$slider_js_skinurl=Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN)."frontend/default/default/js/cybernetikz_cnslider/";
+?>
+<?php if(Mage::helper('cybernetikz_cnslider')->isEnableJquery()){?>
+<script type="text/javascript" src="<?php echo $slider_js_skinurl; ?>jquery-1.9.0.js"></script>
+<?php } ?>
+<script type="text/javascript" src="<?php echo $slider_js_skinurl; ?>noConflict.js"></script>
+<script type="text/javascript" src="<?php echo $slider_js_skinurl; ?>chili-1.7.pack.js"></script>
+<script type="text/javascript" src="<?php echo $slider_js_skinurl; ?>jquery.cycle.all.js"></script>
+<script type="text/javascript" src="<?php echo $slider_js_skinurl; ?>jquery.easing.1.3.js"></script>
+
+<?php 
+	$slider_id = $this->getRequest()->getParam('id');
+	$_bannerCollections = $this->getCollection($slider_id);
+	$_sliderCollections = $this->getSliderCollection($slider_id);
+
+	$show_title = Mage::helper('cybernetikz_cnslider')->isEnableTitle();
+	$show_content = Mage::helper('cybernetikz_cnslider')->isEnableContent();
+	$show_link = Mage::helper('cybernetikz_cnslider')->isEnableLink();
+	
+	$width = Mage::helper('cybernetikz_cnslider')->getWidth();
+	$height = Mage::helper('cybernetikz_cnslider')->getHeight();
+	$effect=Mage::helper('cybernetikz_cnslider')->getEffect();
+	$delay=Mage::helper('cybernetikz_cnslider')->getDelay();
+	$length=Mage::helper('cybernetikz_cnslider')->getLength();
+	$pagination=Mage::helper('cybernetikz_cnslider')->getPagination();
+	$playpause=Mage::helper('cybernetikz_cnslider')->getPlayPause();
+	$nextprev=Mage::helper('cybernetikz_cnslider')->getNextPrev();
+	
+	if(count($_sliderCollections->getData())>0){
+		foreach($_sliderCollections as $slider){
+			$font_size=$slider->getFontSize();
+			
+			if($slider->getSettings()=="custom_configuration"){
+				
+				$show_title = $slider->getShowTitle();
+				$show_content = $slider->getShowContent();
+				$show_link = $slider->getShowLink();				
+				$width = $slider->getWidth();
+				$height = $slider->getHeight();
+				$effect=$slider->getEffect();
+				$delay=$slider->getDelay();
+				$length=$slider->getLength();
+				$pagination=$slider->getPagination();
+				$playpause=$slider->getPlaypause();
+				$nextprev=$slider->getNextprev();
+			}
+		}
+	}
+		
+	$count=count($_bannerCollections->getData());
+?>
+
+<?php if($count>0): ?>
+	<script type="text/javascript">
+	jQuery(function() {
+		jQuery('#cnslider_<?php echo $slider_id; ?>').cycle({
+			fx:     '<?php echo $effect;?>',
+			speed:  <?php echo $delay*1000;?>,
+			timeout: <?php echo $length*1000;?>,
+			<?php if($pagination): ?>
+			pager:  '#cns-pagination_<?php echo $slider_id; ?>',
+			pagerAnchorBuilder: function(i,el){
+				return pagination(i);
+			}<?php if($nextprev){ echo ","; } ?>
+			<?php endif;?>
+			
+			<?php if($nextprev): ?>
+			prev: '.cnslider-container_<?php echo $slider_id; ?> .cns-prev',
+			next: '.cnslider-container_<?php echo $slider_id; ?> .cns-next'
+			<?php endif;?>
+		});
+		
+		<?php if($playpause): ?>
+			jQuery(function() {
+				jQuery('#pauseplay_<?php echo $slider_id; ?> #cns-pause').click(function() {
+					jQuery('#cnslider_<?php echo $slider_id; ?>').cycle('pause'); 
+					jQuery('#pauseplay_<?php echo $slider_id; ?> #cns-play').show();
+					jQuery('#pauseplay_<?php echo $slider_id; ?> #cns-pause').hide();
+					return false;
+				});
+				
+				jQuery('#pauseplay_<?php echo $slider_id; ?> #cns-play').click(function() { 
+					jQuery('#cnslider_<?php echo $slider_id; ?>').cycle('resume'); 
+					jQuery('#pauseplay_<?php echo $slider_id; ?> #cns-pause').show();
+					jQuery('#pauseplay_<?php echo $slider_id; ?> #cns-play').hide();
+					return false;
+				});	
+			});
+		<?php endif;?>
+		<?php if($nextprev): ?>
+			
+			jQuery(".cnslider-container_<?php echo $slider_id; ?>").hover(function() {
+				 jQuery(this).find("#cns-prevnext").fadeIn("slow");
+			  },
+			  function(){
+			  	jQuery(this).find("#cns-prevnext").fadeOut("slow");
+			  });	
+		<?php endif;?>	
+	});
+	</script>
+    	
+	<?php /*?> Start Slider Content <?php */?>
+	<div class="cnslider-container_<?php echo $slider_id; ?>" id="cnslider-container" style="width:<?php echo $width;?>px;height:<?php echo $height;?>px;overflow:hidden;float:none;margin:auto;">
+		<div id="cnslider_<?php echo $slider_id; ?>">
+		<?php
+			foreach($_bannerCollections as $banner):		
+			?>        
+				<div class="cns-item">
+					<?php if ($imageUrl = $this->getImageUrl($banner,$width,$height)): ?>
+                    	<?php if($show_link && $banner->getLinkUrl() && $banner->getCallToActionType()=="showlinkwithimage"){ ?>
+                        	<a href="<?php echo $banner->getLinkUrl();?>" title="<?php echo $banner->getName();?>">
+					   	<?php } ?>
+                        <img src="<?php echo $imageUrl ?>" alt="<?php echo $this->escapeHtml($banner->getName()) ?>" />
+                        <?php if($show_link && $banner->getLinkUrl() && $banner->getCallToActionType()=="showlinkwithimage"){ ?>
+                        	</a>
+					   	<?php } ?>
+					<?php endif; ?>
+                    <?php if($show_title || $show_content || $show_link){ ?>
+                          <div class="cns-contentbox" style="font-size:<?php echo $font_size; ?>;<?php echo ($nextprev)?"left:10%;":"left:5%;width:90%;";?>">
+                             <?php if($show_title && $banner->getName()){ ?>
+                                <h2 style="color:#<?php echo $banner->getNameColor(); ?>;" class="cns-tille"><?php echo $banner->getName();?></h2>
+                            <?php } ?>
+                            <?php if($show_content && $banner->getContent()){ ?>
+                                <div class="cns-inner-content" style="color:#<?php echo $banner->getContentColor(); ?>;"><?php echo $banner->getContent();?></div>
+                            <?php } ?>
+                            <?php if($show_link && $banner->getLinkUrl() && $banner->getCallToActionType()=="showlinkwithborowsebutton" && $banner->getCallToAction()){ ?>
+                                <?php
+									$textcolor=$banner->getCallActionTextcolor();
+									$text_shadow=$banner->getCallActionTextShadow();
+                                	$backgroundfrom=$banner->getCallActionBackgroundFrom();
+									$backgroundto=$banner->getCallActionBackgroundTo();	
+									$background_border=$banner->getCallActionBackgroundBorder();		
+								?>
+                                <div class="cns-link">
+                                	<a href="<?php echo $banner->getLinkUrl();?>" title="<?php echo $banner->getName();?>" style="background-color: #<?php echo $backgroundfrom; ?>;background-image: -webkit-gradient(linear, left top, left bottom, from(#<?php echo $backgroundfrom; ?>), to(#<?php echo $backgroundto; ?>));background-image: -webkit-linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);background-image: -moz-linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);background-image: -ms-linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);background-image: -o-linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);background-image: linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);border: 1px solid #115290;color: #<?php echo $textcolor; ?>;filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#<?php echo $backgroundfrom; ?>, endColorstr=#<?php echo $backgroundto; ?>);<?php if($text_shadow!=""){ ?>text-shadow: 0 -1px 0 #<?php echo $text_shadow;?>;<?php }?><?php if($background_border!=""){ ?>border: 1px solid #<?php echo $background_border;?>;<?php }?>">
+                                    	<?php echo $banner->getCallActionText();?>
+                                    </a>
+								</div>
+                            <?php } ?>
+                          </div>
+					<?php } ?>
+                </div>
+			<?php endforeach; ?>
+		</div>
+        
+        <?php if($pagination): ?>
+		<div class="cns-pagination" id="cns-pagination_<?php echo $slider_id; ?>"></div>
+        <?php endif;?>
+       
+       <?php if($playpause): ?> 
+		<div class="cns-pauseplay" id="pauseplay_<?php echo $slider_id; ?>">
+        	<a id="cns-pause" href=""><img src="<?php echo $slider_skinurl;?>pause.png" alt="Pause" /></a>
+        	<a id="cns-play" href=""><img src="<?php echo $slider_skinurl;?>play.png" alt="Play" /></a>
+        </div>
+        <?php endif;?>
+        
+        <?php if($nextprev): ?>
+		<div id="cns-prevnext">
+			<div id="prev_button"><a id="cns-prev" class="cns-prev" href=""><img src="<?php echo $slider_skinurl;?>prev.png" alt="Prev" /></a></div>
+			<div id="next_button"><a id="cns-next" class="cns-next" href=""><img src="<?php echo $slider_skinurl;?>next.png" alt="Next" /></a></div>
+		</div>
+        <?php endif;?>
+	</div>
+    <div class="clearall"></div>
+<?php endif;?>

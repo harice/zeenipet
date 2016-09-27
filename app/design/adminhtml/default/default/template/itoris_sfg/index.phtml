@@ -1,0 +1,236 @@
+<?php 
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_SFG
+ * @copyright  Copyright (c) 2012 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+<div class="content-header">
+	<h3><?php echo $this->__(_T('Form Manager'))?></h3>
+	<p class="form-buttons">
+		<?php
+
+			/** @var $list Mage_Core_Block_Text_List */
+			$list = $this->getLayout()->createBlock('core/text_list');
+
+			$list->insert($this->getLayout()->createBlock('adminhtml/widget_button', 'top.button.new', array(
+				'on_click' 	=> "sfgNewForm()",
+				'class'		=> 'add',
+				'label'		=> _T($this->__('New')),
+				'type'		=> 'button'
+			)));
+
+			$list->insert($this->getLayout()->createBlock('adminhtml/widget_button', 'top.button.settings', array(
+				'on_click' 	=> "sfgAdminTask('settings',false);",
+				'label'		=> _T($this->__('Settings')),
+				'type'		=> 'button'
+			)));
+
+			$list->insert($this->getLayout()->createBlock('adminhtml/widget_button', 'top.button.delete', array(
+				'on_click' 	=> "sfgAdminTask('delete');",
+				'class'		=> 'delete',
+				'label'		=> _T($this->__('Delete')),
+				'type'		=> 'button'
+			)));
+
+			$list->insert($this->getLayout()->createBlock('adminhtml/widget_button', 'top.button.clone', array(
+				'on_click' 	=> "sfgAdminTask('clone');",
+				'label'		=> _T($this->__('Clone')),
+				'type'		=> 'button'
+			)));
+
+			$list->insert($this->getLayout()->createBlock('adminhtml/widget_button', 'top.button.unpublish', array(
+				'on_click' 	=> "sfgAdminTask('unpublish');",
+				'label'		=> _T($this->__('Unpublish')),
+				'type'		=> 'button'
+			)));
+
+			$list->insert($this->getLayout()->createBlock('adminhtml/widget_button', 'top.button.publish', array(
+				'on_click' 	=> "sfgAdminTask('publish');",
+				'label'		=> _T($this->__('Publish')),
+				'type'		=> 'button'
+			)));
+
+			$list->insert($this->getLayout()->createBlock('adminhtml/widget_button', 'top.button.backup', array(
+				'on_click' 	=> "sfgAdminTask('backup');",
+				'label'		=> _T($this->__('Backup')),
+				'type'		=> 'button'
+			)));
+
+			$ev = new Varien_Object(array('buttons_list' => $list));
+			Mage::getSingleton('itoris_sfg/events')->dispatch('block_forms_list_top_buttons_show', $ev);
+
+			echo $list->toHtml();
+		?>
+	</p>
+</div>
+<?php
+	$table_cols = array(
+		array(
+			'name'=>'#',
+			'width'=>'10px'
+		),
+		array(
+			'name'=>'<input onclick="massCheck(this);" type="checkbox" />',
+			'width'=>'10px'
+		),
+		array(
+			'name'=>_T('Form Name'),
+			'width'=>'200px'
+		),
+		array(
+			'name'=>_T('Description')
+		),
+		array(
+			'name'=>_T('Records'),
+			'width'=>'10px'
+		),
+		array(
+			'name'=>_T('Active'),
+			'width'=>'10px'
+		),
+		array(
+			'name'=>_T('Actions'),
+			'width'=>'100px'
+		),
+		array(
+			'name'=>_T('Direct URL to the form'),
+			'width'=>'300px'
+		)
+	);
+?>
+<form id="SfgAdminForm" name="SfgAdminForm" action="<?php echo $this->getUrl('*/*/post') ?>" method="post" enctype="multipart/form-data">
+<input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+
+<div class="grid">
+	<table cellpadding="0" cellspacing="0">
+		<thead>
+			<tr class="headings">
+				<?php foreach($table_cols as $col){ ?>
+				<th <?php echo isset($col['width']) ? 'width="'.$col['width'].'"' : ''; ?>><center><?php echo  $col['name']; ?></center></th>
+				<?php } ?>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($this->forms as $form){?>
+			<tr>
+				<td><?php echo  $form['id'] ?></td>
+				<td><input id="massCheck<?php echo  $form['id'];?>" name="cid[]" value="<?php echo  $form['id']; ?>" type="checkbox" /></td>
+				<?php $edit_url = $this->getUrl('*/*/edit', array('formid'=> $form['id'])); ?>
+				<td><a href="<?php echo $edit_url;?>"><?php echo  htmlspecialchars($form['name']) ?></a></td>
+				<td><?php echo  str_replace(array("\r\n","\n","\r"), '<br />', htmlspecialchars($form['description'])); ?>&nbsp;</td>
+				
+				<td style="text-align: center;">
+				<?php
+					$dbname = Sfg::getMultipleTagValue($form['form'], 'database.name');
+					if ($dbname == ''){
+						echo _T('no db');
+					} else {
+						$database = new SfgDBAdapter();
+						$database->setQuery('select count(*) from `'.$dbname.'`');
+						$records = intval($database->loadResult());
+						if ($records > 0){
+							echo '<a href="'.$this->getUrl('*/admin_datalist',array('formid'=>$form['id'])).'" >'.$records.'</a>';
+						} else {
+							echo '-';
+						}
+					}
+				?> 
+				</td>
+				<td><?php $p =  ($form['status'] == 1)? 'g' : 'x'  ?><div style="text-align:center;"><a href="javascript:void(0);" onclick="publish_<?php echo $p?>(<?php echo $form['id'];?>)"><img src="<?php echo SFG_URL_SKIN;?>jsf/images/publish_<?php echo $p ?>.png" /></a></div></td>
+				<?php
+					$clone_form_url = '<a href="javascript: void(0);" onclick="cloneForm('.$form['id'].')">'._T('Clone').'</a>';
+					$backup_form_url = '<a href="javascript: void(0);" onclick="backupForm('.$form['id'].')">'._T('Backup').'</a>';
+
+					$ev = new Varien_Object(array(
+												'actions' => array($clone_form_url, $backup_form_url),
+												'form' => new Varien_Object($form)
+											));
+					Mage::getModel('itoris_sfg/events')->dispatch('form_list_form_actions',$ev);
+					$actions = $ev->getActions();
+				?>
+				<td style="white-space: nowrap;"><?php echo  implode(' | ', $actions) ?></td>
+				<?php
+					$def_store_base = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'index.php/';
+					if (Mage::app()->getDefaultStoreView()) {
+						$def_store_base = Mage::app()->getDefaultStoreView()->getBaseUrl();
+					} else {
+						foreach (Mage::app()->getStores() as $store) if ($store->getBaseUrl()) $def_store_base = $store->getBaseUrl();
+					}
+					$direct_url = $def_store_base.'sfg/index/index/formid/'.$form[ 'id' ].'/';
+					/*Mage::getUrl('sfg', array('formid'=>$form['id']));*/
+				?>
+				
+				<td><a target="_blank" href="<?php echo  $direct_url ?>" ><?php echo $direct_url ?></a></td>
+			</tr>
+			<?php } ?>
+			<tr>
+				<td>&nbsp;</td>
+				<td colspan="7">
+					<?php echo _T('Upload form:');?> <input type="file" name="upload" />
+					<button onclick="uploadForm()" class="scalable" type="button"><span><?php echo _T('Upload');?></span></button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<?php
+	echo $this->pager->render();
+?>
+	<input type="hidden" id="task" name="task" value="" />
+	<input type="hidden" id="sn" name="sn" value="" />
+	<input type="hidden" name="limitStart" value="" />
+</form>
+
+<script>
+
+	function getSfgAdminForm(){
+		return document.forms.SfgAdminForm;
+	}
+	
+	function uploadForm(){
+		var f = getSfgAdminForm();
+		f.task.value = 'upload';
+		editForm.submit();
+	}
+
+	function cloneForm(id){
+		singleAction(id, 'clone');
+	}
+
+	function publish_g(id){
+		singleAction(id, 'unpublish');
+	}
+	function publish_x(id){
+		singleAction(id, 'publish');
+	}
+
+	function sfgNewForm(){
+		document.location = '<?php echo $this->getUrl('*/*/edit'); ?>';
+	}
+	
+		function backupForm(id){
+		singleAction(id,'backup');
+	}
+		
+</script>
+<?php  require_once SFG_BASE_DIR.'Block/Admin/helpers/admin_form_common.php'; ?>

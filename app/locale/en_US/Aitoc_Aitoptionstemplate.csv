@@ -1,0 +1,62 @@
+﻿"Check Synchronization","Check Synchronization"
+"Backup data to file","Backup data to file"
+"Restore data from reserve tables","Restore data from reserve tables"
+Export,Export
+"Restore from backup file","Restore from backup file"
+"Add New Option","Add New Option"
+"Save All Options As New Template","Save All Options As New Template"
+"Add Template Options","Add Template Options"
+"Assign Whole Template","Assign Whole Template"
+"Delete Template","Delete Template"
+"Please enter search conditions to view products.","Please enter search conditions to view products."
+"General Information","General Information"
+Title,Title
+Description,Description
+Status,Status
+Active,Active
+Inactive,Inactive
+ID,ID
+Name,Name
+Type,Type
+"Attrib. Set Name","Attrib. Set Name"
+Visibility,Visibility
+SKU,SKU
+Price,Price
+"Default Qty","Default Qty"
+Position,Position
+"Template Information","Template Information"
+Template,Template
+General,General
+Options,Options
+"Assigned Products","Assigned Products"
+Duplicate,Duplicate
+"Save and Continue Edit","Save and Continue Edit"
+"Save Template","Save Template"
+"New Template","New Template"
+"Edit Template '%s'","Edit Template '%s'"
+"Add New Template","Add New Template"
+"Template Title","Template Title"
+"Template Description","Template Description"
+Yes,Yes
+No,No
+"Options Template","Options Template"
+"Custom Options Templates","Custom Options Templates"
+"Options Backup and Restore","Options Backup and Restore"
+"Templates was succesfully backuped","Templates was succesfully backuped"
+"Backup restoring failed","Backup restoring failed"
+"Backup was succesfully restored","Backup was succesfully restored"
+"This template no longer exists","This template no longer exists"
+"Edit Template","Edit Template"
+"The page you are trying to save no longer exists","The page you are trying to save no longer exists"
+"Template was successfully saved","Template was successfully saved"
+"Template was successfully deleted","Template was successfully deleted"
+"Unable to find a page to delete","Unable to find a page to delete"
+"Template duplicated","Template duplicated"
+"Sort Order","Sort Order"
+"Template Options","Template Options"
+"You have already added this template.","You have already added this template."
+"Active Templates","Active Templates"
+"Custom Options","Custom Options"
+"Manage Options Template","Manage Options Template"
+"Manage Options Templates","Manage Options Templates"
+"Some of your data may be corrupted,please restore data in Custom Options Template/Backup and Restore","Some of your data may be corrupted,please restore data in Custom Options Template/Backup and Restore"

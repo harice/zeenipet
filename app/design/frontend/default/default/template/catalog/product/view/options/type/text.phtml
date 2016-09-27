@@ -1,0 +1,60 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+	$_option = $this->getOption();
+	$_absolute = '';
+	$_product_custom_option = 'product-custom-option';
+	$_opConfig_reloadPrice = 'onchange="opConfig.reloadPrice()"';
+	
+	if ($_option->getPriceType() == 'absolute') {
+		$_absolute = '<span> ' . Mage::getStoreConfig('humsayaa/general/default_description') . '</span>';
+		$_product_custom_option = 'product-custom-option-absolute';
+		$_opConfig_reloadPrice = '';
+	}
+?>
+
+<dt><label<?php if ($_option->getIsRequire()) echo ' class="required"' ?>><?php if ($_option->getIsRequire()) echo '<em>*</em>' ?>
+<?php 
+if($this->htmlEscape($_option->getTitle())=='Players'){?>
+Player (Minimum ordering number allowed with a fee is 8 (fee is $25.00) , minimum order without a fee is 10)
+<?php }else 
+		echo  $this->htmlEscape($_option->getTitle());
+?>
+</label>
+    <?php echo $this->getFormatedPrice() ?><?php echo $_absolute ?></dt>
+<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?>>
+    <div class="input-box">
+    <?php if ($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_FIELD): ?>
+        <input type="text" <?php echo $_opConfig_reloadPrice ?> id="options_<?php echo $_option->getId() ?>_text" class="input-text<?php echo $_option->getIsRequire() ? ' required-entry' : '' ?> <?php echo $_option->getMaxCharacters() ? ' validate-length maximum-length-'.$_option->getMaxCharacters() : '' ?> <?php echo $_product_custom_option ?>" name="options[<?php echo $_option->getId() ?>]" value="<?php echo $this->escapeHtml($this->getDefaultValue()) ?>" />
+    <?php elseif ($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_AREA): ?>
+        <textarea id="options_<?php echo $_option->getId() ?>_text" <?php echo $_opConfig_reloadPrice ?> class="<?php echo $_option->getIsRequire() ? ' required-entry' : '' ?> <?php echo $_option->getMaxCharacters() ? ' validate-length maximum-length-'.$_option->getMaxCharacters() : '' ?> <?php echo $_product_custom_option ?>" name="options[<?php echo $_option->getId() ?>]" rows="5" cols="25"><?php echo $this->escapeHtml($this->getDefaultValue()) ?></textarea>
+    <?php endif; ?>
+    <?php if ($_option->getMaxCharacters()): ?>
+        <p class="note"><?php echo Mage::helper('catalog')->__('Maximum number of characters:')?> <strong><?php echo $_option->getMaxCharacters() ?></strong></p>
+    <?php endif; ?>
+    </div>
+</dd>

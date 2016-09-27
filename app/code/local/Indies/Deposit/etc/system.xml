@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+		<sales>
+            <groups>
+                <totals_sort>
+                    <fields>
+						<deposit translate="label" module="deposit">
+                            <label>Paying Now</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </deposit>
+                    </fields>
+                </totals_sort>
+            </groups>
+        </sales>
+	</sections>
+</config>

@@ -1,0 +1,105 @@
+/**
+*	Author		: 	Cybernetikz
+*	Author Email:   info@cybernetikz.com
+*	Blog		: 	http://blog.cybernetikz.com
+*	Website		: 	http://www.cybernetikz.com
+*/
+
+#cnslider-container{
+	display:block;
+	padding-bottom:10px;
+	float:left;
+	position:relative;
+	}
+	
+#cnslider-container p{margin:0;}
+
+	.cns-item .cns-contentbox{
+		float:left;
+		position:absolute;
+		width:75%;
+		top:8%;
+		}
+	
+	.cns-contentbox h2.cns-tille{
+		color: #FFF;
+		font-size: 100%;
+		font-weight: bold;
+		line-height: 110%;
+		margin:0;
+		padding-bottom:10px;
+		}
+		
+	.cns-inner-content{
+		font-size: 70%;
+		line-height:110%;
+		color:#FFF;
+	}
+		
+	.cns-contentbox .cns-link{
+			padding-top:1.5%;
+			text-align:center;
+			width:40%;
+		}
+		
+		.cns-contentbox .cns-link a {
+			font-size: 70%;
+			padding: 5% 8%;
+			text-decoration: none;
+			font-weight: 700;
+			letter-spacing: 2px;
+    		line-height: 110%;
+			display:inline-block;
+		}
+				
+		.cns-contentbox .cns-link a{
+			background-color: #7db7f0;
+			background-image: -webkit-gradient(linear, left top, left bottom, from(#7db7f0), to(#1874cd));
+			background-image: -webkit-linear-gradient(top, #7db7f0, #1874cd);
+			background-image: -moz-linear-gradient(top, #7db7f0, #1874cd);
+			background-image: -ms-linear-gradient(top, #7db7f0, #1874cd);
+			background-image: -o-linear-gradient(top, #7db7f0, #1874cd);
+			background-image: linear-gradient(top, #7db7f0, #1874cd);
+			color: #fff;
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7db7f0, endColorstr=#1874cd);
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
+			border-radius:3px;
+		}
+	
+.cns-pagination{
+	position:absolute;
+	bottom:10px;
+	right:10px;
+	z-index:100;
+	list-style:none outside none;
+	}
+	
+	.cns-pagination li{float:left;position:relative;width:12px;height:12px;padding:2px;list-style:none outside none;}
+	
+	.cns-pagination li a{display:block;text-indent:20000px;background:url(../../images/cybernetikz_cnslider/pagination.png) no-repeat;width:10px;height:10px;}
+	.cns-pagination li.activeSlide a{background:url(../../images/cybernetikz_cnslider/pagination.png) no-repeat center -14px;}
+	
+.cns-pauseplay{
+	bottom: 10px;
+    position: absolute;
+    left: 10px;
+    z-index: 100;
+	}
+	
+	#cns-pause{width:14px;height:16px;}
+	
+	#cns-play{
+		width:14px;
+		height:16px;
+		display:none;
+		}
+
+#cns-prevnext{position:absolute;z-index:100;width:100%;top:45%;display:none;}
+	
+	#prev_button{ width:50px;float:left;position:relative;}
+	
+	#next_button{ width:50px;float:right;position:relative;}
+	
+.clearall{clear:both;}
+		

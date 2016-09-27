@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<action method="addJs"><file>mage/adminhtml/sales.js</file></action>
+			<!--<action method="addJs"><file>mage/adminhtml/giftmessage.js</file></action>
+			<action method="addJs"><file>mage/adminhtml/product/composite/configure.js</file></action>
+			<action method="addJs"><file>varien/configurable.js</file></action>
+			<action method="addJs"><file>mage/adminhtml/giftoptions/tooltip.js</file></action>
+			<block type="adminhtml/template" name="optional_zip_countries" as="optional_zip_countries" template="directory/js/optional_zip_countries.phtml" />-->
+        </reference>
+        <!--<reference name="js">
+            <block type="adminhtml/template" template="sales/order/create/js.phtml" name="create" />
+        </reference>-->
+	</default>
+    <partialpaymentadmin_adminhtml_partialpaymentadmin_index>
+        <reference name="content">
+	         <block type="partialpaymentadmin/adminhtml_partialpaymentadmin"  />
+        </reference>
+    </partialpaymentadmin_adminhtml_partialpaymentadmin_index>
+	<adminhtml_sales_order_create_index>
+    	<reference name="items">            
+			<block type="adminhtml/sales_order_create_items_grid" template="partialpaymentadmin/sales/order/create/items/grid.phtml" name="items_grid">
+				<block type="adminhtml/sales_order_create_coupons" template="sales/order/create/coupons/form.phtml" name="coupons">
+					<block type="adminhtml/sales_order_create_coupons_form" template="sales/order/create/coupons/form.phtml" name="form" />
+				</block>
+			</block>
+        </reference>
+    </adminhtml_sales_order_create_index>
+	<adminhtml_sales_order_create_load_block_data>
+    	<reference name="items">            
+			<block type="adminhtml/sales_order_create_items_grid" template="partialpaymentadmin/sales/order/create/items/grid.phtml" name="items_grid">
+				<block type="adminhtml/sales_order_create_coupons" template="sales/order/create/coupons/form.phtml" name="coupons">
+					<block type="adminhtml/sales_order_create_coupons_form" template="sales/order/create/coupons/form.phtml" name="form" />
+				</block>
+			</block>
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+	<adminhtml_sales_order_create_load_block_items>
+    	<reference name="items">            
+			<block type="adminhtml/sales_order_create_items_grid" template="partialpaymentadmin/sales/order/create/items/grid.phtml" name="items_grid">
+				<block type="adminhtml/sales_order_create_coupons" template="sales/order/create/coupons/form.phtml" name="coupons">
+					<block type="adminhtml/sales_order_create_coupons_form" template="sales/order/create/coupons/form.phtml" name="form" />
+				</block>
+			</block>
+        </reference>
+    </adminhtml_sales_order_create_load_block_items>
+</layout>

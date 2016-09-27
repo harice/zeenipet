@@ -1,0 +1,241 @@
+<?php
+/**
+ * Custom Options Templates
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitoptionstemplate
+ * @version      3.2.2
+ * @license:     FoqAPsDYiV5k0g2ao7Zx8pPoJiVNkUYZBpxixzEerG
+ * @copyright:   Copyright (c) 2013 AITOC, Inc. (http://www.aitoc.com)
+ */
+?>
+<div class="entry-edit" >
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend" align="center">Options Backup and Restore</h4>
+</div>
+<fieldset class="config collapseable">
+    <table class="form-list" style="border: outset 10pt; border-collapse: separate;border-spacing: 15pt">
+    <colgroup class="label"></colgroup>
+    <colgroup class="value"></colgroup>
+    <colgroup class="scope-label"></colgroup>
+        <tbody align="left">
+            <tr >
+            <td></td>
+                <td class="value"><?php echo $this->getRestoreButtonHtml(); ?><br>
+                <p class="note"><span>Restores your custom options from your Database reserve tables, which are automatically being backed up after every state saving in the Extension.</span></p>
+                </td>
+                <td></td>
+            </tr>
+            <tr >
+            <td></td>
+                <td class="value"><?php echo $this->getBackupButtonHtml(); ?><br>
+                <p class="note"><span>Will create a .bak file with all your current custom options and lets you download it to your computer.</span></p></td>
+                <td></td>
+            </tr>
+            <tr >
+            <td></td>
+                <td class="value">
+    <form  target="iframeSave" id="edit_form" action="<?php echo $this->getUploadUrl() ?>" method="post" enctype="multipart/form-data">
+                    <input type="file" class="input-text required" title="Backup" value="" name="backup" id="backup">   
+                <?php echo $this->getImportButtonHtml(); ?>
+
+                    <input name="form_key" type="hidden" value="<?php echo $this->getFormKey() ?>" />
+                    <input id="isFrame" type="hidden" name="isIframe" value="1" />
+            </form>
+            <p class="note"><span>Choose your backup file with custom options and upload it to restore your custom options.</span></p>
+            </td>
+            <td></td>
+            </tr>
+        </tbody>
+    </table>
+    </fieldset>
+        </div>
+</div>    
+    
+<iframe id='framek' name="iframeSave" style="display:none; width:100%;" src="sas"></iframe>
+<div id="loading-mask" style="display:none">
+    <p class="loader"  id="loading_mask_loader"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif') ?>"/><br/>0%</p>
+</div>
+
+<script type="text/javascript" >
+//<![CDATA[
+function updateBar(value)
+{
+    $('loading-mask').update('<p class="loader"  id="loading_mask_loader"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif'); ?>"/><br/>'+value+'%</p>');
+}
+
+Element.observe('framek', 'load', save);
+function save()
+{
+    var oDoc = $('framek').contentWindow || $('framek').contentDocument;
+    if (oDoc.document) 
+    {
+        oDoc = oDoc.document;
+    }
+    if($('isFrame').value=='0')
+    {
+        $('isFrame').value = '1';
+        if(oDoc.body.innerHTML != '')
+        {
+            alert('Please choose a backup file');
+        }
+        else
+        {
+            new Ajax.Request('<?php echo $this->getCheckFileUrl();?>', {
+              onSuccess: function(response) 
+              {
+                  var arr = response.responseText.evalJSON(); 
+                  if(arr.msg == 'good')
+                  {
+                      importFile();
+                  }
+                  else
+                  {
+                      alert('The files extenshion is not valid');
+                  }
+                  
+              }
+            });            
+        }
+    }
+}
+    
+function importFile()
+{
+    new Ajax.Request('<?php echo $this->getSaveUrl();?>', {
+      onSuccess: function(response) 
+      {
+          var time = 10;
+          var arr = response.responseText.evalJSON(); 
+          //alert('Step:'+arr.step);
+          switch(arr.step)
+          {
+              case 'csv_import':
+              {
+                  if(arr.page == 2)
+                  {
+                      updateBar(20);
+                  }
+                  else
+                  {
+                      if(arr.increment<=70)
+                        {
+                            updateBar(20+arr.increment);
+                        }
+                  }
+                  //alert('Text:'+arr.step+' page:'+arr.page);
+                  importFile();                  
+              }
+              break;
+              case 'restore':
+              {
+                  new Ajax.Request('<?php echo $this->getRestoreUrl();?>', 
+                  {
+                  onSuccess: function(response) 
+                  {
+                      //var arr = response.responseText.evalJSON(); 
+                      updateBar(100);
+                      if(response.responseText == '' )
+                      {
+                            setLocation('<?php echo $this->getIndexUrl();?>');
+                      }
+                      else
+                      {
+                          
+                          var str = 'PLease create products with following skues for correct relations between templates and products:\n';
+                          alert('Backup restoring failed');
+                          /*for (var i = 0; i < arr.length; i++)
+                          {
+                              for (var key in arr[i])
+                              {
+                                    str += arr[i][key]+'\n';
+                              }
+                          }   
+                          str += ' and click restore button';
+                          alert(str);  */
+                      }
+                      
+                      updateBar(0);
+                  }  
+                  });
+              }             
+              break;
+              default:
+              {
+                  alert('Text:'+arr.step);
+                  //setTimeout(importFile(),time);
+              }
+              break;
+          }
+      }
+    });
+}    
+    
+editForm = new varienForm('edit_form');
+    
+function makeDivVisible()
+{
+    alert('Completed!');
+}
+
+var cancel = false; 
+
+function doRequest()
+{
+    if(cancel == true)
+    {
+        alert('Please perform Data Restore first');    
+    }
+    else
+    {
+         new Ajax.Request('<?php echo $this->getUrl('*/*/export');?>', {
+         onSuccess: function(response) 
+            {
+                var time = 1000;
+                var arr = response.responseText.evalJSON();
+                if((arr.check == false)&&(arr.step == 'xml'))
+                {
+                    var r = confirm("Warning! Your live data of custom options and templates might have been damaged. If you proceed the previously backed up data will be overwritten with the damaged data and you won't be able to restore to the previous state. Please perform Data Restore first or proceed if you are confident.");
+                    if(r == true)
+                    {
+                        new Ajax.Request('<?php echo $this->getUrl('*/*/backup');?>', {
+                         onSuccess: function(response) 
+                            {
+                                updateBar(10);
+                                doRequest();
+                            }
+                        });                
+                    }
+                    else
+                    {
+                        cancel = true;
+                    }
+                }
+                else
+                {
+                 if(arr.step == 'csv')
+                    {
+                        updateBar(20+arr.increment);
+                        //alert('Text:'+arr.step+' page:'+arr.page);
+                        setTimeout(doRequest(),time);
+                    }
+                    else    if(arr.step == 'xml')
+                            {
+                                updateBar(20);
+                                //alert('xml stage');
+                                doRequest();
+                            }
+                            else
+                            {
+                                updateBar(0);
+                                setLocation('<?php echo $this->getUrl('*/*/export');?>');
+                            }                
+                    }
+                
+            }
+                });           
+    }
+                            
+}
+//]]>
+</script>

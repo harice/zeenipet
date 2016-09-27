@@ -1,0 +1,55 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * Author Rudyuk Vitalij Anatolievich
+ * Email rvansp@gmail.com
+ * Blog www.cervic.info
+ */
+$order_id = Mage::registry('order_id');
+$shipment_id = Mage::registry('shipment_id');
+$upsl = Mage::registry('upsl');
+$upsl2 = Mage::registry('upsl2');
+$backLink = Mage::registry('backLink');
+$type = Mage::registry('type');
+$error = Mage::registry('error');
+if (count($error) == 0) {
+    $shipidnumber = array_key_exists('shipidnumber', $upsl) ? $upsl['shipidnumber'] : $upsl[0]['shipmentidentificationnumber'];
+    echo '<h1> Order ID ' . $order_id . ' Shipment ID ' . $shipment_id . '</h1>
+<br />
+<a href="' . $backLink . '">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="' . $this->getUrl('upslabel/adminhtml_upslabel/deletelabel/order_id/' . $order_id . '/shipment_id/' . $shipment_id . '/type/' . $type) . '">Delete Label</a>';
+    if (file_exists(Mage::getBaseDir('media') . '/upslabel/label/' . "HVR" . $shipidnumber . ".html")) {
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="' . Mage::getBaseUrl('media') . 'upslabel/label/HVR' . $shipidnumber . '.html" target="_blank">Print High Value report</a>';
+    }
+    echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="' . Mage::getUrl('upslabel/adminhtml_pdflabels/onepdf/order_id/' . $order_id . '/shipment_id/' . $shipment_id . '/type/' . $type) . '.html" target="_blank">Print PDF</a>';
+    $ups_data = array_key_exists('arrResponsXML', $upsl) ? $upsl['arrResponsXML'] : $upsl;
+    foreach ($ups_data AS $upsl_one) {
+        echo '<br />
+<br />
+<a href="' . $this->getUrl('upslabel/adminhtml_upslabel/print/imname/' . 'label' . $upsl_one['trackingnumber'] . '.gif') . '" target="_blank">Print Label Gif</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="' . Mage::getBaseUrl('media') . 'upslabel/label/' . $upsl_one['trackingnumber'] . '.html" target="_blank">Print Html image</a>';
+
+        echo '
+<br /><br />
+Tracking Number ' . $upsl_one['trackingnumber'] . '
+<br /><br />
+<br /><a href="' . Mage::getBaseUrl('media') . 'upslabel/label/' . 'label' . $upsl_one['trackingnumber'] . '.gif' . '" target="_blank"><img src="' . Mage::getBaseUrl('media') . 'upslabel/label/' . 'label' . $upsl_one['trackingnumber'] . '.gif' . '" /></a>';
+    }
+    if (isset($upsl2)) {
+        $ups_data = array_key_exists('arrResponsXML', $upsl2) ? $upsl2['arrResponsXML'] : $upsl2;
+        foreach ($ups_data AS $upsl_one) {
+            echo '<br />
+<br />
+<a href="' . $this->getUrl('upslabel/adminhtml_upslabel/print/imname/' . 'label' . $upsl_one['trackingnumber'] . '.gif') . '" target="_blank">Print Label Gif</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="' . Mage::getBaseUrl('media') . 'upslabel/label/' . $upsl_one['trackingnumber'] . '.html" target="_blank">Print Html image</a>';
+
+            echo '
+<br /><br />
+Tracking Number ' . $upsl_one['trackingnumber'] . '
+<br /><br />
+<br /><a href="' . Mage::getBaseUrl('media') . 'upslabel/label/' . 'label' . $upsl_one['trackingnumber'] . '.gif' . '" target="_blank"><img src="' . Mage::getBaseUrl('media') . 'upslabel/label/' . 'label' . $upsl_one['trackingnumber'] . '.gif' . '" /></a>';
+        }
+    }
+} else {
+    echo $error['error'];
+}

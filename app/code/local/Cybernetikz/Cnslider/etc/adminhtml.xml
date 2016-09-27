@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+         <cnslider translate="title" module="cybernetikz_cnslider">
+            <title>Slider</title>
+            <sort_order>65</sort_order>
+            <children>
+				<managecat translate="title" module="cybernetikz_cnslider">
+                    <title>Manage Sliders</title>
+                    <action>adminhtml/cnslidercat</action>
+                    <sort_order>0</sort_order>
+                </managecat>
+                <manage translate="title" module="cybernetikz_cnslider">
+                    <title>Manage Banners</title>
+                    <action>adminhtml/cnslider</action>
+                    <sort_order>10</sort_order>
+                </manage>
+            </children>
+         </cnslider>
+    </menu>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <cnslider translate="title" module="cybernetikz_cnslider">
+                        <title>Slider</title>
+                        <sort_order>65</sort_order>
+                        <children>
+							<managecat translate="title">
+                                <title>Manage Sliders</title>
+                                <sort_order>0</sort_order>
+                            </managecat>
+                            <manage translate="title">
+                                <title>Manage Banners</title>
+                                <sort_order>10</sort_order>
+                            </manage>
+                        </children>
+                    </cnslider>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <cnslider translate="title" module="cybernetikz_cnslider">
+                                        <title>Slider Management</title>
+                                    </cnslider>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

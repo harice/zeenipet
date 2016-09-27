@@ -1,0 +1,6 @@
+#sfg_err_message {
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #ff0000;
+}

@@ -1,0 +1,334 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="order_history_block">
+    <?php if ($this->canAddComment()):?>
+    <div id="history_form" class="order-history-form">
+        <div><?php echo Mage::helper('sales')->__('Add Order Comments') ?></div>
+        <span class="field-row">
+            <label class="normal" for="history_status"><?php echo Mage::helper('sales')->__('Status') ?></label><br/>
+            <select name="history[status]" class="select" id="history_status">
+            <?php foreach ($this->getStatuses() as $_code=>$_label): ?>
+                <option value="<?php echo $_code ?>"<?php if($_code==$this->getOrder()->getStatus()): ?> selected="selected"<?php endif; ?>><?php echo $_label ?></option>
+            <?php endforeach; ?>
+            </select>
+        </span>
+        <span class="field-row">
+            <label class="normal" for="history_comment"><?php echo Mage::helper('sales')->__('Comment') ?></label>
+            <textarea name="history[comment]" rows="3" cols="5" style="height:6em; width:99%;" id="history_comment"></textarea>
+        </span>
+        <div class="f-left">
+            <?php if ($this->canSendCommentEmail()): ?>
+                <input name="history[is_customer_notified]" type="checkbox" id="history_notify" value="1" /><label class="normal" for="history_notify"> <?php echo Mage::helper('sales')->__('Notify Customer by Email') ?></label><br />
+            <?php endif; ?>
+            <input name="history[is_visible_on_front]" type="checkbox" id="history_visible" value="1" /><label class="normal" for="history_visible"> <?php echo Mage::helper('sales')->__('Visible on Frontend') ?></label>
+        </div>
+        <div class="f-right">
+            <?php echo $this->getChildHtml('submit_button') ?>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="divider"></div>
+	
+	<div class="entry-edit">
+		<fieldset style="margin:0px;padding:0px;border:0px;">
+		
+		<button class="scalable back" onclick="deleteSelected()"  id="bulk_del_btn_id" style="float:right;margin-left:2px;">
+				<span><span><span><?php echo $this->helper('sales')->__('Delete Selected') ?></span></span></span>
+			</button> 
+			
+			
+			<button class="scalable save" id="save_bulk_edit" onclick="saveHistoryItems()" style="display:none;float:right;margin-left:2px;">
+				<span><span><span><?php echo $this->helper('sales')->__('Save') ?></span></span></span>
+			</button> 
+			
+			<button class="scalable back" onclick="cancelBulkAll()" id="bulk_cancel_btn_id" style="display:none;float:right;">
+				<span><span><span><?php echo $this->helper('sales')->__('Cancel') ?></span></span></span>
+			</button> 
+			
+			<button class="scalable save editbb" id="bulk_edit_btn_id" onclick="bulkEditHistory()" style="float:right;">
+				<span><span><span><?php echo $this->helper('sales')->__('Bulk Edit') ?></span></span></span>
+			</button> 
+			
+		</fieldset> 
+	</div>
+
+    <?php endif;?>
+	
+<form id="history_form" method="post">
+	
+    <ul class="note-list">
+    <?php foreach ($this->getOrder()->getStatusHistoryCollection(true) as $_item): ?>
+
+
+        <li id="historyli_<?php echo $_item->getId();?>">
+            <strong><?php echo $this->helper('core')->formatDate($_item->getCreatedAtDate(), 'medium') ?></strong>
+	
+	
+            <?php echo $this->helper('core')->formatTime($_item->getCreatedAtDate(), 'medium') ?><span class="separator">|</span><strong><?php echo $_item->getStatusLabel() ?></strong>
+
+			<span class="single_delete" style="margin-left:5px;"><a title="<?php echo $this->helper('sales')->__('Delete') ?>" href="javascript:deleteSingleHistory('<?php echo  $_item->getId(); ?>');">X</a></span>
+			<input style="float:right;margin-top:2px;" class="del_check" type="checkbox" name="remove[<?php echo $_item->getId(); ?>]" onclick="removeHistoryRow(<?php echo $_item->getId() ?>);" id="removehis_<?php echo $_item->getId() ?>" value="<?php echo $_item->getId() ?>" />
+<input type="hidden" class="his_item_id" value="<?php echo $_item->getId() ?>" />
+
+			
+			<br/><small><?php echo $this->helper('sales')->__('Customer') ?>
+            <strong class="subdue">
+                <?php if ($this->isCustomerNotificationNotApplicable($_item)): ?>
+               	 <?php echo $this->helper('sales')->__('Notification Not Applicable') ?>
+                <?php elseif ($_item->getIsCustomerNotified()): ?>
+               	 <?php echo $this->helper('sales')->__('Notified') ?>
+
+               	 <img src="<?php echo $this->getSkinUrl('images/ico_success.gif') ?>" width="16" height="16" alt="" />
+                <?php else: ?>
+
+                <?php echo $this->helper('sales')->__('Not Notified') ?>
+                <?php endif; ?>
+            </strong></small>
+            <?php if ($_item->getComment()): ?>
+		
+			<div style="display:none;" class="bulk_edit_his" >		
+
+					<textarea class="bulk_txtar" id="edit_bulk_<?php echo  $_item->getId(); ?>" rows="5" cols="70"><?php echo $this->escapeHtml($_item->getComment(), array('b','br','strong','i','u')) ?></textarea>
+			</div>
+				
+				<div class="one_click_edit">
+					<span id="delete_history<?php echo  $_item->getId(); ?>" title="Click to edit" style="background-color:#CCCCCC;"><?php echo $this->escapeHtml($_item->getComment(), array('b','br','strong','i','u')) ?></span>
+					<script type="text/javascript">
+									new Ajax.InPlaceEditor('delete_history<?php echo  $_item->getId(); ?>', '<?php echo $this->getUrl("ordermanager/adminhtml_ordereditor/editsinglehistory/field/history/")."order_id/".$this->getOrder()->getId()."/item_id/". $_item->getId(); ?>',{highlightColor:'#E2F1B1',field_type : 'textbox',rows:5,cols:70});
+					</script>
+				</div>
+						
+            <?php endif; ?>
+			
+			
+        </li>
+ 
+    <?php endforeach; ?>
+    </ul>
+	
+	
+		<input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+		<input type="hidden" name="order_id" id="order_id" value="<?php echo $this->getOrder()->getId();?>" />
+	
+	</form>
+	
+    <script type="text/javascript">
+    if($('order_status'))$('order_status').update('<?php echo $this->getOrder()->getStatusLabel() ?>');
+    </script>
+</div>
+
+<script>
+function removeHistoryRow(id)
+{
+
+	if($('removehis_'+id).checked == 0){$('historyli_'+id).setStyle({ 'color': ''});}
+	else{$('historyli_'+id).setStyle({ 'color': '#CCCCCC', fontSize: '12px' });}
+}
+function bulkEditHistory()
+{
+	//	if ($('.bulk_edit').is(':visible')) {
+		//	$(".bulk_edit_his").show();
+	//}
+	$$('.bulk_edit_his').each(function(element){
+		$(element).show();
+	});
+	
+	$$('.one_click_edit').each(function(element){
+		$(element).hide();
+	});
+	
+	$$('.single_delete').each(function(element){
+		$(element).hide();
+	});
+	
+	document.getElementById("save_bulk_edit").style.display='block';
+	
+	document.getElementById("bulk_edit_btn_id").style.display='none';
+	
+	document.getElementById("bulk_cancel_btn_id").style.display='block';
+	
+	document.getElementById("bulk_del_btn_id").style.display='none';
+}
+function cancelBulkAll()
+{
+	document.getElementById("save_bulk_edit").style.display='none';
+	document.getElementById("bulk_edit_btn_id").style.display='block';
+	document.getElementById("bulk_cancel_btn_id").style.display='none';
+	document.getElementById("bulk_del_btn_id").style.display='block';
+	
+	$$('.bulk_edit_his').each(function(element){
+		$(element).hide();
+	});
+	
+	$$('.one_click_edit').each(function(element){
+		$(element).show();
+	});
+	
+	$$('.single_delete').each(function(element){
+		$(element).show();
+	});
+	
+}
+
+function deleteSingleHistory(historyId)
+{
+
+	if (confirm("<?php echo Mage::helper('ordermanager')->__('Are you sure ?');?>") ) {
+       var params = {};  
+	   var url = '<?php echo Mage::getModel('adminhtml/url')->getUrl("ordermanager/adminhtml_ordereditor/deletesinglehistory/"); ?>';
+	   url = url + 'item_id/' + historyId + '&isAjax=true' ;
+
+		var str = 'item_id='+historyId + '&order_id='+'<?php echo $this->getOrder()->getId(); ?>' ;
+	 
+	   new Ajax.Request(url, { 
+		   method: 'post',
+		   parameters: str,
+		   onSuccess: function(transport) {
+					try {
+                            if (transport.responseText.isJSON()) {
+
+                                var response = transport.responseText.evalJSON()
+                                if (response.error) {
+                                }
+                                if(response.ajaxExpired && response.ajaxRedirect) {
+                                    setLocation(response.ajaxRedirect);
+                                }
+                            } else {
+                                $('order_history_block').update(transport.responseText);
+                            }
+                        }
+                        catch (e) {
+                            $('order_history_block').update(transport.responseText);
+                        }
+		   }
+	   }
+	   );
+    } 
+}
+
+function deleteSelected()
+{
+	var delIds = '';
+	$$(".del_check:checkbox:checked").each(function (element) {
+			if (element.checked) 
+			{	 
+				delIds += element.value+',';
+			}
+	});
+if(delIds == "")
+{
+	alert('<?php echo $this->__('Please select atleast one item to delete.'); ?>');return false;
+}else{
+if (confirm("<?php echo Mage::helper('ordermanager')->__('Are you sure to delete selected items ?');?>") ) {
+       var params = {};  
+	   var url = '<?php echo Mage::getModel('adminhtml/url')->getUrl("ordermanager/adminhtml_ordereditor/deleteallhistory/"); ?>';
+
+		var str = 'item_ids='+delIds + '&order_id='+'<?php echo $this->getOrder()->getId(); ?>' ;
+	 
+	   new Ajax.Request(url, { 
+		   method: 'post',
+		   parameters: str,
+		   onSuccess: function(transport) {
+					try {
+                            if (transport.responseText.isJSON()) {
+
+                                var response = transport.responseText.evalJSON()
+                                if (response.error) {
+														alert(response.message);
+                                }
+                                if(response.ajaxExpired && response.ajaxRedirect) {
+                                    setLocation(response.ajaxRedirect);
+                                }
+                            } else {
+                                $('order_history_block').update(transport.responseText);
+                            }
+                        }
+                        catch (e) {
+                            $('order_history_block').update(transport.responseText);
+                        }
+		   }
+	   }
+	   );
+    }
+  }
+}
+
+function saveHistoryItems()
+{
+		 var params = {};  
+			var historyCommentsWithDelete = new Object();
+			historyCommentsWithDelete.his_item_id = new Array();
+			historyCommentsWithDelete.comment = new Array();
+			
+			historyCommentsWithDelete.deleteHistory = new Array();
+			historyCommentsWithDelete.order_id = '<?php echo $this->getOrder()->getId(); ?>';
+		 
+			$$('.his_item_id').each(function(element){
+				historyCommentsWithDelete.his_item_id.push(element.value);
+			});
+			
+			$$('.bulk_txtar').each(function(element){
+				historyCommentsWithDelete.comment.push(element.value);
+			});
+			
+			$$('.del_check').each(function(element){
+				if(element.checked)
+				historyCommentsWithDelete.deleteHistory.push(element.value);
+			});
+ 
+
+			params['historyCommentsWithDelete'] = Object.toJSON(historyCommentsWithDelete);
+ 
+			   var url = '<?php echo Mage::getModel('adminhtml/url')->getUrl("ordermanager/adminhtml_ordereditor/savewithdel/"); ?>';
+			var url = url + 'order_id/'+'<?php echo $this->getOrder()->getId(); ?>' + '&isAjax=true';
+				 
+			   new Ajax.Request(url, { 
+				   method: 'post',
+				   parameters: params,
+				   onSuccess: function(transport) {
+							try {
+									if (transport.responseText.isJSON()) {
+		
+										var response = transport.responseText.evalJSON()
+										if (response.error) {
+																alert(response.message);
+										}
+										if(response.ajaxExpired && response.ajaxRedirect) {
+											setLocation(response.ajaxRedirect);
+										}
+									} else {
+										$('order_history_block').update(transport.responseText);
+									}
+								}
+								catch (e) {
+									$('order_history_block').update(transport.responseText);
+								}
+				   }
+			   }
+			   );
+}
+</script>

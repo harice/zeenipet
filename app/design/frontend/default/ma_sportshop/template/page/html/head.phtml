@@ -1,0 +1,88 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<? if($_SERVER['REQUEST_URI']=='/index.php/basketball.html'){?>
+<title>Quality Basketball Team Uniforms Online | Zeeni Sports</title>
+<meta name="description" content="Zeeni Sports provides an extensive line of basketball team uniforms and accessories. For more details, visit our site or call us now at 800-551-8411." />
+
+<?php }elseif($_SERVER['REQUEST_URI']=='/index.php/zeeni-soccer.html'){?>
+<title>Quality Soccer Team Uniforms Online | Zeeni Sports</title>
+<meta name="description" content="At Zeeni Sports, we pride ourselves on providing high quality soccer team uniforms. To get more information, visit our site or call us at 800-551-8411." />
+
+<?php }elseif($_SERVER['REQUEST_URI']=='/index.php/contact-us'){?>
+<title>Contact Us | Zeeni Sports</title>
+<meta name="description" content="Zeeni Sports specializes in offering high quality sports uniforms and accessories. Visit our website or call us now at 800-551-8411 for more information." />
+
+<?php }elseif($_SERVER['REQUEST_URI']=='/index.php/soccer-logos/?___store=en'){?>
+<title>Customize Soccer Team Jerseys | Zeeni Sports</title>
+<meta name="description" content="Provide a logo or choose from our selection and substitute in your team name to customize your soccer team's jersey! Call 800-551-8411 for details." />
+<?php }else{?>
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<?php }?>
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<link media="all" href="<?php echo $this->getSkinUrl()?>css/styles.css3.php?url=<?php echo $this->getSkinUrl()?>" type="text/css" rel="stylesheet" />
+
+<!-- msdropdown -->
+<!-- <script src="http://<?php echo $_SERVER['SERVER_NAME'];?>/myscripts/msdropdown/js/jquery/jquery-1.8.2.min.js"></script> -->
+
+<!-- msdropdown::END -->
+
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+
+<!-- set css color -->
+<?php $_style_color = Mage::getStoreConfig('themeoptions/themeoptions_config/theme_color') ?>
+<?php if ( $_style_color ) { ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/styles_'.$_style_color.'.css'); ?>" media="screen" />
+<?php } else { ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/styles_blue.css'); ?>" media="screen" />
+<?php } ?>
+
+<!-- MENU -->
+<?php $_menu_style = Mage::getStoreConfig('themeoptions/themeoptions_config/menu_style') ?>
+<?php if ( $_menu_style == 'wine_menu') { ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/wide_menu.css'); ?>" media="screen"/>
+<?php } else { ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/fish_menu.css'); ?>" media="screen"/>
+<?php } ?>

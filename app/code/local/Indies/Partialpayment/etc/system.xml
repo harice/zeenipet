@@ -1,0 +1,581 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   Mage
+ * @package    Mage_Contacts
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+	<tabs>
+        <indies_services translate="label">
+            <label>Indies Services</label>
+            <sort_order>250</sort_order>
+        </indies_services>
+    </tabs>
+    <sections>
+		<payment>
+            <groups>
+                <authorizenet translate="label" module="paygate">
+                    <label>Authorize.net</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <soap_test translate="label">
+                            <label>Use test SOAP API</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </soap_test>
+                    </fields>
+                </authorizenet>
+            </groups>
+        </payment>
+        <partialpayment translate="label" module="partialpayment">
+            <label>Partial Payment</label>
+            <tab>indies_services</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <license_status_group translate="label">
+                    <label>License and Status</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <serial_key translate="label">
+                            <label>Serial Key</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </serial_key>
+						<status translate="label">
+                            <label>Status</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>partialpayment/status</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </status>
+                    </fields>
+                </license_status_group>
+				<functionalities_group>
+					<label>General Settings</label>
+					<sort_order>30</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<brand_label translate="label">
+							<label>Partial Payment Brand Label</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry</validate>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>This will be used on your front.</comment>
+						</brand_label>
+						<allow_auto_capturing translate="label">
+							<label>Capture Installments Automatically</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</allow_auto_capturing>
+						<apply_partial_payment_to translate="label">
+							<label>Apply Partial Payment to</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/applyto</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</apply_partial_payment_to>
+						<partial_payment_options translate="label">
+							<label>Partial Payment Options</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/options</source_model>
+							<backend_model>partialpayment/validation</backend_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</partial_payment_options>
+						<total_installments translate="label">
+							<label>Total Installments</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry validate-digits</validate>
+							<depends>
+								<partial_payment_options separator=",">fixed_installments,flexy_payments</partial_payment_options>
+							</depends>
+							<backend_model>partialpayment/validation</backend_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</total_installments>
+						<partial_payment_optional translate="label">
+							<label>Partial Payment Optional for Buyer</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<depends>
+								<partial_payment_options separator=",">2_installments,fixed_installments</partial_payment_options>
+							</depends>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</partial_payment_optional>
+						<allproducts_discount_calculation_options translate="label">
+							<label>Discount Calculation Options</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/discountcalculationoptions</source_model>
+							<sort_order>80</sort_order>
+							<depends>
+								<apply_partial_payment_to>1</apply_partial_payment_to>
+								<partial_payment_options separator=",">2_installments,fixed_installments</partial_payment_options>
+								<partial_payment_optional>0</partial_payment_optional>
+							</depends>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</allproducts_discount_calculation_options>
+						<wholecart_discount_calculation_options translate="label">
+							<label>Discount Calculation Options</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/discountcalculationoptions</source_model>
+							<sort_order>80</sort_order>
+							<depends>
+								<apply_partial_payment_to>4</apply_partial_payment_to>
+							</depends>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</wholecart_discount_calculation_options>
+						<allproducts_shipping_and_tax_calculation_options translate="label">
+							<label>Shipping and Tax Calculation Options</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/shippingandtaxcalculationoptions</source_model>
+							<sort_order>90</sort_order>
+							<depends>
+								<apply_partial_payment_to>1</apply_partial_payment_to>
+								<partial_payment_options separator=",">2_installments,fixed_installments</partial_payment_options>
+								<partial_payment_optional>0</partial_payment_optional>
+							</depends>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</allproducts_shipping_and_tax_calculation_options>
+						<wholecart_shipping_and_tax_calculation_options translate="label">
+							<label>Shipping and Tax Calculation Options</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/shippingandtaxcalculationoptions</source_model>
+							<sort_order>90</sort_order>
+							<depends>
+								<apply_partial_payment_to>4</apply_partial_payment_to>
+							</depends>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</wholecart_shipping_and_tax_calculation_options>
+						<minimum_order_amount translate="label">
+							<label>Minimum Order Amount</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry validate-number</validate>
+							<sort_order>100</sort_order>
+							<depends>
+								<apply_partial_payment_to>4</apply_partial_payment_to>
+							</depends>
+							<backend_model>partialpayment/validation</backend_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Partial Payment Facility will be available only if the order total exceeds Minimum Order Amount. Set Zero if you want to give facility to all orders.</comment>
+						</minimum_order_amount>
+					</fields>
+				</functionalities_group>
+				<calculation_settings>
+					<label>Partial Payment Calculation Settings</label>
+					<sort_order>40</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<installment_calculation_type translate="label">
+							<label>Calculate Installments On</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/installmentcalculationtype</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</installment_calculation_type>
+						<first_installment_amount translate="label">
+							<label>Down Payment</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry validate-number</validate>
+							<backend_model>partialpayment/validation</backend_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</first_installment_amount>
+						<payment_plan translate="label">
+							<label>Payment Plan</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/paymentplan</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</payment_plan>
+						<total_no_days translate="label">
+							<label>Total Number of Days</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry validate-digits</validate>
+							<depends>
+								<payment_plan>days</payment_plan>
+							</depends>
+							<backend_model>partialpayment/validation</backend_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</total_no_days>
+						<surcharge_options translate="label">
+							<label>Surcharge Options</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/surchargeoptions</source_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</surcharge_options>
+						<single_surcharge_value translate="label">
+							<label>Surcharge Value</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry validate-number</validate>
+							<depends>
+								<surcharge_options>single_surcharge</surcharge_options>
+							</depends>
+							<backend_model>partialpayment/validation</backend_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</single_surcharge_value>
+						<multiple_surcharge_values translate="label">
+							<label>Surcharge Values (Coma Separated)</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry</validate>
+							<depends>
+								<surcharge_options>multiple_surcharge</surcharge_options>
+							</depends>
+							<backend_model>partialpayment/validation</backend_model>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</multiple_surcharge_values>
+					</fields>
+				</calculation_settings>
+				<outofstock_discount>
+					<label>Pre Order Discount Settings</label>
+					<sort_order>50</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<outofstock_discount_calculation_type translate="label">
+							<label>Calculate Pre Order Discount On</label>
+							<frontend_type>select</frontend_type>
+							<source_model>partialpayment/installmentcalculationtype</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</outofstock_discount_calculation_type>
+						<outofstock_discount_amount translate="label">
+							<label>Pre Order Discount</label>
+							<frontend_type>text</frontend_type>
+							<validate>validate-number</validate>
+							<backend_model>partialpayment/validation</backend_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</outofstock_discount_amount>
+					</fields>
+				</outofstock_discount>
+				<stock_availability_email>
+					<label>Stock Availability Email Settings</label>
+					<sort_order>55</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<send_stock_availability_email translate="label">
+							<label>Send Stock Availability Email</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</send_stock_availability_email>
+						<stock_availability_email_sender>
+							<label>Stock Availability Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</stock_availability_email_sender>
+						<stock_availability_email_template translate="label">
+                            <label>Stock Availability Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </stock_availability_email_template>
+					</fields>
+				</stock_availability_email>
+				<credit_group translate="label">
+                    <label>Allow Partial Payment to Specific Customer Groups</label>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<customer_credit_options translate="label">
+                            <label>Partial Payment Available To</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>credit/customercreditoptions</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer_credit_options>
+						<customer_groups translate="label">
+                            <label>Customer Groups</label>
+                            <frontend_type>multiselect</frontend_type>
+							<validate>required-entry</validate>
+							<depends>
+								<customer_credit_options>3</customer_credit_options>
+							</depends>
+                            <source_model>credit/customergroups</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer_groups>
+					    <default_credit_amount translate="label">
+                           <label>Default Credit Amount</label>
+                           <frontend_type>text</frontend_type>
+						   <validate>validate-number</validate>
+						   <backend_model>partialpayment/validation</backend_model>
+                           <sort_order>20</sort_order>
+                           <show_in_default>1</show_in_default>
+                           <show_in_website>1</show_in_website>
+                           <show_in_store>1</show_in_store>
+                       </default_credit_amount>
+                       <exceeded_credit_limit_message translate="label">
+                           <label>Credit Limit Exceeded Message</label>
+                           <frontend_type>text</frontend_type>
+						   <validate>required-entry</validate>
+                           <sort_order>30</sort_order>
+                           <show_in_default>1</show_in_default>
+                           <show_in_website>1</show_in_website>
+                           <show_in_store>1</show_in_store>
+                       </exceeded_credit_limit_message>
+                    </fields>
+                </credit_group>
+				<order_confirmation_email translate="label">
+                    <label>Partial Payment Order Confirmation Email</label>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<order_confirmation_sender translate="label">
+                            <label>Order Confirmation Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_confirmation_sender>
+						<order_confirmation_template translate="label">
+                            <label>Order Confirmation Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_confirmation_template>
+						<order_confirmation_cc translate="label">
+                            <label>Send Order Confirmation CC To</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-email</validate>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_confirmation_cc>
+                    </fields>
+                </order_confirmation_email>
+				<installment_reminder_email translate="label">
+                    <label>Partial Payment Installment Reminder Email</label>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<send_installments_reminder_email translate="label">
+							<label>Send Installments Reminder Email</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</send_installments_reminder_email>
+						<remind_before_days translate="label">
+							<label>Remind Before Days</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry validate-digits</validate>
+							<backend_model>partialpayment/validation</backend_model>
+							<depends>
+								<send_installments_reminder_email>1</send_installments_reminder_email>
+							</depends>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Send installments reminder email to customer before number of days for each installment.</comment>
+						</remind_before_days>
+						<reminder_email_sender translate="label">
+                            <label>Reminder Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </reminder_email_sender>
+						<reminder_email_template translate="label">
+                            <label>Reminder Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </reminder_email_template>
+						<reminder_email_cc translate="label">
+                            <label>Reminder Email CC To</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-email</validate>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </reminder_email_cc>
+                    </fields>
+                </installment_reminder_email>
+				<installment_confirmation_email translate="label">
+                    <label>Partial Payment Installment Confirmation Email</label>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<installment_confirmation_sender translate="label">
+                            <label>Installment Confirmation Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </installment_confirmation_sender>
+						<installment_confirmation_template translate="label">
+                            <label>Installment Confirmation Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </installment_confirmation_template>
+						<installment_confirmation_cc translate="label">
+                            <label>Send Installment Confirmation CC To</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-email</validate>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </installment_confirmation_cc>
+                    </fields>
+                </installment_confirmation_email>
+			</groups>
+        </partialpayment>
+		<sales>
+            <groups>
+                <totals_sort>
+                    <fields>
+						<outstockdiscount translate="label" module="partialpayment">
+                            <label>Out of Stock Discount Amount</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </outstockdiscount>
+                    </fields>
+                </totals_sort>
+            </groups>
+        </sales>		
+    </sections>
+</config>

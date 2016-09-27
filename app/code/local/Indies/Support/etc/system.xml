@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <indies_services translate="label">
+            <label>Indies Services</label>
+            <sort_order>300</sort_order>
+        </indies_services>
+    </tabs>
+    <sections>
+        <support translate="label" module="support">
+            <label>Support and Feedback</label>
+            <tab>indies_services</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>99999</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+			<groups>
+				<extensions translate="label">
+                    <label>Extension Information</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+					<frontend_model>support/system_config_form_fieldset_awall_extensions</frontend_model>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </extensions>
+				
+				<support_form translate="label">
+					<label>Support</label>
+                    <frontend_type>text</frontend_type>					
+					<frontend_model>support/system_config_form_fieldset_awall_Support</frontend_model>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+				</support_form>
+				
+				<share_your_feedback translate="label">
+					<label>Share Your Feedback</label>
+                    <frontend_type>text</frontend_type>
+					<frontend_model>support/system_config_form_fieldset_awall_ShareYourFeedback</frontend_model>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+				</share_your_feedback>
+				
+				<get_customized translate="label">
+					<label>Get Customized</label>
+                    <frontend_type>text</frontend_type>
+					<frontend_model>support/system_config_form_fieldset_awall_GetCustomized</frontend_model>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+				</get_customized>
+				
+				<get_connected translate="label">
+					<label>Get Connected</label>
+                    <frontend_type>text</frontend_type>
+					<frontend_model>support/system_config_form_fieldset_awall_GetConnected</frontend_model>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+				</get_connected>
+			</groups>
+        </support>
+    </sections>
+</config>

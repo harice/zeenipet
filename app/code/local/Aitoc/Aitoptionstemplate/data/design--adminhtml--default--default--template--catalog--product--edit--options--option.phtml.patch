@@ -1,0 +1,259 @@
+diff -aurBb /home/httpd/htdocs/users/rastorguev/manew131/var/ait_patch_orig/compare84612429729784a16433244fa8 /home/httpd/htdocs/users/rastorguev/manew131/var/ait_patch_modif/compare84612429729784a16433244fa8
+--- /home/httpd/htdocs/users/rastorguev/manew131/var/ait_patch_orig/compare84612429729784a16433244fa8	2009-05-22 09:16:18 +0300
++++ /home/httpd/htdocs/users/rastorguev/manew131/var/ait_patch_modif/compare84612429729784a16433244fa8	2009-05-22 09:16:18 +0300
+@@ -331,6 +332,249 @@
+     productOptionType.addDataToValues(<?php echo $_value->toJson() ?>);
+ <?php endforeach; ?>
+ 
++
++
++
++<?php if ($this->checkTemplateAllowed()) { ?>
++
++var customTplTemplate = '<div class="option-box" id="option_{{id}}">'+
++            '<table id="<?php echo $this->getFieldId() ?>_{{id}}" class="option-header" cellpadding="0" cellspacing="0">'+
++            '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_is_delete" name="<?php echo $this->getFieldName() ?>[{{id}}][is_delete]" value="" />'+
++            '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_id" name="<?php echo $this->getFieldName() ?>[{{id}}][id]" value="{{id}}" />'+
++            '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_option_id" name="<?php echo $this->getFieldName() ?>[{{id}}][option_id]" value="{{option_id}}" />'+
++            '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_template_id" name="<?php echo $this->getFieldName() ?>[{{id}}][template_id]" value="{{template_id}}" />'+
++            '<input type="hidden" id="<?php echo $this->getFieldId() ?>_{{id}}_is_require" name="<?php echo $this->getFieldName() ?>[{{id}}][is_require]" value="0" />'+
++            '<thead>'+
++                '<tr>'+
++                    '<th class="opt-title" width=50%><?php echo Mage::helper('catalog')->__('Template Title') ?> </th>'+
++                    '<th class="opt-order" width=10%><?php echo Mage::helper('catalog')->__('Sort Order') ?></th>'+
++                    '<th class="a-right"><?php echo $this->getDeleteTplButtonHtml() ?></th>'+
++                '</tr>'+
++            '</thead>'+
++            '<tr>'+
++                '<td><input type="text" class="required-entry input-text" id="<?php echo $this->getFieldId() ?>_{{id}}_title" name="<?php echo $this->getFieldName() ?>[{{id}}][title]" value="{{title}}" disabled="true"></td>'+
++                '<td><input type="text" class="validate-zero-or-greater input-text" name="<?php echo $this->getFieldName() ?>[{{id}}][sort_order]" value="{{sort_order}}"></td>'+
++                '<td>&nbsp;</td>'+
++            '</tr>'+
++            '<tr>'+
++                '<td colspan=3><b><?php echo Mage::helper('catalog')->__('Template Options') ?>:</b><br> {{options_list}}</td>'+
++            '</tr></table></div>';
++
++var productTpl = {
++    div : $('product_tpls_container_top'),
++    templateSyntax : /(^|.|\r|\n)({{(\w+)}})/,
++    templateText : customTplTemplate,
++    itemCount : 1,
++    add : function(data) {
++        this.template = new Template(this.templateText, this.templateSyntax);
++
++        if(!data.id){
++            data = {};
++            data.id  = this.itemCount;
++            data.type = '';
++            data.option_id = 0;
++        } else {
++            this.itemCount = data.item_count;
++        }
++
++        data.options_list = '';
++        
++        iTemplateId = data.template_id;
++        
++        if (iTemplateId && aTemplateOptionList[iTemplateId])
++        {
++            for (var i=1; i < aTemplateOptionList[iTemplateId].length; i++)
++            {
++                if (aTemplateOptionList[iTemplateId][i])
++                {
++                    opt = aTemplateOptionList[iTemplateId][i];
++                    
++                    data.options_list = data.options_list + opt.title;
++                    
++                    if (opt.optionValues)
++                    {
++                        data.options_list = data.options_list + ' (';
++                        
++                        opt.optionValues.each(function(option){
++                            data.options_list = data.options_list + option.title + ', ';
++                        });                        
++                        
++                        data.options_list = data.options_list.substr(0, data.options_list.length - 2);
++                        
++                        data.options_list = data.options_list + ')';
++                    }
++                    
++                    data.options_list = data.options_list + '<br>';
++                }
++            }
++        }
++        
++        Element.insert(this.div, {'after':this.template.evaluate(data)});
++
++        this.itemCount++;
++        this.bindRemoveButtons();
++////        productOptionType.bindSelectInputType();
++    },
++    remove : function(event){
++        var element = $(Event.findElement(event, 'div'));
++        if(element){
++            $('product_'+element.readAttribute('id')+'_'+'is_delete').value = '1';
++            element.addClassName('no-display');
++            element.addClassName('ignore-validate');
++            element.hide();
++            
++            var aParts = element.readAttribute('id').split('aitoctpl');
++
++            if (aTemplateUsedIds[aParts[1]])
++            {
++                aTemplateUsedIds[aParts[1]] = 0;
++            }
++        }
++    },
++    bindRemoveButtons : function(){
++        var buttons = $$('div.product-custom-options .delete-product-option');
++        for(var i=0;i<buttons.length;i++){
++            if(!$(buttons[i]).binded){
++                $(buttons[i]).binded = true;
++                Event.observe(buttons[i], 'click', this.remove.bind(this));
++            }
++        }
++    }
++}
++
++
++if($('add_new_template_set')){
++    Event.observe('add_new_template_set', 'click', addTemplateSet);
++}
++
++if($('add_new_template_tpl')){
++    Event.observe('add_new_template_tpl', 'click', addTemplateTpl);
++}
++if($('save_template_button')){
++    Event.observe('save_template_button', 'click', SaveTemplate);
++}
++
++    var aTemplateOptionList = []; var aTemplateOptionSrcList = [];
++    
++    var aTemplateDataList   = [];
++    
++    var aTemplateUsedIds = [];
++    
++<?php 
++
++    if ($aTemplateHash = $this->getTemplateHash()) 
++    {                         
++        foreach ($aTemplateHash as $iKey => $sTitle)
++        {
++            echo 'aTemplateDataList[' . $iKey . '] = {"id":"aitoctpl' . $iKey . '","template_id":"' . $iKey . '","option_id":"aitoctpl' . $iKey . '","title":"' . $sTitle . '","sort_order":"0"};
++                
++';
++            echo 'aTemplateOptionList[' . $iKey . '] = []; aTemplateOptionSrcList[' . $iKey . '] = [];
++';
++        }
++    } 
++?>                        
++
++ 
++<?php $aTemplateOptionCounter = array(); ?>
++    
++
++//adding data to templates
++<?php if ($aTemplatesOptionValues = $this->getTemplatesOptionValues(array_keys($aTemplateHash))) { ?>
++<?php foreach ($aTemplatesOptionValues as $_value): ?>
++    <?php $aOptionData = $_value->getData();  ?>
++    <?php if (!isset($aTemplateOptionCounter[$aOptionData['template_id']])) $aTemplateOptionCounter[$aOptionData['template_id']] = 0; ?>
++    <?php $aTemplateOptionCounter[$aOptionData['template_id']]++; ?>
++    aTemplateOptionList[<?php echo $aOptionData['template_id']; ?>][<?php echo $aTemplateOptionCounter[$aOptionData['template_id']]; ?>] = <?php echo $_value->toJson() ?>;
++    aTemplateOptionSrcList[<?php echo $aOptionData['template_id']; ?>][<?php echo $aTemplateOptionCounter[$aOptionData['template_id']]; ?>] = '<?php echo str_replace("'", '\\' . "'", $_value->toJson()) ?>';
++<?php endforeach; ?>
++<?php } ?>
++
++
++<?php 
++
++    echo 'var dataTpl = {"id":"0"};
++    ';
++
++    if ($aTemplate2ProductList = $this->getProductTemplateList()) 
++    {                         
++        foreach ($aTemplate2ProductList as $aTemplateData)
++        {
++            echo '
++            if (aTemplateDataList[' . $aTemplateData['template_id'] . '])
++            {
++                dataTpl = aTemplateDataList[' . $aTemplateData['template_id'] . '];
++                dataTpl.sort_order = ' . $aTemplateData['sort_order'] . ';
++                productTpl.add(dataTpl);
++                aTemplateUsedIds[' . $aTemplateData['template_id'] . '] = 1;
++            }
++';
++            
++        }
++    } 
++?> 
++
++function addTemplateSet()
++{
++    var iTemplateId = 0;
++    
++    if ($('add_template_select'))
++    {
++        iTemplateId = $('add_template_select').value;
++    }
++
++ //   var data = {"id":"0"};
++    
++    if (iTemplateId && aTemplateOptionList[iTemplateId])
++    {
++        aitdependable.startTemplateImport();
++        for (var i=1; i < aTemplateOptionList[iTemplateId].length; i++)
++        {
++            if (aTemplateOptionList[iTemplateId][i])
++            {
++                var sJson = aTemplateOptionSrcList[iTemplateId][i]; sJson = str_replace(sJson, aTemplateOptionList[iTemplateId][i].id, aTemplateOptionList[iTemplateId][i].id + "-" + Math.floor(Math.random()*100001)); eval('var data = ' + sJson + ';');
++                data.item_count = productOption.itemCount;
++                aitdependable.setTemplateOptionId(aTemplateOptionList[iTemplateId][i].id);
++                productOption.add(data);    
++                productOptionType.addDataToValues(data);
++            }
++        }
++        aitdependable.endTemplateImport();
++    }
++}
++ function str_replace(haystack, needle, replacement) { var temp = haystack.split(needle); return temp.join(replacement); }
++
++function addTemplateTpl()
++{
++    var iTemplateId = 0;
++    
++    if ($('add_template_select'))
++    {
++        iTemplateId = $('add_template_select').value;
++    }
++
++    var data = {"id":"0"};
++
++    if (aTemplateUsedIds[iTemplateId])
++    {
++        alert('<?php echo Mage::helper('catalog')->__('You have already added this template.') ?>');
++        return false;
++    }
++    
++    if (iTemplateId && aTemplateDataList[iTemplateId])
++    {
++        data = aTemplateDataList[iTemplateId];
++        
++        productTpl.add(data); 
++        aTemplateUsedIds[iTemplateId] = 1;   
++    }
++}
++function SaveTemplate()
++{
++<?php $productTpl = Mage::getResourceModel('aitoptionstemplate/aitproduct2tpl')->getProductTemplates(Mage::registry('current_product')->getId());
++        if(!empty($productTpl)){ ?>deleteConfirm('You have a whole custom options template(s) assigned to the Product. It will not be saved in the new Template. Only simple custom options will be saved.\n                                                   Do you agree to proceed?','<?php echo $this->getUrl('aitoptionstemplate/index/new',
++       array('optproduct_id'=>Mage::registry('current_product')->getId()));?>');<?php }else {?>window.location.replace('<?php echo $this->getUrl('aitoptionstemplate/index/new',
++       array('optproduct_id'=>Mage::registry('current_product')->getId()));?>');<?php } ?>
++}
++
++<?php } ?>
++
++
++
+ //bind scope checkboxes
+ productOptionScope.bindScopeCheckbox();
+ //]]>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_cnslider_index>
+        <reference name="content">
+            <block type="cybernetikz_cnslider/adminhtml_cnslider" name="cnslider" />
+        </reference>
+    </adminhtml_cnslider_index>
+
+    <adminhtml_cnslider_grid>
+        <block type="cybernetikz_cnslider/adminhtml_cnslider_grid" name="root"/>
+    </adminhtml_cnslider_grid>
+
+    <adminhtml_cnslider_new>
+        <update handle="adminhtml_cnslider_edit" />
+    </adminhtml_cnslider_new>
+
+    <adminhtml_cnslider_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="cybernetikz_cnslider/adminhtml_cnslider_edit" name="cnslider_edit" />
+        </reference>
+    </adminhtml_cnslider_edit>
+	
+	<adminhtml_cnslidercat_index>
+        <reference name="content">
+            <block type="cybernetikz_cnslider/adminhtml_cnslidercat" name="cnslidercat" />
+        </reference>
+    </adminhtml_cnslidercat_index>
+
+    <adminhtml_cnslidercat_grid>
+        <block type="cybernetikz_cnslider/adminhtml_cnslidercat_grid" name="root"/>
+    </adminhtml_cnslidercat_grid>
+
+    <adminhtml_cnslidercat_new>
+        <update handle="adminhtml_cnslidercat_edit" />
+    </adminhtml_cnslidercat_new>
+
+    <adminhtml_cnslidercat_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="cybernetikz_cnslider/adminhtml_cnslidercat_edit" name="cnslider_edit" />
+        </reference>
+    </adminhtml_cnslidercat_edit>
+</layout>

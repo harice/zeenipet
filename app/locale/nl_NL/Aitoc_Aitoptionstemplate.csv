@@ -1,0 +1,62 @@
+﻿"Check Synchronization","Controleer Synchronisatie"
+"Backup data to file","Backup Gegevens naar een bestand"
+"Restore data from reserve tables","Gegevens herstellen van de gereserveerde tabellen"
+Export,Exporteren
+"Restore from backup file","Herstellen vanuit een bestand"
+"Add New Option","Nieuwe Optie Toevoegen"
+"Save All Options As New Template","Alle Opties als een Nieuwe Sjabloon Opslaan"
+"Add Template Options","Voeg Sjabloon Opties Toe"
+"Assign Whole Template","Gehele Sjabloon Toewijzen"
+"Delete Template","Sjabloon Verwijderen"
+"Please enter search conditions to view products.","Vul alstublieft de zoekvoorwaarden in om producten te bekijken."
+"General Information","Algemene informatie"
+Title,Titel
+Description,Beschrijving
+Status,Status
+Active,Actief
+Inactive,Inactief
+ID,ID
+Name,Naam
+Type,Soort
+"Attrib. Set Name","Attrib. Naam Instellen"
+Visibility,Zichtbaarheid
+SKU,SKU
+Price,Prijs
+"Default Qty","Standaard Hoeveelheid"
+Position,Positie
+"Template Information","Sjabloon Informatie"
+Template,Sjabloon
+General,Algemeen
+Options,Opties
+"Assigned Products","Toegewezen Producten"
+Duplicate,Dupliceer
+"Save and Continue Edit","Opslaan en doorgaan met bewerken"
+"Save Template","Sjabloon Opslaan"
+"New Template","Nieuwe sjabloon"
+"Edit Template '%s'","%s' Sjabloon Bewerken"
+"Add New Template","Nieuwe Sjabloon Toevoegen"
+"Template Title","Sjabloon Titel"
+"Template Description","Sjabloon Beschrijving"
+Yes,Ja
+No,Nee
+"Options Template","Opties Sjabloon"
+"Custom Options Templates","Aangepaste Opties Sjablonen"
+"Options Backup and Restore","Opties Backup en Herstellen"
+"Templates was succesfully backuped","Sjablonen waren succesvol backuped"
+"Backup restoring failed","Backup herstellen is mislukt"
+"Backup was succesfully restored","Backup was succesvol hersteld"
+"This template no longer exists","Dit sjabloon bestaat niet meer"
+"Edit Template","Sjabloon bewerken"
+"The page you are trying to save no longer exists","De pagina die u probeert op te slaan bestaat niet meer"
+"Template was successfully saved","Sjabloon was succesvol opgeslagen"
+"Template was successfully deleted","Sjabloon was succesvol verwijderd"
+"Unable to find a page to delete","Niet in staat om de pagina te vinden om te verwijderen"
+"Template duplicated","Sjabloon gedupliceerd"
+"Sort Order","Sorteer Bestelling"
+"Template Options","Sjabloon Opties"
+"You have already added this template.","U hebt deze sjabloon al toegevoegd."
+"Active Templates","Actieve Sjablonen"
+"Custom Options","Aangepaste Opties"
+"Manage Options Template","Opties Sjabloon Beheren"
+"Manage Options Templates","Opties Sjablonen Beheren"
+"Some of your data may be corrupted,please restore data in Custom Options Template/Backup and Restore","Sommige van uw Gegevens zijn waarschijnlijk beschadigd,herstel alstublieft de gegevens in Aangepaste Opties Sjabloon/Backup en Herstellen"

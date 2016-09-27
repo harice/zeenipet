@@ -1,0 +1,41 @@
+<!--@subject {{var frontend_label}} Order Confirmation @-->
+<!--@vars
+{"var frontend_label":"Frontend Label",
+"var customer_name":"Customer Name",
+"var order_id":"Order Id",
+"var store_url":"Store URL",
+"var login_url":"Login URL",
+"var partialpayment_installment_grid":"Installment Grid"
+}
+@-->
+
+<style type="text/css">
+	.partialpayment_order_confirmation { font-family:Arial, Helvetica, sans-serif; font-size:12px; }
+	.align_center { text-align:center; }
+	.align_right { text-align:right; }
+</style>
+
+<div class="partialpayment_order_confirmation">
+	<table border="0" cellpadding="3" cellspacing="3">
+    	<tr>
+        	<td>Dear {{var customer_name}},<br /></td>
+        </tr>
+        <tr>
+        	<td>Thank you for Order at <a href="{{var store_url}}" target="_blank">{{var store_url}}</a> by using {{var frontend_label}}. You can check the status of your order by <a href="{{var login_url}}" target="_blank">logging into your account</a>.<br /></td>
+        </tr>
+        <tr>
+        	<td>Your Partially Paid order details for order # {{var order_id}} are as follows:<br /></td>
+        </tr>
+        <tr>
+        	<td>
+            	{{var partialpayment_installment_grid}}
+            </td>
+        </tr>
+        <tr>
+        	<td>Thank you for using our services. Visit our store for more products and exciting offers.<br /></td>
+        </tr>
+        <tr>
+        	<td>Thank you.</td>
+        </tr>
+    </table>
+</div>

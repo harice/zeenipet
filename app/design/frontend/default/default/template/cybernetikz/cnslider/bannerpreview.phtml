@@ -1,0 +1,100 @@
+<?php
+/**
+*	Author		: 	Cybernetikz
+*	Author Email:   info@cybernetikz.com
+*	Blog		: 	http://blog.cybernetikz.com
+*	Website		: 	http://www.cybernetikz.com
+*/
+?>
+
+<?php 
+	$banner_id = $this->getRequest()->getParam('id');
+	$_bannerCollections = $this->getCollection($banner_id);
+	$bannerdata=$_bannerCollections->getData();
+	//exit;
+	$cat_ids=explode(",",$bannerdata[0]["cat_id"]);
+	$cat_id=trim(str_replace(array("cns_","_cns"),array("",""),$cat_ids[0]));
+	$_sliderCollections = $this->getSliderCollection($cat_id);
+
+	$show_title = Mage::helper('cybernetikz_cnslider')->isEnableTitle();
+	$show_content = Mage::helper('cybernetikz_cnslider')->isEnableContent();
+	$show_link = Mage::helper('cybernetikz_cnslider')->isEnableLink();
+	
+	$width = Mage::helper('cybernetikz_cnslider')->getWidth();
+	$height = Mage::helper('cybernetikz_cnslider')->getHeight();
+	$effect=Mage::helper('cybernetikz_cnslider')->getEffect();
+	$delay=Mage::helper('cybernetikz_cnslider')->getDelay();
+	$length=Mage::helper('cybernetikz_cnslider')->getLength();
+	$pagination=Mage::helper('cybernetikz_cnslider')->getPagination();
+	$playpause=Mage::helper('cybernetikz_cnslider')->getPlayPause();
+	$nextprev=Mage::helper('cybernetikz_cnslider')->getNextPrev();
+	
+	if(count($_sliderCollections->getData())>0){
+		foreach($_sliderCollections as $slider){
+			$font_size=$slider->getFontSize();
+				
+			if($slider->getSettings()=="custom_configuration"){				
+				$show_title = $slider->getShowTitle();
+				$show_content = $slider->getShowContent();
+				$show_link = $slider->getShowLink();				
+				$width = $slider->getWidth();
+				$height = $slider->getHeight();
+				$effect=$slider->getEffect();
+				$delay=$slider->getDelay();
+				$length=$slider->getLength();
+				$pagination=$slider->getPagination();
+				$playpause=$slider->getPlaypause();
+				$nextprev=$slider->getNextprev();
+			}
+		}
+	}
+		
+	$count=count($_bannerCollections->getData());
+?>
+<?php if($count>0): ?>	
+	<?php /*?> Start Slider Content <?php */?>
+	<div id="cnslider-container" style="width:<?php echo $width;?>px;height:<?php echo $height;?>px;overflow:hidden;margin:auto;float:none;">
+		<div id="cnslider">
+		<?php
+			foreach($_bannerCollections as $banner):		
+			?>        
+				<div class="cns-item">
+					<?php if ($imageUrl = $this->getImageUrl($banner,$width,$height)): ?>
+                    	<?php if($show_link && $banner->getLinkUrl() && $banner->getCallToActionType()=="showlinkwithimage"){ ?>
+                        	<a href="<?php echo $banner->getLinkUrl();?>" title="<?php echo $banner->getName();?>">
+					   	<?php } ?>
+                        <img src="<?php echo $imageUrl ?>" alt="<?php echo $this->escapeHtml($banner->getName()) ?>" />
+                        <?php if($show_link && $banner->getLinkUrl() && $banner->getCallToActionType()=="showlinkwithimage"){ ?>
+                        	</a>
+					   	<?php } ?>
+					<?php endif; ?>
+                    <?php if($show_title || $show_content || $show_link){ ?>
+                          <div class="cns-contentbox" style="font-size:<?php echo $font_size; ?>;<?php echo ($nextprev)?"left:10%;":"left:5%;width:90%;";?>">
+                             <?php if($show_title && $banner->getName()){ ?>
+                                <h2 style="color:#<?php echo $banner->getNameColor(); ?>;" class="cns-tille"><?php echo $banner->getName();?></h2>
+                            <?php } ?>
+                            <?php if($show_content && $banner->getContent()){ ?>
+                                <div class="cns-inner-content" style="color:#<?php echo $banner->getContentColor(); ?>;"><?php echo $banner->getContent();?></div>
+                            <?php } ?>
+                            <?php if($show_link && $banner->getLinkUrl() && $banner->getCallToActionType()=="showlinkwithborowsebutton" && $banner->getCallToAction()){ ?>
+                                <?php
+									$textcolor=$banner->getCallActionTextcolor();
+									$text_shadow=$banner->getCallActionTextShadow();
+                                	$backgroundfrom=$banner->getCallActionBackgroundFrom();
+									$backgroundto=$banner->getCallActionBackgroundTo();	
+									$background_border=$banner->getCallActionBackgroundBorder();		
+								?>
+                                <div class="cns-link">
+                                	<a href="<?php echo $banner->getLinkUrl();?>" title="<?php echo $banner->getName();?>" style="background-color: #<?php echo $backgroundfrom; ?>;background-image: -webkit-gradient(linear, left top, left bottom, from(#<?php echo $backgroundfrom; ?>), to(#<?php echo $backgroundto; ?>));background-image: -webkit-linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);background-image: -moz-linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);background-image: -ms-linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);background-image: -o-linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);background-image: linear-gradient(top, #<?php echo $backgroundfrom; ?>, #<?php echo $backgroundto; ?>);border: 1px solid #115290;color: #<?php echo $textcolor; ?>;filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#<?php echo $backgroundfrom; ?>, endColorstr=#<?php echo $backgroundto; ?>);<?php if($text_shadow!=""){ ?>text-shadow: 0 -1px 0 #<?php echo $text_shadow;?>;<?php }?><?php if($background_border!=""){ ?>border: 1px solid #<?php echo $background_border;?>;<?php }?>">
+                                    	<?php echo $banner->getCallActionText();?>
+                                    </a>
+								</div>
+                            <?php } ?>
+                          </div>
+					<?php } ?>
+                </div>
+			<?php endforeach; ?>
+		</div>
+	</div>
+    <div class="clearall"></div>
+<?php endif;?>

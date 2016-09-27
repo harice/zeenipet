@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Aitoc_Aitoptionstemplate>
+            <active>true</active>
+            <codePool>local</codePool>
+            <self_name>Custom Options Templates</self_name>
+            <priority>4000</priority>
+        </Aitoc_Aitoptionstemplate>
+    </modules>
+</config>
+
+<!--
+/**
+ * Custom Options Templates
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitoptionstemplate
+ * @version      3.2.2
+ * @license:     FoqAPsDYiV5k0g2ao7Zx8pPoJiVNkUYZBpxixzEerG
+ * @copyright:   Copyright (c) 2013 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

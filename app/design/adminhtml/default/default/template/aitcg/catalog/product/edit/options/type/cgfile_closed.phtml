@@ -1,0 +1,20 @@
+<?php
+/**
+ * Product:     Custom Product Preview
+ * Package:     Aitoc_Aitcg_3.0.1_1.0.0_520274
+ * Purchase ID: 9XHJkpl9USQGlgqMmhzeUoZOIR22A95V3tio9yYTqY
+ * Generated:   2013-03-05 20:52:02
+ * File path:   app/design/adminhtml/default/default/template/aitcg/catalog/product/edit/options/type/cgfile_closed.phtml
+ * Copyright:   (c) 2013 AITOC, Inc.
+ */
+?>
+<script type="text/javascript">
+
+OptionTemplateCg = '<?php echo Mage::helper("aitcg")->__("You have exceed limit of product for your license."); ?>';
+
+if ($('option_panel_type_file')) {
+    $('option_panel_type_file').remove();
+}
+
+aitcgImageSelector = new Aitcg.ImageSelectorClosed();
+</script>

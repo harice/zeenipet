@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <sections>
+        <humsayaa>
+            <label>Absolute Pricing by Humsayaa</label>
+				<tab>catalog</tab>
+				<frontend_type>text</frontend_type>
+				<sort_order>999999</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+            <groups>
+			  <!-- -->
+                <general translate="label">
+                    <comment><![CDATA[
+                        <div class="box">
+                            <p>See documentation and support for <a href="http://www.absolutepricing.com" target="_blank">Absolute Pricing</a></p>
+                        </div>
+                        ]]>
+                    </comment>
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+					<!-- -->
+                        <serial translate="label">
+                            <label>Serial</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </serial>
+					<!-- -->
+                        <default_description translate="label">
+                            <label>Default Description</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[If not specified, Default Text from General Config will be used, you may change it here.]]></comment>
+                        </default_description>
+					<!-- -->
+                    </fields>
+                </general>
+			  <!-- -->
+                <notepad translate="label">
+                    <comment><![CDATA[
+                        <div class="box">
+                            <p>add any notes here, it's just an area to add whatever you wish - hopefully of some use</p>
+                        </div>
+                        ]]>
+                    </comment>
+                    <label>NotePad/ScratchPad</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>201</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+					<!-- -->
+                        <default_notepad_1 translate="label">
+                            <label>My Notes</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[add any notes you wish here.]]></comment>
+                        </default_notepad_1>
+					<!--
+                        <default_notepad_2 translate="label">
+                            <label>My Notes - addtitional</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[add any notes you wish here.]]></comment>
+                        </default_notepad_2>
+					-->
+                    </fields>
+                </notepad>
+			  <!-- -->
+                <faq translate="label">
+                    <label>FAQ's</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>301</sort_order>
+                    <show_in_default>0</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+
+                    <fields>
+					<!-- -->
+                        <default_description translate="label">
+                            <label>Default Description</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[change the default text by replacing with for your own.]]></comment>
+                        </default_description>
+					<!-- -->
+                    </fields>
+                </faq>
+			  <!-- -->
+            </groups>
+        </humsayaa>
+    </sections>
+
+</config>

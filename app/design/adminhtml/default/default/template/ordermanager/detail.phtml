@@ -1,0 +1,149 @@
+<?php 
+$order = $this->getData('order');
+$order_id = $order->getIncrementId();
+$order = Mage::getModel('sales/order')->loadByIncrementId($order_id);
+$_items = $order->getAllItems();
+
+?>
+
+<div class="grid np" id="d_<?php echo $order_id; ?>" style="display:none;position:absolute;margin:45px 0 0 -190px;border:1px solid green">
+   
+   <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'adminhtml/default/default/images/rule_component_remove.gif'?>" onclick="hideDetail('d_<?php echo $order_id; ?>')" style="position:absolute;left:884px;top:-7px;">
+   
+    <div class="hor-scroll">
+    <table cellspacing="0" class="data order-tables">
+        <col />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <thead>
+            <tr class="headings" style="background:none repeat scroll 0 0 #6f8992;">
+				 <th><?php echo $this->helper('sales')->__('Image') ?></th>
+                <th style="width:175px;"><?php echo $this->helper('sales')->__('Product') ?></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Item Status') ?></span></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Original Price') ?></span></th>
+                <th><?php echo $this->helper('sales')->__('Price') ?></th>
+                <th class="a-center"><?php echo $this->helper('sales')->__('Qty') ?></th>
+                <th><?php echo $this->helper('sales')->__('Subtotal') ?></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Tax Amount') ?></span></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Tax Percent') ?></span></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Discount Amount') ?></span></th>
+                <th class="last"><span class="nobr"><?php echo $this->helper('sales')->__('Row Total') ?></span></th>
+            </tr>
+        </thead>
+        <?php //$_items = $this->getItemsCollection() 
+		$_coreHelper = Mage::helper('core');
+		$totalsItemObj = new Mage_Adminhtml_Block_Sales_Order_Totals_Item();
+		?>
+        <?php $i=0;foreach ($_items as $_item):?>
+		 <?php 
+		 			   $_productId = $_item->getProductId();
+					   $_product = Mage::getModel('catalog/product')->load($_productId);
+					   $productImage = Mage::helper('catalog/image')->init($_product, 'image')->resize(30);
+		 ?>
+            <?php if ($_item->getParentItem()) continue; else $i++;?>
+            <tbody class="<?php echo $i%2?'even':'odd' ?>">
+				<tr class="border">
+				<td><img src="<?php echo $productImage ; ?>" /></td>
+				<td>
+					<div class="item-container" id="order_item_1">
+						<div class="item-text">
+							<h5 class="title">
+								<span id="order_item_1_title">
+									<?php echo $_item->getName();?>
+								</span></h5>
+							<div><strong>SKU:</strong> <?php echo $_item->getSku();?></div>
+						</div>
+					</div>
+				</td>
+				<td class="a-center"><?php echo $_item->getStatus();?></td>
+				<td class="a-right"><span class="price"><?php echo $_coreHelper->currency($_item->getPrice(), true, false);?></span></td>
+				<td class="a-right">
+					<span class="price-excl-tax">
+				
+						<span class="price"><?php echo $_coreHelper->currency($_item->getPrice(), true, false);?></span>                
+					</span>
+						<br>	
+				</td>
+				<td>
+					<table cellspacing="0" class="qty-table">
+						<tbody>
+							<tr>
+								<td><?php echo $itemStatus =  $_item->getStatus();?></td>
+								<td>
+									<strong>
+										<?php
+										if($itemStatus == "Invoiced")echo number_format($_item['qty_invoiced'],0);
+										if($itemStatus == "Ordered")echo  number_format($_item['qty_ordered'],0);
+										if($itemStatus == "Shipped")echo  number_format($_item['qty_shipped'],0);
+										if($itemStatus == "Cancelled")echo number_format($_item['qty_cancelled'],0);
+										if($itemStatus == "Refunded")echo  number_format($_item['qty_refunded'],0);
+										
+											 //$obj = new Mage_Adminhtml_Block_Sales_Order_View_Items_Renderer_Default();
+											 //echo $obj->getColumnHtml($_item, 'qty');
+										?>
+									</strong>
+									
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+
+				<td class="a-right">
+					<span class="price-excl-tax">
+						<span class="price"><?php echo $_coreHelper->currency($_item->getRowTotal(), true, false);?></span>                
+					</span>
+						<br>
+				</td>
+				
+				<td class="a-right"><span class="price">
+					<?php echo $_coreHelper->currency($_item->getTaxAmount(), true,false);?>
+				</span></td>
+				
+				<td class="a-right">
+					<?php if ($_item->getTaxPercent()) {
+								echo sprintf('%s%%', $_item->getTaxPercent() + 0);
+							} else {
+								echo '0%';
+							}
+					?>
+				</td>
+				
+				<td class="a-right">
+					<span class="price">
+						<?php echo $_coreHelper->currency($_item->getDiscountAmount(),true, false);?>
+					</span>
+				</td>
+				<td class="a-right last">
+					<span class="price">
+					   <?php echo Mage::helper('adminhtml/sales')->displayPrices($order, 
+							$_item->getBaseRowTotal() + $_item->getBaseTaxAmount() + $_item->getBaseHiddenTaxAmount() + $_item->getBaseWeeeTaxAppliedRowAmount() - $_item->getBaseDiscountAmount(),
+							$_item->getRowTotal() + $_item->getTaxAmount() + $_item->getHiddenTaxAmount() + $_item->getWeeeTaxAppliedRowAmount() - $_item->getDiscountAmount()
+						); ?>
+					</span>
+				</td>
+					
+			</tr>
+			
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+  </div>
+</div>
+<script>
+	function showDetail(order_id)
+	{	
+		document.getElementById(order_id).style.display = 'block'
+	}
+	function hideDetail(order_id)
+	{	
+		document.getElementById(order_id).style.display = 'none'
+	}
+</script>

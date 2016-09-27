@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Indies_Outstockdiscount>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Indies_Outstockdiscount>
+    </modules>
+</config> 

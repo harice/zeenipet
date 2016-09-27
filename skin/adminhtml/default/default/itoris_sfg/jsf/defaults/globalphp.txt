@@ -1,0 +1,14 @@
+﻿/*******************************************************************/
+/* SmartFormer Gold (c) Form PHP controller                        */
+/*                                                                 */
+/* Product of IToris (c) 2009 http://www.itoris.com                */
+/*                                                                 */
+/*******************************************************************/
+
+$form->getPostedValues();
+
+$form->doAfterSubmitAction();
+
+$form->renderForm();
+
+echo $form->page_html;

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<alias>pdf_templates</alias>
+	<version>1.0.3</version>
+	<name>PDF Templates</name>
+	<date>December 2012</date>
+	<author>IToris Inc. (www.itoris.com)</author>
+	<description>The plugin allows administrator to create a template for each form using WYSIWYG, and then export the form submissions into a .pdf document based on the template.</description>
+	<installfile>install.php</installfile>
+	<required_sfg_version>1.2.0</required_sfg_version>
+	<observer>
+		<classname>PdfTemplatesPlugin</classname>
+		<filename>PdfTemplatesPlugin.php</filename>
+	</observer>
+	<observer>
+		<classname>PdfTemplatesEditObserver</classname>
+		<filename>Edit/Observer.php</filename>
+	</observer>
+	<observer>
+		<classname>PdfTemplatesVariablesObserver</classname>
+		<filename>Variables/Observer.php</filename>
+	</observer>
+	<observer>
+		<classname>PdfTemplatesButtonsObserver</classname>
+		<filename>Buttons/Observer.php</filename>
+	</observer>
+	<observer>
+		<classname>PdfTemplatesExportObserver</classname>
+		<filename>Export/Observer.php</filename>
+	</observer>
+	<observer>
+		<classname>PdfTemplatesFormObserver</classname>
+		<filename>Form/Observer.php</filename>
+	</observer>
+	<observer>
+		<classname>PdfTemplatesEmailObserver</classname>
+		<filename>Email/Observer.php</filename>
+	</observer>
+</plugin>

@@ -1,0 +1,7 @@
+﻿<!-- SmartFormer Gold code part -->
+
+<form action="" method="post" name="sfgForm" enctype="multipart/form-data">
+<%form_html%>
+</form>
+
+<!-- End of SmartFormer Gold code part -->

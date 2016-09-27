@@ -1,0 +1,122 @@
+Partial Payment,Deposit Payment
+Please login to know your parital payment facility.,Please login to know your Deposit payment facility.
+You have opted for partial payment.<br />It is not available in guest checkout.<br />Please register to avail facility.,You have opted for deposit payment.<br />It is not available in guest checkout.<br />Please register to avail facility.
+Paying Now,Initial Deposit
+,
+,
+Allow Partial Payment,Allow Deposit Payment
+Partial Payment Status,Partial Payment Status
+Partial Payment Id,Deposit Payment Id
+Partial Payment Brand Label,Deposit Payment Brand Label
+Apply Partial Payment to,Apply Deposit Payment to
+Partial Payment Options,Deposit  Payment Options
+Partial Payment Optional for Buyer,Deposit Payment Optional for Buyer
+Partial Payment Calculation Settings,Deposit Payment Calculation Settings
+Allow Partial Payment to Specific Customer Groups,Allow Deposit Payment to Specific Customer Group
+Partial Payment Order Confirmation Email,Deposit Payment Order Conformation Email
+Partial Payment Installment Reminder Email,Deposit Payment Installment Reminder Email
+Partial Payment Installment Confirmation Email,Deposit Payment Installment Confirmation Email
+Partial Payment Facility will be available only if the order total exceeds Minimum Order Amount. Set Zero if you want to give facility to all orders.,Deposit Payment Facility will be available only if the order total exceeds Minimum Order Amount. Set Zero if you want to give facility to all orders.
+Partially Paid Orders,Deposit Payment Orders
+,
+,
+Partial Payment Available To,Deposit Payment Available To
+Partial Payment Installment Reminder,Deposit Payment Installment Reminder
+Partial Payment Installment Confirmation,Deposit Payment Installment Confirmation
+Partial Payment Order Confirmation,Deposit Payment Order Confirmation
+You have opted for partial payment,You have opted for deposit payment
+Edit Partially Paid Order's Information,Edit Deposit Payment Order's Information
+Partially Paid Order's Information,Deposit Payment Order's Information
+Partial Payment Status,Deposit Payment Status
+Partially paid order's information has been edited successfully.,Deposit payment order's information has been edited successfully.
+"<div style=""border:3px solid #FF0000; margin:15px 0; padding:5px;"">The Partial Payment module license got violated. Please contact us on <a href=""http://www.indieswebs.com"">www.indieswebs.com</a></div>","<div style=""border:3px solid #FF0000; margin:15px 0; padding:5px;"">The Deposit Payment module license got violated. Please contact us on <a href=""http://www.indieswebs.com"">www.indieswebs.com</a></div>"
+"Sorry, you have surpassed your partial payment credit limit.","Sorry, you have surpassed your deposit payment credit limit."
+You have opted for partial payment.<br />It is not available in guest checkout.<br />The cart will be refreshed.<br />Do you want to continue?,You have opted for Deposit payment.<br />It is not available in guest checkout.<br />The cart will be refreshed.<br />Do you want to continue?
+Partial Payment Module,Deposit Payment Module
+,
+,
+This product is available on ,This product is available on 
+License and Status,License and Status
+Serial Key,Serial Key
+Status,Status
+General Settings,General Settings
+Capture Installments Automatically,Capture Installments Automatically
+Calculate Installments On,Calculate Installments On
+Down Payment,Down Payment
+Payment Plan,Payment Plan
+Surcharge Options,Surcharge Options
+Pre Order Discount Settings,Pre Order Discount Settings
+Calculate Pre Order Discount On,Calculate Pre Order Discount On
+Pre Order Discount,Pre Order Discount
+Default Credit Amount,Default Credit Amount
+Credit Limit Exceeded Message,Credit Limit Exceeded Message
+Order Confirmation Sender,Order Confirmation Sender
+Order Confirmation Template,Order Confirmation Template
+Send Order Confirmation CC To ,Send Order Confirmation CC To 
+Send Installments Reminder Email,Send Installments Reminder Email
+Reminder Email Sender,Reminder Email Sender
+Reminder Email Template,Reminder Email Template
+Reminder Email CC To,Reminder Email CC To
+Installment Confirmation Sender,Installment Confirmation Sender
+Installment Confirmation Template,Installment Confirmation Template
+Send Installment Confirmation CC To,Send Installment Confirmation CC To
+Enabled,Enabled
+Disabled,Disabled
+Yes,Yes
+No,No
+All Products,All Products
+Selected Products Only,Selected Products Only
+Pre Order Products Only (Out of Stock),Pre Order Products Only (Out of Stock)
+Whole Cart,Whole Cart
+2 Installments Only (Initial Deposit + 1 Installment),2 Installments Only (Initial Deposit + 1 Installment)
+"Fixed Installments (Buyer will pay, defined by admin)","Fixed Installments (Buyer will pay, defined by admin)"
+Flexy Payments (Buyer can select from installment plans),Flexy Payments (Buyer can select from installment plans)
+Fixed Amount Value,Fixed Amount Value
+Percentage Value,Percentage Value
+All Customers Including Guest,All Customers Including Guest
+Registered Customers Only,Registered Customers Only
+Specific Customer Groups Only,Specific Customer Groups Only
+"Sorry, you have surpassed your partial payment credit limit.","Sorry, you have surpassed your deposit payment credit limit."
+General Contact,General Contact
+Sales Representative,Sales Representative
+Customer Support,Customer Support
+Custom Email 1,Custom Email 1
+Custom Email 2,Custom Email 2
+Order Id,Order Id
+First Name,First Name
+Last Name,Last Name
+Email,Email
+Total Amount,Total Amount
+Paid Amount,Paid Amount
+Due Amount,Due Amount
+Total Installment,Total Installment
+Paid Installment,Paid Installment
+Remaining Installment,Remaining Installment
+Created Date,Created Date
+Updated Date,Updated Date
+Installments,Installments
+Payment Method,Payment Method
+Order Information,Order Information
+Pending,Pending
+Processing,Processing
+Complete,Complete
+Canceled,Canceled
+Pay,Pay
+Edit,Edit
+Installment Amount,Installment Amount
+Due Date,Due Date
+Paid Date,Paid Date
+Installment Status,Installment Status
+Paid,Paid
+Remaining,Remaining
+Canceled,Canceled
+Installments,Installments
+Installments of Order,Installments of Order
+installment of order,installment of order
+has been done successfully,has been done successfully
+Item(s),Item(s)
+Stock Availability Email Settings,Stock Availability Email Settings
+Send Stock Availability Email,Send Stock Availability Email
+Stock Availability Email Sender,Stock Availability Email Sender
+Stock Availability Email Template,Stock Availability Email Template
+Partial Payment Stock Availability,Deposit Payment Stock Availability

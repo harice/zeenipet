@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Magedev
+ * @package    Magedev_Ordermanager
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Magedev_Ordermanager>
+            <version>1.0.0</version>
+        </Magedev_Ordermanager>
+    </modules>
+    <frontend>
+        <routers>
+            <ordermanager>
+                <use>standard</use>
+                <args>
+                    <module>Magedev_Ordermanager</module>
+                    <frontName>ordermanager</frontName>
+                </args>
+            </ordermanager>
+        </routers>
+        <layout>
+            <updates>
+                <ordermanager>
+                    <file>ordermanager.xml</file>
+                </ordermanager>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<ordermanager>
+				<use>admin</use>
+				<args>
+					<module>Magedev_Ordermanager</module>
+					<frontName>ordermanager</frontName>
+				</args>
+			</ordermanager>
+        </routers>
+    </admin>
+    <adminhtml>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<orderview translate="title">
+											<title>Advance Order View</title>
+										</orderview>
+									</children>
+								</config>
+							</children>
+						</system>
+						<Magedev_Ordermanager>
+							<title>Ordermanager Module</title>
+							<sort_order>10</sort_order>
+						</Magedev_Ordermanager>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<ordermanager>
+					<file>ordermanager.xml</file>
+				</ordermanager>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+     
+        <blocks>
+            <ordermanager>
+                <class>Magedev_Ordermanager_Block</class>
+            </ordermanager>
+			<adminhtml>
+				<rewrite>
+					<sales_order_grid>Magedev_Ordermanager_Block_Adminhtml_Order_Grid</sales_order_grid>
+				</rewrite>
+				
+				<rewrite>
+                    <sales_order_view_tab_invoices>Magedev_Ordermanager_Block_Adminhtml_Sales_Order_View_Tab_Invoices</sales_order_view_tab_invoices>
+				</rewrite>
+				
+			</adminhtml>
+        </blocks>
+		
+		<models>
+			<!-- invoice status starts-->
+			<sales>
+			  <rewrite>
+				  <order_invoice>Magedev_Ordermanager_Model_Order_Invoice</order_invoice>
+			  </rewrite>
+			</sales>
+			<!-- invoice status ends-->
+			
+			
+			<sales_resource>
+                <rewrite>
+                    <order_grid_collection>Magedev_Ordermanager_Model_Resource_Order_Grid_Collection</order_grid_collection>
+                </rewrite>
+            </sales_resource>
+			
+			
+			<ordermanager>
+				<class>Magedev_Ordermanager_Model</class>
+				<resourceModel>ordermanager_mysql4</resourceModel>
+			</ordermanager>
+															
+			<ordermanager_mysql4>
+				<class>Magedev_Ordermanager_Model_Mysql4</class>
+			</ordermanager_mysql4>
+															
+	    </models>
+		
+		<resources>
+            <ordermanager_setup>
+                <setup>
+                    <module>Magedev_Ordermanager</module>
+                    <!--<class>Mage_Sales_Model_Mysql4_Setup</class>-->
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ordermanager_setup>
+			
+			<ordermanager_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ordermanager_write>
+            <ordermanager_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ordermanager_read>
+			
+        </resources>
+		
+        <helpers>
+            <ordermanager>
+                <class>Magedev_Ordermanager_Helper</class>
+            </ordermanager>
+        </helpers>
+    </global>
+	
+		<default>
+        <orderview>
+            <general>
+                <enabled>1</enabled>
+                <hide_product_view>1</hide_product_view>
+				
+				<order_grid_col>real_order_id,store_id,created_at,product_detail,payment_method,shipping_method,billing_name,shipping_name,base_grand_total,grand_total,status,order_type,action</order_grid_col>
+				<notify_customer_oninvoice>0</notify_customer_oninvoice> 
+				<notify_customer_onship>0</notify_customer_onship> 
+				<product_thumb_size>50</product_thumb_size>
+				
+				<product_name_limit>50</product_name_limit>
+				<custom_option_limit>50</custom_option_limit>
+				<add_mass_invoce>1</add_mass_invoce>
+				<add_mass_ship>1</add_mass_ship>
+				<add_mass_ico>1</add_mass_ico>
+				<add_mass_icon>1</add_mass_icon>
+				<add_mass_icoffship>1</add_mass_icoffship>
+				<add_mass_iconship>1</add_mass_iconship>
+				<add_mass_archieve>1</add_mass_archieve>
+				<add_mass_active>1</add_mass_active>
+				
+            </general> 
+ 
+			
+        </orderview>
+    </default>	
+	
+</config>

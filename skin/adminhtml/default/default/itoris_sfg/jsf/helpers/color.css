@@ -1,0 +1,102 @@
+#colorSelectorBack {
+	position:absolute;
+	left:100px;
+	top:100px;
+	width:500px;
+	height:393px;
+	border:1px solid #000000;
+	background-color:#f5f5f5;
+	z-index:99999;
+}
+
+#colorSelector {
+	position:absolute;
+	left:1px;
+	top:18px;
+	width:337px;
+	height:337px;
+	z-index:999;
+}
+
+#colorSelector div {
+	margin:1px 0 0 1px;
+	float:left;
+	width:20px;
+	height:20px;
+	cursor:pointer;
+}
+
+#colorsHeader {
+	height:16px;
+	font-family:Arial;
+	font-size:11px;
+	line-height:16px;
+	font-weight:bold;
+	padding:0 1px 0 5px;
+	color:#000000;
+	background-color:#555555;
+	border-bottom:1px solid #888888;
+	color:#ffffff;
+}
+
+#colorsClose {
+	float:right;
+	cursor:pointer;
+}
+
+#colorScale {
+	position:absolute;
+	left:345px;
+	top:28px;
+}
+
+#colorScroller {
+	position:absolute;
+	left:357px;
+	top:23px;
+	cursor:pointer;
+}
+
+#colorPreview {
+	position:absolute;
+	left:10px;
+	top:357px;
+	width:50px;
+	height:30px;
+	border:1px solid #555555;
+}
+
+#colorPreviewText {
+	position:absolute;
+	left:80px;
+	top:365px;
+	width:100px;
+	height:16px;
+	text-align:center;
+	font-family:Arial;
+	font-size:11px;
+	line-height:16px;
+	font-weight:bold;
+	border:1px solid #555555;
+}
+
+#recentColors {
+	position:absolute;
+	left:385px;
+	top:18px;
+	width:100px;
+	text-align:center;
+	font-family:Arial;
+	font-size:11px;
+	line-height:16px;
+	font-weight:bold;
+}
+
+.recentColor {
+	float:left;
+	width:50px;
+	height:30px;
+	margin:2px 10px 0px 25px;
+	border:1px solid #555555;
+	cursor:pointer;
+}

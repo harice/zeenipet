@@ -1,0 +1,238 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $collection = $this->getCollection();
+	  $paidorder = 0;  ?>
+<div class="layer-post layer-gettoknowteampost">
+<?php  $partialpaymentHelper = Mage::helper('partialpayment/partialpayment');  ?>
+<?php if(sizeof($collection)): ?>
+	<?php $odd_even = 1;
+		   $orderId = Mage::app()->getRequest()->getParam('order_id');
+	 ?>
+    <div class="layer-gettoknowteamdesc">
+    <h1><?php echo $this->__('Installments of Order #%s',$orderId); ?></h1>
+     <script src="<?php echo Mage::getBaseUrl('js') ?>indies/payment.js" type="text/javascript"></script>
+	<form action="<?php echo $this->getUrl('partialpayment/index/overview') ?>" method="post" id="multishipping-billing-form">
+		<div>
+			<div class="box-account box-recent">
+              <p></p>
+                   <?php echo $this->getPagerHtml(); ?>
+                   <table id="my-orders-table1" class="data-table">
+                         <tr class="first last">
+                            <th>Pay</th>
+                            <th>Installment Amount</th>
+                            <th>Due Date</th>
+                            <th>Paid Date</th>
+                            <th>Installment Status</th>
+                            <th>Payment Method </th>
+                         </tr>
+                            <?php $previousOrderId="";$number="even"; ?>
+                            <?php foreach ($collection as $order) 
+							{ ?>
+                            <?php 
+								$partialPayment = Mage::getModel('partialpayment/partialpayment')->load($order['partial_payment_id']);
+								if ($previousOrderId != $order['partial_payment_id'])
+								{
+									if($number == "even")
+										$number = "odd";
+									else 
+										$number = "even";
+								}
+							?>
+                          <tr class="<?php echo $number ?>">
+                            <td>
+                         <?php if($order['installment_status'] != 'Paid') : ?>
+                                <input type="radio" value="<?php echo $order['installment_id']; ?>" name='installment_id' />
+                                <input type="hidden" value="<?php echo $order['installment_amount']; ?>" name="<?php echo $order['installment_id'];?>" />
+                         <?php $paidorder++ ; ?>
+						  <?php endif; ?>
+                            </td>                    
+                            <td class="amount"><?php echo $this->helper('checkout')->formatPrice($order['installment_amount']);  ?></td>                
+                            <td><center><?php echo $order['installment_due_date']; ?></center></td>
+                            <td><center><?php echo $order['installment_paid_date']; ?></center></td>
+                            <td><?php 
+                                echo "<center>".$order['installment_status']."</center>";
+                             ?>
+                            </td>
+                            <td><center><?php echo $order['payment_method']; ?></center></td>
+                        </tr>
+                         <?php  
+                              $odd_even++;
+						      $previousOrderId = $order['partial_payment_id'];
+                     } ?>
+			     </table>
+                    	<?php echo $this->getPagerHtml(); ?>
+                        <p></p>
+					</div>
+				</div>
+                <?php
+				/* If there is no remaining amount then payment information will not display */
+				if ($paidorder != 0) 
+				{?>		
+				<div>
+					<div>
+                    	<div class="page-title">
+                        	<h1><?php echo $this->__('Payment Information') ?></h1>
+                    	</div>
+                    	<div class="col2-set">
+                        	<div class="col-1 col-narrow">
+                            	<div class="box">
+                                	<div class="box-title">
+                                    	<h2><?php echo $this->__('Payment Method') ?></h2>
+                                	</div>
+                                	<div class="box-content">
+		                                <div class="tool-tip" id="payment-tool-tip" style="display:none;">
+        		                        <div class="btn-close">
+                		                    <a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a>
+                        		        </div>
+                                		<div class="tool-tip-content">
+                                    		<img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" />
+										</div>
+                            		</div>
+									<!-- Payment methods forms list -->
+                            		<dl class="sp-methods" id="sp-methods1">
+										<?php
+                                            $_methods = $partialpaymentHelper->getActivPaymentMethods($order['order_id']);						
+                                        ?>
+                                        <?php foreach ($_methods as $_code => $label): ?>
+                                            <?php if ($_code != 'free'): ?>
+                                                <dt>                    	
+                                                    <input type="radio" id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" name="payment[method]" title="<?php echo $this->htmlEscape($label['label']) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')" class="radio" />
+                                                    <label for="p_method_<?php echo $_code ?>"><?php echo $label['label'] ?></label>
+                                                </dt>
+                                                <?php if($html = $this->getChildHtml('payment.method.'.$_code)): ?>
+                                                    <dd>
+                                                        <?php echo $html; ?>
+                                                    </dd>
+                                                <?php endif; ?>
+                                                 <?php if($_code == "eway_direct"): ?>
+                                                    <dd>
+                                                        <ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <li>
+        <label for="<?php echo $_code ?>_cc_owner" class="required"><em>*</em><?php echo $this->__('Name on Card') ?></label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Name on Card') ?>" class="input-text required-entry" id="<?php echo $_code ?>_cc_owner" name="payment[cc_owner1]" value="" />
+        </div>
+    </li>
+  
+    <li>
+        <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em><?php echo $this->__('Credit Card Number') ?></label>
+        <div class="input-box">
+            <input type="text" id="<?php echo $_code ?>_cc_number" name="payment[cc_number1]" title="<?php echo $this->__('Credit Card Number') ?>" class="input-text required-entry" value="" />
+        </div>
+    </li>
+    <li>
+        <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+        <div class="input-box">
+            <div class="v-fix">
+                <select id="<?php echo $_code ?>_expiration" name="payment[cc_exp_month1]" class="month validate-cc-exp required-entry">			        <option selected="selected" value="">Month</option>
+                                    <option value="1">01 - January</option>
+                                    <option value="2">02 - February</option>
+                                    <option value="3">03 - March</option>
+                                    <option value="4">04 - April</option>
+                                    <option value="5">05 - May</option>
+                                    <option value="6">06 - June</option>
+                                    <option value="7">07 - July</option>
+                                    <option value="8">08 - August</option>
+                                    <option value="9">09 - September</option>
+                                    <option value="10">10 - October</option>
+                                    <option value="11">11 - November</option>
+                                    <option value="12">12 - December</option>
+               </select>
+            </div>
+            <div class="v-fix">
+             
+                <select id="<?php echo $_code ?>_expiration_yr" name="payment[cc_exp_year1]" class="year required-entry">
+                    <option selected="selected" value="">Year</option>
+                    <option value="12">2012</option>
+                    <option value="13">2013</option>
+                    <option value="14">2014</option>
+                    <option value="15">2015</option>
+                    <option value="16">2016</option>
+                    <option value="17">2017</option>
+                    <option value="18">2018</option>
+                    <option value="19">2019</option>
+                    <option value="20">2020</option>
+                    <option value="21">2021</option>
+                    <option value="22">2022</option>
+                </select>
+            </div>
+        </div>
+    </li>
+    <li id="<?php echo $_code ?>_cc_type_cvv_div">
+            <label for="<?php echo $_code ?>_cc_cid" class="required"><em>*</em><?php echo $this->__('Card Verification Number') ?></label>
+            <div class="input-box">
+                <div class="v-fix">
+                    <input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry validate-cc-cvn" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid1]" value="" />
+                </div>
+            </div>
+        </li>
+</ul>
+                                                    </dd>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                	</dl>
+									<?php echo $this->getChildHtml('checkout_billing_items') ?>
+                        		</div>
+                    		</div>
+                		</div>
+            		</div>
+            		<div class="buttons-set">
+                    <input type="hidden" value="<?php echo $order['partial_payment_id']; ?>" name="<?php echo $this->__('partial_payment_id'); ?>" />
+                    <input type="hidden" name="refer" value="<?php echo Mage::helper('core/url')->getCurrentUrl() ?>" />
+                		<button type="submit" title="<?php echo $this->__('Pay Installment') ?>" class="button" onclick="chk();"><span><span><?php echo $this->__('Pay Installment') ?></span></span></button>
+					</div>
+            	</div>
+			</div>
+            <?php }
+			 ?>
+		</form>
+		<script type="text/javascript">
+		//<![CDATA[
+			var payment = new paymentForm('multishipping-billing-form');
+			function toggleToolTip(event){
+				if($('payment-tool-tip')){
+				$('payment-tool-tip').toggle();
+			}
+			Event.stop(event);
+			}
+			if($('payment-tool-tip-close')){
+				Event.observe($('payment-tool-tip-close'), 'click', toggleToolTip);
+			}
+			$$('.cvv-what-is-this').each(function(element){
+				Event.observe(element, 'click', toggleToolTip);
+			});
+		//]]>
+        </script>
+	</div>
+    <?php else: ?>
+		<div class="layer-gettoknowteamdesc">
+            <div>
+                <div class="box-account box-recent">
+                   	<?php echo $this->__('You have not any partially paid order\'s installment available.'); ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <script type="text/javascript">decorateTable('my-orders-table');</script>
+</div>
+
+
+<script type="text/javascript">
+function chk() {
+	if(document.getElementById('p_method_ccsave') != null && !document.getElementById('p_method_ccsave').checked) {
+		jQuery('#p_method_ccsave').parent().next('dd').remove();
+	}
+
+	if(document.getElementById('p_method_authorizenet') != null && !document.getElementById('p_method_authorizenet').checked) {
+		jQuery('#p_method_authorizenet').parent().next('dd').remove();
+	}
+
+	if(document.getElementById('p_method_sagepaydirectpro') != null && !document.getElementById('p_method_sagepaydirectpro').checked) {
+		jQuery('#p_method_sagepaydirectpro').parent().next('dd').remove();
+	}
+
+	if(document.getElementById('p_method_paypal_direct') != null && !document.getElementById('p_method_paypal_direct').checked) {
+		jQuery('#p_method_paypal_direct').parent().next('dd').remove();
+	}
+}
+</script>

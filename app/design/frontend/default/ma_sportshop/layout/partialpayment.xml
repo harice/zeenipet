@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+	<partialpayment_index_index>
+		<reference name="head">
+			<action method="addCss"><stylesheet>partialpayment/css/partialpayment.css</stylesheet></action>
+		</reference>
+		<update handle="customer_account" />
+        <reference name="content">
+            <block type="partialpayment/partialpayment" name="partialpayment_orders" template="partialpayment/partialpayment_orders.phtml" />
+        </reference>
+    </partialpayment_index_index>
+
+	<partialpayment_index_installments>
+		<reference name="head">
+			<action method="addCss"><stylesheet>partialpayment/css/partialpayment.css</stylesheet></action>
+<!--  Task: Make partial payment module compatible with sage pay - Start - Date: 22/01/2013 - By: Indies Services  -->
+			<action method="addItem"><type>js</type><name>sagepaysuite/common.js</name></action>
+			<action method="addItem"><type>js</type><name>sagepaysuite/direct.js</name></action>
+<!--  Task: Make partial payment module compatible with sage pay - End - Date: 22/01/2013 - By: Indies Services  -->
+			<action method="addItem"><type>js</type><name>indies/jquery-1.9.1.js</name></action>
+			<action method="addItem"><type>js</type><name>indies/noconflict.js</name></action>
+		</reference>
+		<update handle="customer_account" />
+		<reference name="content">
+            <block type="partialpayment/partialpaymentinstallment" name="partialpayment_installments" template="partialpayment/partialpayment_installments.phtml" />
+        </reference>
+	</partialpayment_index_installments>
+
+	<customer_account translate="label">
+		<reference name="customer_account_navigation">
+			<action ifconfig="partialpayment/license_status_group/status" ifvalue="1" method="addLink" translate="label" module="partialpayment">
+				<name>partialpayment</name><path>partialpayment/index/index</path><label>Partial Payment</label>
+			</action>	
+		</reference>
+	</customer_account>
+
+	<catalog_product_view translate="label">
+		<reference name="head">
+			<action method="addCss"><stylesheet>partialpayment/css/partialpayment.css</stylesheet></action>
+			<action method="addItem"><type>js</type><name>indies/jquery.js</name></action>
+			<action method="addItem"><type>js</type><name>indies/noconflict.js</name></action>
+		</reference>
+			<!--- Start to Add on date : 2013-07-01 : to update price as per custome option price -->
+		<reference name="product.info.options.wrapper" as="product_options_wrapper">
+			 <block type="catalog/product_view_options" name="product.info.options" as="product_options" template="partialpayment/catalog/product/view/options.phtml" />
+			  <block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+                    <block type="catalog/product_view_options" name="product.info.options" as="product_options" template="partialpayment/catalog/product/view/options.phtml">
+                        <action method="addOptionRenderer"><type>text</type><block>catalog/product_view_options_type_text</block><template>catalog/product/view/options/type/text.phtml</template></action>
+                        <action method="addOptionRenderer"><type>file</type><block>catalog/product_view_options_type_file</block><template>catalog/product/view/options/type/file.phtml</template></action>
+                        <action method="addOptionRenderer"><type>select</type><block>catalog/product_view_options_type_select</block><template>catalog/product/view/options/type/select.phtml</template></action>
+                        <action method="addOptionRenderer"><type>date</type><block>catalog/product_view_options_type_date</block><template>catalog/product/view/options/type/date.phtml</template></action>
+                </block>
+        </reference>
+		<!--- End to Add on date : 2013-07-01 : to update price as per custome option price -->
+		<reference name="product.info.addtocart">
+			<block type="catalog/product_view" name="partialpayment.options" template="partialpayment/catalog/product/view/partialpayment_options.phtml" />
+		</reference>
+	</catalog_product_view>
+
+	<PRODUCT_TYPE_downloadable translate="label" module="downloadable">
+		<reference name="product.info.options.wrapper">
+            <block type="downloadable/catalog_product_links" name="product.info.downloadable.options" as="type_downloadable_options" before="-" template="partialpayment/downloadable/catalog/product/links.phtml"/>
+            <action method="insert"><block>product.info.downloadable.options</block></action>
+        </reference>
+	</PRODUCT_TYPE_downloadable>
+
+	<checkout_cart_index translate="label">
+		<reference name="head">
+			<action method="addCss"><stylesheet>partialpayment/css/partialpayment.css</stylesheet></action>
+			<action method="addItem"><type>js</type><name>indies/jquery.js</name></action>
+			<action method="addItem"><type>js</type><name>indies/jquery.simplemodal.js</name></action>
+			<action method="addItem"><type>js</type><name>indies/noconflict.js</name></action>
+		</reference>
+		 <reference name="checkout.cart.methods">
+			<block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon">
+				<action method="setTemplate">
+					<template>partialpayment/wholecart.phtml</template>
+				</action>
+			</block>
+		</reference>
+ 	</checkout_cart_index>
+
+    <checkout_onepage_index>
+		<reference name="head">
+			<action method="addCss"><stylesheet>partialpayment/css/partialpayment.css</stylesheet></action>
+			<action method="addCss"><stylesheet>partialpayment/css/jquery-ui.css</stylesheet></action>
+			<action method="addItem"><type>js</type><name>indies/jquery-1.9.1.js</name></action>
+			<action method="addItem"><type>js</type><name>indies/jquery-ui.js</name></action>
+			<action method="addItem"><type>js</type><name>indies/noconflict.js</name></action>
+		</reference>
+        <reference name="checkout.onepage.login">
+            <action method="setTemplate"><template>partialpayment/persistent/checkout/onepage/login.phtml</template></action>
+            <block type="persistent/form_remember" name="persistent.remember.me" template="persistent/remember_me.phtml" />
+        </reference>
+    </checkout_onepage_index>
+
+	<checkout_onepage_review>
+        <reference name="checkout.onepage.review.info.totals">
+            <action method="setTemplate"><template>partialpayment/checkout/onepage/review/totals.phtml</template></action>
+        </reference>
+	</checkout_onepage_review>
+
+	<PRODUCT_TYPE_downloadable translate="label" module="downloadable">
+		<reference name="product.info.options.wrapper">
+            <block type="downloadable/catalog_product_links" name="product.info.downloadable.options" as="type_downloadable_options" before="-" template="partialpayment/downloadable/catalog/product/links.phtml"/>
+            <action method="insert"><block>product.info.downloadable.options</block></action>
+        </reference>
+	</PRODUCT_TYPE_downloadable>
+</layout>

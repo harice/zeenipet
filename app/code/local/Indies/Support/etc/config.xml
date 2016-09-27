@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Indies
+ * @package    Indies_Support
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Indies_Support>
+            <version>1.0.0</version>
+        </Indies_Support>
+    </modules>
+    <admin>
+        <routers>
+			<support>
+				<use>admin</use>
+				<args>
+					<module>Indies_Support</module>
+					<frontName>support</frontName>
+				</args>
+			</support>
+        </routers>
+    </admin>
+    <adminhtml>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <support translate="title" module="support">
+                                            <title>Indies Support and Feedback</title>
+                                        </support>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<support>
+					<file>support.xml</file>
+				</support>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <blocks>
+            <support>
+                <class>Indies_Support_Block</class>
+            </support>
+        </blocks>
+        <helpers>
+            <support>
+                <class>Indies_Support_Helper</class>
+            </support>
+        </helpers>
+    </global>
+</config>

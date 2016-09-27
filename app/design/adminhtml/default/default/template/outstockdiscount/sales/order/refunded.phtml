@@ -1,0 +1,18 @@
+<?php if($this->getSource() instanceof Mage_Sales_Model_Order){ ?>
+<?php if ((float) $this->getSource()->getOutstockDiscountAmountRefunded()): ?>
+    <tr>
+        <td class="label"><strong><?php echo Mage::helper('outstockdiscount')->__('OutstockDiscount refunded to customer') ?></strong></td>
+        <td><strong><?php echo $this->getSource()->getOutstockDiscountAmountRefunded(); ?></strong></td>
+    </tr>
+<?php endif; ?>
+<?php } else { ?>
+<?php if ((float) $this->getSource()->getOutstockDiscountAmount()): ?>
+    <tr>
+        <td class="label"><strong><?php echo Mage::helper('outstockdiscount')->__('OutstockDiscount Refunded') ?></strong></td>
+        <td><strong><?php echo $this->getSource()->getOutstockDiscountAmount(); ?></strong></td>
+    </tr>
+<?php endif; 
+}?>
+
+
+

@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <cnsliderconf translate="label" module="cybernetikz_cnslider">
+            <label>Cybernetikz</label>
+            <sort_order>200</sort_order>
+			<show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+        </cnsliderconf>
+    </tabs>
+	<sections>
+        <cnsliderconf translate="label" module="cybernetikz_cnslider">
+            <label>Slider Management</label>
+            <tab>cnsliderconf</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+ 			
+            <groups>
+				<hint>
+                    <frontend_model>cybernetikz_cnslider/adminhtml_system_config_fieldset_hint</frontend_model>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </hint>
+				<contentsetting translate="label" module="cybernetikz_cnslider">
+					<label>Slider Content Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<fields>
+						<licensekey translate="label">
+                            <label>License Key</label>
+                            <frontend_type>text</frontend_type>
+							<comment>Please enter your license key</comment>
+							<validate>required-entry</validate>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </licensekey>
+						
+						<slider_view translate="label">
+                            <label>Frontend Default View</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<comment>Please select "Yes/No" for Enable/Disable Frontend View Slider like: http://www.example.com/slider/</comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </slider_view>
+						<slider_title translate="label">
+                            <label>Show Title</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<comment>Please select "Yes/No" for Show/Hide Title in each banner image.</comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </slider_title>						
+						<slider_content translate="label">
+                            <label>Show Content</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<comment>Please select "Yes/No" for Show/Hide Content in each banner image.</comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </slider_content>
+						<slider_link translate="label">
+                            <label>Set Call to Action URL</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<comment>Please select "Yes/No" for Show/Hide Call to Action URL in each banner image.</comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </slider_link>
+					</fields>
+				</contentsetting>
+				
+                <slidersettiing translate="label" module="cybernetikz_cnslider">
+                    <label>Slider Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<effect translate="label">
+                            <label>Transition Effect</label>
+                            <comment>Please select the transition effect you would like to use.</comment>
+                            <frontend_type>select</frontend_type>
+							<source_model>cybernetikz_cnslider/effects</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </effect>
+						<delay translate="label">
+                            <label>Transition Delay</label>
+                            <comment>Length of time (in seconds) you would like each slide to be visible.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </delay>
+						<length translate="label">
+                            <label>Transition Length</label>
+                            <comment>Length of time (in seconds) you would like the transition length.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </length>
+						<image_width translate="label">
+                            <label>Slider Width</label>
+                            <comment>Please enter the width of the slider.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </image_width>
+						<image_height translate="label">
+                            <label>Slider Height</label>
+                            <comment>Please enter the height of the slider.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </image_height>						
+						<playpause translate="label">
+                            <label>Play &amp; Pause</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<comment>Please select "Yes/No" for Show/Hide Play &amp; Pause.</comment>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </playpause>
+						<pagination translate="label">
+                            <label>Pagination</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<comment>Please select "Yes/No" for Show/Hide Pagination.</comment>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pagination>
+						<nextprev translate="label">
+                            <label>Next &amp; Prev</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<comment>Please select "Yes/No" for Show/Hide Next &amp; Prev.</comment>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </nextprev>
+                    </fields>
+                </slidersettiing>
+								
+				<sliderjsfile translate="label" module="cybernetikz_cnslider">
+                    <label>Js File</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<fields>
+						<jquerylibrary translate="label">
+                            <label>Jquery Library</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<comment>Please select "Yes/No" for Enable/Disable Jquery Library.</comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </jquerylibrary>
+					</fields>
+				</sliderjsfile>
+            </groups>
+        </cnsliderconf>
+    </sections>
+</config>

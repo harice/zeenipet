@@ -1,0 +1,62 @@
+﻿"Check Synchronization","Comprobar la sincronización"
+"Backup data to file","Hacer una copia de seguridad de datos del archivo"
+"Restore data from reserve tables","Restaurarlos datos de las tablas de reserva"
+Export,Exportar
+"Restore from backup file","Restaurar desde un archivo de copia de seguridad"
+"Add New Option","Añadir una opción nueva"
+"Save All Options As New Template","Guardar todas las opciones como plantilla nueva"
+"Add Template Options","Agregar opciones de plantilla"
+"Assign Whole Template","Asignar la plantilla completa"
+"Delete Template","Eliminar la plantilla"
+"Please enter search conditions to view products.","Por favor, introduzca las condiciones de búsqueda para ver productos."
+"General Information","Información general"
+Title,Título
+Description,Descripción
+Status,Status
+Active,Activo
+Inactive,Inactivo
+ID,ID
+Name,Nombre
+Type,Tipo
+"Attrib. Set Name","Nombre de identificación del atributo"
+Visibility,Visibilidad
+SKU,"Número de referencia SKU"
+Price,Precio
+"Default Qty","Cantidad predeterminada"
+Position,Posición
+"Template Information","Información de plantilla "
+Template,Plantilla
+General,General
+Options,Opciones
+"Assigned Products","Productos asignados"
+Duplicate,Duplicado
+"Save and Continue Edit","Guardar y continuar modificar"
+"Save Template","Guardar la plantilla"
+"New Template","Plantilla nueva"
+"Edit Template '%s'","Modificar la plantilla '%s'"
+"Add New Template","Añadir una plantilla nueva"
+"Template Title","Título de plantilla"
+"Template Description","Descripción de plantilla"
+Yes,Sí
+No,No
+"Options Template","Plantilla de opciones"
+"Custom Options Templates","Plantillas de opciones personalizadas"
+"Options Backup and Restore","Opciones de hacer una copia de seguridad y restaurar"
+"Templates was succesfully backuped","Las plantillas han sido respaldadas correctamente"
+"Backup restoring failed","La restauración de la copia de seguridad ha fallado"
+"Backup was succesfully restored","La copia de seguridad ha sido restaurada correctamente"
+"This template no longer exists","Esta plantilla ya no existe"
+"Edit Template","Modificar la plantilla"
+"The page you are trying to save no longer exists","La página que está tratando de guardar ya no existe"
+"Template was successfully saved","La plantilla ha sido guardada correctamente"
+"Template was successfully deleted","La plantilla ha sido eliminada correctamente"
+"Unable to find a page to delete","No se puede encontrar una página para eliminar"
+"Template duplicated","Plantilla duplicada"
+"Sort Order","Orden de Clasificación"
+"Template Options","Opciones de plantilla"
+"You have already added this template.","Ya ha agregado esta plantilla."
+"Active Templates","Plantillas activas"
+"Custom Options","Opciones personalizadas"
+"Manage Options Template","Administrar la plantilla de opciones"
+"Manage Options Templates","Administrar plantillas de opciones"
+"Some of your data may be corrupted,please restore data in Custom Options Template/Backup and Restore","Algunos de sus datos pueden estar dañados, por favor, restaure los datosen la plantilla de opciones personalizadas/Hacer copia de seguridad y Restaurar"

@@ -1,0 +1,76 @@
+diff -aurBb /home/httpd/htdocs/users/rastorguev/manew131/var/ait_patch_orig/compare63012429729784a164332856e6 /home/httpd/htdocs/users/rastorguev/manew131/var/ait_patch_modif/compare63012429729784a164332856e6
+--- /home/httpd/htdocs/users/rastorguev/manew131/var/ait_patch_orig/compare63012429729784a164332856e6	2009-05-22 09:16:18 +0300
++++ /home/httpd/htdocs/users/rastorguev/manew131/var/ait_patch_modif/compare63012429729784a164332856e6	2009-05-22 09:16:18 +0300
+@@ -34,6 +34,72 @@
+             </li>
+         </ul>
+     </div>
++    
++    
++<!-------------------------    START AITOC OPTIONS TEMPLATE          ---------------------------->
++
++<?php if ($this->checkTemplateAllowed()) { ?>
++
++    <div class="entry-edit-head">
++        <h4><?php echo Mage::helper('catalog')->__('Options Template') ?></h4>
++        <div class="right"><?php echo $this->getSaveTemplateButtonHtml() ?></div>
++    </div>
++
++<?php 
++    if ($aTemplateHash = $this->getTemplateHash()) 
++    {                         
++?>                        
++    <div id="product_options_template" class="box">
++        <div class="option-box">
++            <table width="100%" cellpadding="0" cellspacing="0" class="option-header">
++            <thead>
++                <tr>
++                    <th class="opt-title"><?php echo Mage::helper('catalog')->__('Active Templates') ?></th>
++                    <th class="opt-title"></th>
++                </tr>
++            </thead>
++                <tr>
++                    <td  width="30%">
++                    
++                        <select name="tpl_select" style="width:100%" id="add_template_select">
++                        
++<?php 
++        foreach ($aTemplateHash as $iKey => $sTitle)
++        {
++            echo '<option value=' . $iKey . '>' . $sTitle . '</option>';
++        }
++?>                        
++                        </select>
++                        
++                    </td>
++                    <td align="center"  width="70%">
++                        <?php echo $this->getAddTemplateAsSetButtonHtml() ?>           
++                        &nbsp;
++                        <?php echo $this->getAddTemplateAsTplButtonHtml() ?>
++                        &nbsp;                        
++                        <?php echo $this->getAddTemplateAsSaveButtonHtml() ?>
++                    </td>
++                </tr>
++            </table>
++        </div>
++        
++        <div id="product_tpls_container_top"></div>
++        
++    </div>
++
++<?php 
++    } 
++    else 
++    {
++        echo '<br>';
++    }
++?>                        
++ 
++<?php } ?>
++<!-------------------------    FINISH AITOC OPTIONS TEMPLATE          ---------------------------->
++
++    
++    
+     <div class="entry-edit-head">
+         <h4><?php echo Mage::helper('catalog')->__('Custom Options') ?></h4>
+         <div class="right"><?php echo $this->getAddButtonHtml() ?></div>

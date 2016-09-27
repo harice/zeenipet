@@ -1,0 +1,6 @@
+<?php
+
+class Indies_Partialsubscription_Model_Payment_Method_Paypal_Abstract extends Indies_Partialsubscription_Model_Payment_Method_Abstract
+{
+
+}

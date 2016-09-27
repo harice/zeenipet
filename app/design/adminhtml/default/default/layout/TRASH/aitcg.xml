@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_catalog_product_new>
+    	<reference name="head">
+    		<action method="addJs"><script>aitoc/aitcg/cropper.js</script></action>
+    		<action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/product.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/image_selector.js</script></action>		
+    		<action method="addItem"><type>skin_css</type><name>aitcgcropper.css</name></action>
+    	</reference>
+    </adminhtml_catalog_product_new>
+    
+    <adminhtml_catalog_product_edit>
+    	<reference name="head">
+    		<action method="addJs"><script>aitoc/aitcg/cropper.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/product.js</script></action>
+    		<action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/image_selector.js</script></action>
+    		<action method="addItem"><type>skin_css</type><name>aitcgcropper.css</name></action>
+    	</reference>
+    </adminhtml_catalog_product_edit>
+    
+    <adminhtml_sales_order_view>
+        <reference name="head">
+            <action method="addJs"><script>aitoc/aitcg/tooltip.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/raphael.js</script></action>
+            <action method="addItem"><type>js_css</type><name>aitoc/aitcg/aitcg.css</name></action>
+            <action method="addJs"><script>aitoc/aitcg/colorpicker.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/shape.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/tracker.js</script></action>            
+            <action method="addJs"><script>aitoc/aitcg/rgbcolor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/canvg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/jscolor/jscolor.js</script></action>
+        </reference>
+    </adminhtml_sales_order_view>
+
+    <adminhtml_sales_order_shipment_new>
+        <reference name="head">
+            <action method="addJs"><script>aitoc/aitcg/tooltip.js</script></action>
+			<action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/raphael.js</script></action>
+            <action method="addItem"><type>js_css</type><name>aitoc/aitcg/aitcg.css</name></action>
+            <action method="addJs"><script>aitoc/aitcg/colorpicker.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/shape.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/tracker.js</script></action>            
+            <action method="addJs"><script>aitoc/aitcg/rgbcolor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/canvg.js</script></action>				
+        </reference>
+    </adminhtml_sales_order_shipment_new>
+
+    <adminhtml_sales_order_shipment_view>
+        <reference name="head">
+            <action method="addJs"><script>aitoc/aitcg/tooltip.js</script></action>
+			<action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/raphael.js</script></action>
+            <action method="addItem"><type>js_css</type><name>aitoc/aitcg/aitcg.css</name></action>
+            <action method="addJs"><script>aitoc/aitcg/colorpicker.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/shape.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/tracker.js</script></action>   
+            <action method="addJs"><script>aitoc/aitcg/rgbcolor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/canvg.js</script></action>				
+        </reference>
+    </adminhtml_sales_order_shipment_view>
+
+    <adminhtml_sales_order_invoice_new>
+        <reference name="head">
+            <action method="addJs"><script>aitoc/aitcg/tooltip.js</script></action>
+			<action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/raphael.js</script></action>
+            <action method="addItem"><type>js_css</type><name>aitoc/aitcg/aitcg.css</name></action>
+            <action method="addJs"><script>aitoc/aitcg/colorpicker.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/shape.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/tracker.js</script></action>  
+            <action method="addJs"><script>aitoc/aitcg/rgbcolor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/canvg.js</script></action>				
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+
+    <adminhtml_sales_order_invoice_view>
+        <reference name="head">
+            <action method="addJs"><script>aitoc/aitcg/tooltip.js</script></action>
+			<action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/raphael.js</script></action>
+            <action method="addItem"><type>js_css</type><name>aitoc/aitcg/aitcg.css</name></action>
+            <action method="addJs"><script>aitoc/aitcg/colorpicker.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/shape.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/tracker.js</script></action>      
+            <action method="addJs"><script>aitoc/aitcg/rgbcolor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/canvg.js</script></action>				
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="head">
+            <action method="addJs"><script>aitoc/aitcg/tooltip.js</script></action>
+			<action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/raphael.js</script></action>
+            <action method="addItem"><type>js_css</type><name>aitoc/aitcg/aitcg.css</name></action>
+            <action method="addJs"><script>aitoc/aitcg/colorpicker.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/shape.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/tracker.js</script></action>         
+            <action method="addJs"><script>aitoc/aitcg/rgbcolor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/canvg.js</script></action>				
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="head">
+            <action method="addJs"><script>aitoc/aitcg/tooltip.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/raphael.js</script></action>
+            <action method="addItem"><type>js_css</type><name>aitoc/aitcg/aitcg.css</name></action>
+            <action method="addJs"><script>aitoc/aitcg/colorpicker.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/shape.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/tracker.js</script></action>            
+            <action method="addJs"><script>aitoc/aitcg/rgbcolor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/canvg.js</script></action>				
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+
+    <aitcg_admin_tips_index>
+        <reference name="content">
+            <block type="core/template"  name="tips" template="aitcg/tips/cgfile.phtml"  /> 
+        </reference>
+    </aitcg_admin_tips_index>
+    <adminhtml_cache_index>
+        <reference name="content">
+            <block type="adminhtml/cache_additional" name="cache.image_cache_management" template="aitcg/system/cache/image_cache_management.phtml" /> 
+        </reference>
+    </adminhtml_cache_index>
+    <aitcg_adminhtml_font_index>
+        <reference name="content">
+            <block type="aitcg/adminhtml_font" name="font" />
+        </reference>
+    </aitcg_adminhtml_font_index>
+    <aitcg_admin_font_color_set_new>
+        <reference name="head">
+            <action method="addCss"><stylesheet>aitoc/aitcg/css/colorset.css</stylesheet></action>
+            <action method="addJs"><script>aitoc/aitcg/jscolor/jscolor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/colorset/editor.js</script></action>
+        </reference>
+    </aitcg_admin_font_color_set_new>
+    <aitcg_admin_font_color_set_edit>
+        <reference name="head">
+            <action method="addCss"><stylesheet>aitoc/aitcg/css/colorset.css</stylesheet></action>
+            <action method="addJs"><script>aitoc/aitcg/jscolor/jscolor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/colorset/editor.js</script></action>
+        </reference>
+    </aitcg_admin_font_color_set_edit>
+
+    <aitoptionstemplate_index_edit>
+        <reference name="head">
+    		<action method="addJs"><script>aitoc/aitcg/cropper.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/product.js</script></action>
+    		<action method="addJs"><script>aitoc/aitcg/aitcg/aitcg.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/raph.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/uploader.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/main_social_widgets.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/popup.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/area_editor.js</script></action>
+            <action method="addJs"><script>aitoc/aitcg/aitcg/image_selector.js</script></action>
+    		<action method="addItem"><type>skin_css</type><name>aitcgcropper.css</name></action>
+    	</reference>
+    </aitoptionstemplate_index_edit>
+</layout>
+<!--
+/**
+ * Product:     Custom Product Preview
+ * Package:     Aitoc_Aitcg_3.0.1_1.0.0_520274
+ * Purchase ID: 9XHJkpl9USQGlgqMmhzeUoZOIR22A95V3tio9yYTqY
+ * Generated:   2013-03-05 20:52:02
+ * File path:   app/design/adminhtml/default/default/layout/aitcg.xml
+ * Copyright:   (c) 2013 AITOC, Inc.
+ */
+-->
